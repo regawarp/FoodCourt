@@ -3,9 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package WaitingDisplay;
+package foodcourt;
 
-import javax.swing.Timer;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -15,9 +33,55 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
     /**
      * Creates new form WaitingDisplay
+     * @throws java.io.IOException
      */
-    public WaitingDisplay() {
+    public WaitingDisplay() throws IOException {
         initComponents();
+        DisplayBill();
+    }
+    
+    private void DisplayBill() throws FileNotFoundException, IOException{
+        double total = 0;
+        
+        XSSFRow row;
+        FileInputStream fis;
+        DefaultTableModel table = new DefaultTableModel();
+        
+        fis = new FileInputStream(new File("Book1.xlsx"));
+        try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
+            XSSFSheet sheet = wb.getSheetAt(0);
+            
+            table.addColumn("Nama");
+            table.addColumn("Qty");
+            table.addColumn("Harga");
+            
+            Iterator < Row > rowIterator = sheet.rowIterator();
+            
+            while(rowIterator.hasNext()){
+                row = (XSSFRow) rowIterator.next();
+                Iterator < Cell > cellIterator = row.cellIterator();                                        
+                
+                String nama;
+                double qty;
+                double harga;
+                
+                Cell cell = cellIterator.next();
+                nama = cell.getStringCellValue();
+                cell = cellIterator.next();
+                qty = cell.getNumericCellValue();
+                cell = cellIterator.next();
+                harga = cell.getNumericCellValue();
+                total += harga;
+                
+                Object[] data = new Object[]{
+                    nama, qty, harga
+                };
+                
+                table.addRow(data);
+            }
+            
+            Bill.setModel(table);
+        }
     }
 
     /**
@@ -32,11 +96,11 @@ public class WaitingDisplay extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Bill = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        Ads = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(26, 26, 26));
@@ -53,7 +117,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
         jLabel1.setText("Pesanan Anda Sedang Diproses");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -61,7 +125,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Bill);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
 
@@ -85,7 +149,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 520));
+        jPanel2.add(Ads, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 520));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
 
@@ -95,7 +159,34 @@ public class WaitingDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        XSSFWorkbook wb = new XSSFWorkbook();
+        XSSFSheet sheet = wb.createSheet("Sheet 1");
+        XSSFFont font = wb.createFont();
+        File file = new File("Log Transaksi.xlsx");
+        XSSFCellStyle cellStyle = wb.createCellStyle();
+        TableModel model = Bill.getModel();
+        
+        for(int i = 0; i < model.getRowCount(); i++){
+            XSSFRow row = sheet.createRow((short) i);
+            for(int j = 0; j < model.getColumnCount(); j++){
+                XSSFCell cell = row.createCell((short) j);
+                cell.setCellValue(model.getValueAt(i, j).toString());
+                cell.setCellStyle(cellStyle);
+            }
+        }
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(file);
+            BufferedOutputStream bos;
+            bos = new BufferedOutputStream(fos);
+            wb.write(bos);
+            bos.close();
+            fos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -128,34 +219,23 @@ public class WaitingDisplay extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new WaitingDisplay().setVisible(true);
+                try {
+                    new WaitingDisplay().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Ads;
+    private javax.swing.JTable Bill;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-
-    public void SlideShow(){
-        Timer tm;
-        int x = 0;
-        String[] pict = {
-            "images/1.JPEG",
-            "images/2.JPEG",                   
-            "images/3.JPEG",                   
-            "images/4.JPEG",                   
-            "images/5.JPEG"                    
-        };
-        
-        
-    }
-
 }
