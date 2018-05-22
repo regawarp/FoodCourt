@@ -6,12 +6,15 @@
 package foodcourt;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -76,20 +79,16 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jProgressBar1 = new javax.swing.JProgressBar();
         jLabel15 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        stock_pane = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        adm_pane = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
         stats_pane = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
@@ -101,6 +100,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jPanel6 = createChartPanelLine();
         jLabel19 = new javax.swing.JLabel();
+        stock_pane = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        adm_pane = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
         settings_pane = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
 
@@ -310,7 +314,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(side_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 170, 660));
 
-        jPanel2.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel2MouseDragged(evt);
@@ -360,7 +364,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 80));
 
-        jPanel3.setBackground(new java.awt.Color(51, 0, 0));
+        jPanel3.setBackground(new java.awt.Color(88, 0, 0));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel4.setBackground(new java.awt.Color(204, 102, 0));
@@ -376,20 +380,14 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("date");
-        jLabel13.setText(dateFormat.format(date));
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 240, 27));
-
         jPanel5.setBackground(new java.awt.Color(51, 0, 0));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/icons8_Contacts_25px.png"))); // NOI18N
-        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 32, -1, -1));
+        jPanel5.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/icons8_Calendar_25px.png"))); // NOI18N
-        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 32, -1, -1));
+        jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/icons8_Lock_25px.png"))); // NOI18N
         jLabel4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -397,24 +395,35 @@ public class Dashboard extends javax.swing.JFrame {
                 jLabel4MouseMoved(evt);
             }
         });
-        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 32, -1, -1));
-        jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 73, 230, 10));
+        jPanel5.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
+        jPanel5.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 230, 20));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/icons8_Secured_Letter_25px_2.png"))); // NOI18N
+        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("date");
+        jLabel13.setText(dateFormat.format(date));
+        jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 240, 27));
+
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 310, 150));
 
         jProgressBar1.setBackground(new java.awt.Color(84, 127, 206));
         jProgressBar1.setForeground(new java.awt.Color(0, 204, 204));
         jProgressBar1.setPreferredSize(new java.awt.Dimension(146, 10));
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
-        jPanel5.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 230, 10));
+        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 230, -1));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/icons8_Secured_Letter_25px_2.png"))); // NOI18N
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 32, -1, -1));
-
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 310, 130));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("time");
+        jLabel5.setToolTipText("");
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 610, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 80, 310, 660));
 
-        jPanel1.setBackground(new java.awt.Color(102, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -429,43 +438,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 740, 1370, 30));
 
-        stock_pane.setBackground(new java.awt.Color(255, 204, 204));
-        stock_pane.setMinimumSize(new java.awt.Dimension(680, 570));
-        stock_pane.setPreferredSize(new java.awt.Dimension(330, 300));
-        stock_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel21.setText("Stok Makanan");
-        stock_pane.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
-        );
-
-        stock_pane.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 890, 590));
-
-        getContentPane().add(stock_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 890, 660));
-        stock_pane.getAccessibleContext().setAccessibleName("stock_pane");
-
-        adm_pane.setBackground(new java.awt.Color(255, 204, 204));
-        adm_pane.setVerifyInputWhenFocusTarget(false);
-        adm_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
-        jLabel18.setText("Administrasi Pegawai");
-        adm_pane.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
-
-        getContentPane().add(adm_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 890, 660));
-        adm_pane.getAccessibleContext().setAccessibleName("");
-
-        stats_pane.setBackground(new java.awt.Color(255, 204, 204));
+        stats_pane.setBackground(new java.awt.Color(255, 153, 153));
         stats_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel9.setMaximumSize(new java.awt.Dimension(660, 600));
@@ -593,6 +566,42 @@ public class Dashboard extends javax.swing.JFrame {
         getContentPane().add(stats_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
         stats_pane.getAccessibleContext().setAccessibleName("stats_pane");
         stats_pane.getAccessibleContext().setAccessibleDescription("");
+
+        stock_pane.setBackground(new java.awt.Color(255, 204, 204));
+        stock_pane.setMinimumSize(new java.awt.Dimension(680, 570));
+        stock_pane.setPreferredSize(new java.awt.Dimension(330, 300));
+        stock_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel21.setText("Stok Makanan");
+        stock_pane.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 890, Short.MAX_VALUE)
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 590, Short.MAX_VALUE)
+        );
+
+        stock_pane.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 890, 590));
+
+        getContentPane().add(stock_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 890, 660));
+        stock_pane.getAccessibleContext().setAccessibleName("stock_pane");
+
+        adm_pane.setBackground(new java.awt.Color(255, 204, 204));
+        adm_pane.setVerifyInputWhenFocusTarget(false);
+        adm_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        jLabel18.setText("Administrasi Pegawai");
+        adm_pane.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+
+        getContentPane().add(adm_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 890, 660));
+        adm_pane.getAccessibleContext().setAccessibleName("");
 
         settings_pane.setBackground(new java.awt.Color(204, 204, 204));
         settings_pane.setMinimumSize(new java.awt.Dimension(153, 75));
@@ -793,8 +802,25 @@ public class Dashboard extends javax.swing.JFrame {
       return new ChartPanel(lineChartObject);
     }
     
-    
-
+//    modul latihan jam
+//    
+//    ActionListener updateClockAction = new ActionListener() {
+//  public void actionPerformed(ActionEvent e) {
+//      // Assumes clock is a custom component
+//      jLabel5.setTime(System.currentTimeMillis()); 
+//      // OR
+//      // Assumes clock is a JLabel
+//      jLabel5.setText(new Date().toString()); 
+//    }
+//
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//    }
+//    
+//    private Timer t = new Timer(1000, updateClockAction);
+//    t.start();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel adm_pane;
     private javax.swing.JPanel btn_1;
@@ -822,6 +848,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
