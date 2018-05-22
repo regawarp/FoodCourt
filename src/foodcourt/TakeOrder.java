@@ -1,30 +1,23 @@
-package foodcourt;
-
 /*
  * Deskripsi    : Mengambil Orderan dari meja 
  * Author       : Cahya Ramadhan (171524007)
  * 
  */
-//package package3;
+package foodcourt;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-//import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 
 import java.util.Iterator;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
-//import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -35,26 +28,22 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author lenovo
  */
-public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
+public class TakeOrder extends javax.swing.JFrame {
 
-    private static final String EXCEL_FILE_LOCATION = ".\\file\\DATA_PESANAN_DARI_MEJA.xlsx";
-    private static final String EXCEL_FILE_DATA_REKAP = ".\\file\\DATA_REKAP_PESANAN.xlsx";
+    private static final String EXCEL_FILE_DATA_PESANAN_MEJA = ".\\src\\data\\dataPesananDariMeja.xlsx";
+    private static final String EXCEL_FILE_DATA_REKAP = ".\\src\\data\\dataRekapPesanan.xlsx";
     private static final int MAX_FOOD_COURT = 26;
     private String selectedListMeja = " ";
-//    private String namaToko = "Ootoya";
-    private String namaToko = "Han Gang";
+    private String namaToko = "Ootoya";
     private int jumlahToko = 12;
     static XSSFRow row;
 
-    /**
-     * Creates new form Dashboard
-     */
-    public TakePesananDariMeja_v3() {
+    public TakeOrder() {
         initComponents();
         XSSFSheet spreadsheet = null;
         FileInputStream fis;
         try {
-            fis = new FileInputStream(new File(EXCEL_FILE_LOCATION));
+            fis = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             String sheetName; boolean sheetFound = false;
             for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
@@ -89,10 +78,6 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
                     temp = ListMeja[baris];
                     baris++;
                 }
-//                if(baris == 3){
-//                    rowIterator = spreadsheet.iterator(); //pindah ke baris 0
-//                    row = (XSSFRow) rowIterator.next(); //pindah dari baris 0 ke baris 1
-//                }
             }
             JListTable.setListData(ListMeja);
         }
@@ -102,20 +87,59 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        JLabelNamaToko = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTableMenuOrdered = new javax.swing.JTable();
+        JNoteOrder = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         JListTable = new javax.swing.JList<>();
-        JNoteOrder = new javax.swing.JTextField();
-        jButtonTakeOrder = new javax.swing.JButton();
-        JLabelNamaToko = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jButtonTakeOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jPanel1.setBackground(new java.awt.Color(84, 82, 82));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
+
+        jPanel2.setBackground(new java.awt.Color(84, 82, 82));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
+
+        JLabelNamaToko.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        JLabelNamaToko.setForeground(new java.awt.Color(255, 255, 255));
+        JLabelNamaToko.setText("NAMA TOKO");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1336, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(573, 573, 573)
+                    .addComponent(JLabelNamaToko)
+                    .addContainerGap(543, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(26, 26, 26)
+                    .addComponent(JLabelNamaToko)
+                    .addContainerGap(26, Short.MAX_VALUE)))
+        );
+
+        jPanel3.setBackground(new java.awt.Color(150, 150, 150));
+        jPanel3.setToolTipText("");
+
+        JTableMenuOrdered.setBackground(new java.awt.Color(188, 188, 188));
         JTableMenuOrdered.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        JTableMenuOrdered.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        JTableMenuOrdered.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         JTableMenuOrdered.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -144,7 +168,14 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(JTableMenuOrdered);
 
-        JListTable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        JNoteOrder.setBackground(new java.awt.Color(188, 188, 188));
+        JNoteOrder.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        JNoteOrder.setText("Note :");
+
+        jScrollPane1.setBackground(new java.awt.Color(240, 0, 240));
+
+        JListTable.setBackground(new java.awt.Color(188, 188, 188));
+        JListTable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         JListTable.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -157,10 +188,18 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JListTable);
 
-        JNoteOrder.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        JNoteOrder.setText("Note :");
+        jButton2.setBackground(new java.awt.Color(251, 251, 251));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton2.setText("Dashboard");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButtonTakeOrder.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jButtonTakeOrder.setBackground(new java.awt.Color(255, 0, 54));
+        jButtonTakeOrder.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButtonTakeOrder.setForeground(new java.awt.Color(255, 255, 255));
         jButtonTakeOrder.setText("Take Order");
         jButtonTakeOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,59 +207,76 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
             }
         });
 
-        JLabelNamaToko.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        JLabelNamaToko.setText("NAMA TOKO");
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(JNoteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonTakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(JNoteOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonTakeOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
+        );
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton2.setText("Dashboard");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(JNoteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
-                                .addComponent(jButtonTakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(210, 210, 210))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(587, 587, 587)
-                .addComponent(JLabelNamaToko)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 890, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addComponent(JLabelNamaToko)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonTakeOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JNoteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(52, 52, 52))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                .addGap(702, 702, 702))
         );
 
         pack();
@@ -229,7 +285,7 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
     private void JListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JListTableMouseClicked
         FileInputStream fis;
         try {
-            fis = new FileInputStream(new File(EXCEL_FILE_LOCATION));
+            fis = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
 
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet spreadsheet = workbook.getSheetAt(0);
@@ -286,15 +342,16 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
     }//GEN-LAST:event_JListTableMouseClicked
 
     private void jButtonTakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTakeOrderActionPerformed
-        //WRITE KE FILE REKAP (BELUM BERHASIL)
+
         FileInputStream fileInOrderanMeja, fileInDataRekap;
         OutputStream fileOutOrderanMeja, fileOutDataRekap;
         try {
-            fileInOrderanMeja = new FileInputStream(EXCEL_FILE_LOCATION);
+            fileInOrderanMeja = new FileInputStream(EXCEL_FILE_DATA_PESANAN_MEJA);
             XSSFWorkbook workbookOrderanMeja = (XSSFWorkbook) WorkbookFactory.create(fileInOrderanMeja);
             XSSFSheet sheetInOrderanMeja = workbookOrderanMeja.getSheetAt(0);
+
             String sheetName; boolean sheetFound = false;
-            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){ //Cari sheet yang sama dengan nama toko
+            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
                 sheetInOrderanMeja = workbookOrderanMeja.getSheetAt(indexSheet);
                 sheetName = sheetInOrderanMeja.getSheetName();
                 if(sheetName.equals(namaToko)){
@@ -307,6 +364,14 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
             fileInDataRekap = new FileInputStream(EXCEL_FILE_DATA_REKAP);
             XSSFWorkbook workbookDataRekap = (XSSFWorkbook) WorkbookFactory.create(fileInDataRekap);
             XSSFSheet sheetDataRekap = workbookDataRekap.getSheetAt(0);
+            sheetFound = false;
+            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
+                sheetDataRekap = workbookDataRekap.getSheetAt(indexSheet);
+                sheetName = sheetDataRekap.getSheetName();
+                if(sheetName.equals(namaToko)){
+                    sheetFound = true;
+                }
+            }
             Iterator<Row> rowIteratorDataRekap = sheetDataRekap.iterator();
             fileInDataRekap.close();
 
@@ -318,7 +383,7 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
                 selectedNamaMeja = selectedListMeja; //table 1, table 2, dll
             int rowIndexSelectedMeja = getRowIndexOfId(sheetInOrderanMeja, selectedNamaMeja);
             
-            for(int i = 0; i < rowIndexSelectedMeja-1; i++){ //dikasih -1 karena loop setelah ini merupakan do-while (dilakukan dulu 1x)
+            for(int i = 0; i < rowIndexSelectedMeja; i++){
                 rowDataOrder = (XSSFRow) rowIteratorDataOrder.next(); //pindah ke index selectedListMeja
             }
 
@@ -326,26 +391,12 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
             Cell cellMenuDataOrder = rowDataOrder.getCell(1);
             Cell cellQuantityDataOrder = rowDataOrder.getCell(2);
 
-            /*
-            // BUG, data TERAKHIR dari tabel atasnya ikut masuk + quantity di Data terakhir tidak terambil datanya
-            // ex. 1) Tabel 2 : Sasami, Lychee Iced Tea, Sabi Sasami, Ume Sasami
-                      Tabel 3 : Nasi Kuning, Gyutan Negi Miso, ButaBara, Aoringo Lemon Tea, Hakuto Peach Lemon Tea, Sabi Sasami
-                      Data Quantity yang ter-rekap (masuk ke file rekap) : Ume Sasami + Semua data di Tabel 3
-            // ex. 2)Nasi Uduk          1
-                     Chicken Teriyaki	2
-                     Gyutan Negi Miso	3
-                     ButaBara           4
-                    Quantity ButaBara tidak diambil 4, tetapi diambil 1 (SOLVEDDDDDDDDD!!!!!!!)
-            // kemungkinan bug di method rowIterator.hasNext();
-            */            
-            
-            do{
+            if(cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)){
                 boolean found = false;
                 rowIteratorDataRekap = sheetDataRekap.iterator(); //pindah ke baris 0
                 rowDataRekap = (XSSFRow) rowIteratorDataRekap.next(); //pindah ke baris 0
-//                rowDataRekap = (XSSFRow) rowIteratorDataRekap.next(); //pindah dari baris 0 ke baris 1
 
-                do{
+                while(rowIteratorDataRekap.hasNext() && !found){
                     rowDataRekap = (XSSFRow) rowIteratorDataRekap.next();
                     Cell cellMenuDataRekap = rowDataRekap.getCell(0);
                     Cell cellQuantityDataRekap = rowDataRekap.getCell(1);
@@ -359,24 +410,69 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
                         System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + QuantityTotal);
                         System.out.println();
                         found = true;
+
                     }
-                }while(rowIteratorDataRekap.hasNext() && !found);
-                
-                if(!found){
-                    //tambah Row untuk data yang baru
-                    System.out.println(cellMenuDataOrder.getStringCellValue() + " : NOT FOUND");
                 }
-                //write ke file g
+                if(!found){
+                    System.out.println(cellMenuDataOrder.getStringCellValue() + " : NOT FOUND DI FILE REKAP");
+                }
                 fileOutDataRekap = new FileOutputStream(EXCEL_FILE_DATA_REKAP);
                 workbookDataRekap.write(fileOutDataRekap); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
                 sheetDataRekap = workbookDataRekap.getSheetAt(0);
+                sheetFound = false;
+                for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
+                    sheetDataRekap = workbookDataRekap.getSheetAt(indexSheet);
+                    sheetName = sheetDataRekap.getSheetName();
+                    if(sheetName.equals(namaToko)){
+                        sheetFound = true;
+                    }
+                }
                 fileOutDataRekap.close();
-
+            }
+            
+            while (rowIteratorDataOrder.hasNext() && cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)) { //Selama "PUNYA" Next && sama, jadi kalo gak punya next, nilainya false
                 rowDataOrder = (XSSFRow) rowIteratorDataOrder.next();
                 cellNamaMejaDataOrder = rowDataOrder.getCell(0);
                 cellMenuDataOrder = rowDataOrder.getCell(1);
                 cellQuantityDataOrder = rowDataOrder.getCell(2);
-            }while (rowIteratorDataOrder.hasNext() && cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)); //Selama "PUNYA" Next && sama, jadi kalo gak punya next, nilainya false
+
+                boolean found = false;
+                rowIteratorDataRekap = sheetDataRekap.iterator(); //pindah ke baris 0
+                rowDataRekap = (XSSFRow) rowIteratorDataRekap.next(); //pindah ke baris 0
+
+                while(rowIteratorDataRekap.hasNext() && !found){
+                    rowDataRekap = (XSSFRow) rowIteratorDataRekap.next();
+                    Cell cellMenuDataRekap = rowDataRekap.getCell(0);
+                    Cell cellQuantityDataRekap = rowDataRekap.getCell(1);
+                    if(cellMenuDataOrder.getStringCellValue().equals(cellMenuDataRekap.getStringCellValue()) && !found){
+                        int tempQuantityDataRekap = Integer.parseInt(String.valueOf(Math.round(cellQuantityDataRekap.getNumericCellValue())));
+                        int tempQuantityDataOrder = Integer.parseInt(String.valueOf(Math.round(cellQuantityDataOrder.getNumericCellValue())));
+                        int QuantityTotal = tempQuantityDataRekap + tempQuantityDataOrder;
+
+                        System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + tempQuantityDataRekap);
+                        cellQuantityDataRekap.setCellValue(Integer.parseInt(String.valueOf(Math.round(QuantityTotal))));
+                        System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + QuantityTotal);
+                        System.out.println();
+                        found = true;
+
+                    }
+                }
+                if(!found){
+                    System.out.println(cellMenuDataOrder.getStringCellValue() + " : NOT FOUND DI FILE REKAP");
+                }
+                fileOutDataRekap = new FileOutputStream(EXCEL_FILE_DATA_REKAP);
+                workbookDataRekap.write(fileOutDataRekap); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
+                sheetDataRekap = workbookDataRekap.getSheetAt(0);
+                sheetFound = false;
+                for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
+                    sheetDataRekap = workbookDataRekap.getSheetAt(indexSheet);
+                    sheetName = sheetDataRekap.getSheetName();
+                    if(sheetName.equals(namaToko)){
+                        sheetFound = true;
+                    }
+                }
+                fileOutDataRekap.close();
+            }
             
 
             while(rowIndexSelectedMeja != -1){
@@ -384,20 +480,12 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
                 removeRow(sheetInOrderanMeja, rowIndexSelectedMeja); //delete row dari sheet
             }
 
-            fileOutOrderanMeja = new FileOutputStream(EXCEL_FILE_LOCATION);
+            fileOutOrderanMeja = new FileOutputStream(EXCEL_FILE_DATA_PESANAN_MEJA);
             workbookOrderanMeja.write(fileOutOrderanMeja); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
-            XSSFSheet sheetOutOrderanMeja = workbookOrderanMeja.getSheetAt(0);
-            sheetFound = false;
-            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                sheetOutOrderanMeja = workbookOrderanMeja.getSheetAt(indexSheet);
-                sheetName = sheetOutOrderanMeja.getSheetName();
-                if(sheetName.equals(namaToko)){
-                    sheetFound = true;
-                }
-            }
+//            XSSFSheet sheetOut = workbookOrderanMeja.getSheetAt(0);
             fileOutOrderanMeja.close();
 
-            SetGUI(sheetOutOrderanMeja); //update GUI
+            SetGUI(sheetInOrderanMeja); //update GUI
         } catch (IOException ex) {
             System.out.println("IOException : " + ex);
         } catch (InvalidFormatException ex) {
@@ -408,6 +496,10 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonTakeOrderActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private static int getRowIndexOfId(XSSFSheet sheet, String selectedid) {
         DataFormatter formatter = new DataFormatter();
@@ -461,16 +553,8 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-//      BEFORE : 
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new TakePesananDariMeja().setVisible(true);
-//            }
-//        });
-
-//      AFTER :
         java.awt.EventQueue.invokeLater(() -> {
-            new TakePesananDariMeja_v3().setVisible(true);
+            new TakeOrder().setVisible(true);
         });
     }
 
@@ -481,13 +565,10 @@ public class TakePesananDariMeja_v3 extends javax.swing.JFrame {
     private javax.swing.JTable JTableMenuOrdered;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonTakeOrder;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
-
-//                if(cell.getCellTypeEnum() == CellType.STRING){
-//                    tempQuantity = cell.getNumericCellValue(); //harus jadiin INT
-//                } else if(cell.getCellTypeEnum() == CellType.NUMERIC){
-//                    tempMenuName = cell.getStringCellValue();
-//                }
