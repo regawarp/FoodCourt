@@ -6,6 +6,7 @@
 package foodcourt;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,6 +42,7 @@ public class Pemesanan extends javax.swing.JFrame {
         jPanel3.setBackground(new Color(101,101,101,200));
         ReadExcelFile();
         accDelete_pane.setVisible(false);
+        accBuy_pane.setVisible(false);
     }
     
     public Pemesanan(String namaResto) throws IOException{
@@ -413,6 +415,9 @@ public class Pemesanan extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel7MousePressed(evt);
+            }
         });
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 6, 170, 40));
 
@@ -575,6 +580,10 @@ public class Pemesanan extends javax.swing.JFrame {
     */
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         accDelete_pane.setVisible(false);
+        jPanel3.setBackground(new Color(101,101,101,200));
+
+        accDelete_pane.setVisible(false);
+
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /*
@@ -603,14 +612,7 @@ public class Pemesanan extends javax.swing.JFrame {
         dtm = (DefaultTableModel) jTable2.getModel();
         tobeDeletedName.setText((String) dtm.getValueAt(jTable2.getSelectedRow(), 0));
     }//GEN-LAST:event_jLabel6MouseClicked
-    
-    /*
-        Menampilkan popup untuk meyakinkan apakah sudah selesai memesan atau belum
-    */
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        if(! tableEmpty(jTable2))
-            accBuy_pane.setVisible(true);
-    }//GEN-LAST:event_jLabel7MouseClicked
+
 
     /*
         Jadi memproses makanan
@@ -630,12 +632,23 @@ public class Pemesanan extends javax.swing.JFrame {
     */
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         accBuy_pane.setVisible(false);
+        jPanel3.setBackground(new Color(101,101,101,200));
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel14MouseClicked
 
+    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7MousePressed
+    
+    /*
+        Sebelum memesan, pastikan user sudah selesai memilih
+    */
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
+        accBuy_pane.setVisible(true);
+    }       
     /*
      * Modul untuk menulis ke file excel
      */
@@ -652,10 +665,11 @@ public class Pemesanan extends javax.swing.JFrame {
     }
     
     
+
     /*
      * Modul Format_Number untuk memformat bilangan dilengkapi dengan titik
      */
-    private String Format_Number(double number){
+    String Format_Number(double number){
         DecimalFormat df = new DecimalFormat("#,##0",new DecimalFormatSymbols(new Locale("pt", "ID")));
         BigDecimal value = new BigDecimal(number);
 
