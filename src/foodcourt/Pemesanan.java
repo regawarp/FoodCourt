@@ -43,6 +43,7 @@ public class Pemesanan extends javax.swing.JFrame {
         ReadExcelFile();
         accDelete_pane.setVisible(false);
         accBuy_pane.setVisible(false);
+        warnKosong_pane.setVisible(false);
     }
     
     public Pemesanan(String namaResto) throws IOException{
@@ -53,6 +54,8 @@ public class Pemesanan extends javax.swing.JFrame {
         ReadExcelFile();
         accDelete_pane.setVisible(false);
         accBuy_pane.setVisible(false);
+        warnKosong_pane.setVisible(false);
+        
     }
     
     
@@ -118,12 +121,6 @@ public class Pemesanan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        accBuy_pane = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
         accDelete_pane = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -131,6 +128,16 @@ public class Pemesanan extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         tobeDeletedName = new javax.swing.JLabel();
+        warnKosong_pane = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        accBuy_pane = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -148,8 +155,11 @@ public class Pemesanan extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         bayar_total = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jLabel17 = new javax.swing.JLabel();
+        pajak = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        harga = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -196,59 +206,6 @@ public class Pemesanan extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Pesanan");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 60, -1, -1));
-
-        accBuy_pane.setBackground(new java.awt.Color(255, 204, 153));
-        accBuy_pane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 7));
-        accBuy_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Apakah anda sudah selesai memesan?");
-        accBuy_pane.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 40));
-
-        jPanel13.setBackground(new java.awt.Color(102, 153, 0));
-        jPanel13.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel13MouseClicked(evt);
-            }
-        });
-        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("YA");
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel13MouseClicked(evt);
-            }
-        });
-        jPanel13.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
-
-        accBuy_pane.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 110, 40));
-
-        jPanel14.setBackground(new java.awt.Color(255, 102, 102));
-        jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel14MouseClicked(evt);
-            }
-        });
-        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel14.setBackground(new java.awt.Color(255, 153, 153));
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setText("BATAL");
-        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel14MouseClicked(evt);
-            }
-        });
-        jPanel14.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, 110, 40));
-
-        accBuy_pane.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 110, 40));
-
-        jPanel3.add(accBuy_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, 220));
 
         accDelete_pane.setBackground(new java.awt.Color(255, 204, 153));
         accDelete_pane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 7));
@@ -309,19 +266,94 @@ public class Pemesanan extends javax.swing.JFrame {
 
         jPanel3.add(accDelete_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, 220));
 
+        warnKosong_pane.setBackground(new java.awt.Color(255, 204, 153));
+        warnKosong_pane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 7));
+        warnKosong_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Anda belum memesan!");
+        warnKosong_pane.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 40));
+
+        jPanel16.setBackground(new java.awt.Color(102, 153, 0));
+        jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel16MouseClicked(evt);
+            }
+        });
+        jPanel16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel18.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("OK");
+        jLabel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel18MouseClicked(evt);
+            }
+        });
+        jPanel16.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
+
+        warnKosong_pane.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 110, 40));
+
+        jPanel3.add(warnKosong_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, 220));
+
+        accBuy_pane.setBackground(new java.awt.Color(255, 204, 153));
+        accBuy_pane.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 7));
+        accBuy_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Apakah anda sudah selesai memesan?");
+        accBuy_pane.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 440, 40));
+
+        jPanel13.setBackground(new java.awt.Color(102, 153, 0));
+        jPanel13.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel13MouseClicked(evt);
+            }
+        });
+        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("YA");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        jPanel13.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 40));
+
+        accBuy_pane.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 110, 40));
+
+        jPanel14.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel14MouseClicked(evt);
+            }
+        });
+        jPanel14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("BATAL");
+        jLabel14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel14MouseClicked(evt);
+            }
+        });
+        jPanel14.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, 110, 40));
+
+        accBuy_pane.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 110, 40));
+
+        jPanel3.add(accBuy_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, 220));
+
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        jTable1.setAutoscrolls(false);
         jTable1.setRowHeight(24);
         jTable1.setRowMargin(4);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -381,7 +413,7 @@ public class Pemesanan extends javax.swing.JFrame {
         jTable2.getColumnModel().getColumn(3).setMaxWidth(0);
         jScrollPane2.setViewportView(jTable2);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 350, 120));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 350, 140));
 
         jPanel6.setBackground(new java.awt.Color(204, 0, 0));
         jPanel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -403,7 +435,7 @@ public class Pemesanan extends javax.swing.JFrame {
         });
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 190, 70, 40));
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 220, 70, 40));
 
         jPanel7.setBackground(new java.awt.Color(153, 204, 0));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -423,26 +455,41 @@ public class Pemesanan extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 410, 180, 50));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Total yang harus dibayar :");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 360, -1, -1));
+        jLabel8.setText("Total                             :");
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 370, -1, -1));
 
-        bayar_total.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        bayar_total.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         bayar_total.setForeground(new java.awt.Color(255, 255, 153));
         bayar_total.setText("Rp. 0,-");
-        jPanel3.add(bayar_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 360, 180, -1));
+        jPanel3.add(bayar_total, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 370, 180, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 2, 16)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("makanan yang sudah dipilh akan masuk ke sini..");
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane4.setViewportView(jTextArea1);
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Pajak  (0%)                       :");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 320, 240, -1));
 
-        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 250, 440, -1));
+        pajak.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        pajak.setForeground(new java.awt.Color(255, 255, 153));
+        pajak.setText("Rp. 0,-");
+        jPanel3.add(pajak, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 320, 180, -1));
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Harga total                         :");
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, -1, -1));
+
+        harga.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        harga.setForeground(new java.awt.Color(255, 255, 153));
+        harga.setText("Rp. 0,-");
+        jPanel3.add(harga, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 290, 180, -1));
+        jPanel3.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 360, 440, 20));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 1200, 520));
 
@@ -548,12 +595,16 @@ public class Pemesanan extends javax.swing.JFrame {
             total+=Double.parseDouble(model.getValueAt(i, 2).toString());
         }
         jTable2.setModel(model);
-        bayar_total.setText("Rp. "+ Format_Number(total) +",-");
+        this.harga.setText("Rp. "+ Format_Number(total) +",-");
+        this.pajak.setText("Rp. "+ Format_Number(total*0.1) +",-");
+        this.bayar_total.setText("Rp. "+ Format_Number(total*1.1) +",-");
         
         
         //kembalikan spinner dan textarea ke default
         jSpinner1.setValue(1);
         jTextArea2.setText("Masukkan catatan disini");
+        jPanel1.repaint();
+        jPanel1.validate();
     }//GEN-LAST:event_jButton1MouseClicked
 
 
@@ -583,7 +634,9 @@ public class Pemesanan extends javax.swing.JFrame {
         jPanel3.setBackground(new Color(101,101,101,200));
 
         accDelete_pane.setVisible(false);
-
+        jPanel1.validate();
+        jPanel1.repaint();
+        jPanel1.validate();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /*
@@ -599,8 +652,14 @@ public class Pemesanan extends javax.swing.JFrame {
         for(int i=0; i<dtm.getRowCount(); i++){
             total+=Double.parseDouble(dtm.getValueAt(i, 2).toString());
         }
-        bayar_total.setText("Rp. "+Format_Number(total)+",-");
+        this.harga.setText("Rp. "+ Format_Number(total) +",-");
+        this.pajak.setText("Rp. "+ Format_Number(total*0.1) +",-");
+        this.bayar_total.setText("Rp. "+ Format_Number(total*1.1) +",-");
+        
         accDelete_pane.setVisible(false);
+        jPanel1.validate();
+        jPanel1.repaint();
+        jPanel1.validate();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     /*
@@ -628,11 +687,13 @@ public class Pemesanan extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel13MouseClicked
 
     /*
-        Batal memproses tutup kembali
+        Batal memproses tutup kembali popup
     */
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         accBuy_pane.setVisible(false);
-        jPanel3.setBackground(new Color(101,101,101,200));
+        jPanel1.validate();
+        jPanel1.repaint();
+        jPanel1.validate();
     }//GEN-LAST:event_jLabel14MouseClicked
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
@@ -642,12 +703,22 @@ public class Pemesanan extends javax.swing.JFrame {
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7MousePressed
+
+    private void jPanel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel16MouseClicked
+
+    private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
+        warnKosong_pane.setVisible(false);
+    }//GEN-LAST:event_jLabel18MouseClicked
     
     /*
         Sebelum memesan, pastikan user sudah selesai memilih
     */
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        accBuy_pane.setVisible(true);
+        if(!tableEmpty(jTable2))
+            accBuy_pane.setVisible(true);
+        else warnKosong_pane.setVisible(true);
     }       
     /*
      * Modul untuk menulis ke file excel
@@ -721,6 +792,7 @@ public class Pemesanan extends javax.swing.JFrame {
     private javax.swing.JPanel accDelete_pane;
     private javax.swing.JLabel bayar_total;
     private javax.swing.JLabel btn_exit;
+    private javax.swing.JLabel harga;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -729,6 +801,10 @@ public class Pemesanan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -743,6 +819,7 @@ public class Pemesanan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -753,12 +830,13 @@ public class Pemesanan extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel pajak;
     private javax.swing.JLabel tobeDeletedName;
+    private javax.swing.JPanel warnKosong_pane;
     // End of variables declaration//GEN-END:variables
 }
