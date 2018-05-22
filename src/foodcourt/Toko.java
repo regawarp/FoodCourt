@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -79,6 +80,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(197, 197, 197));
         jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel7.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
 
         lToko4.setText("jLabel1");
 
@@ -134,6 +140,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(197, 197, 197));
         jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel9.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel9MouseClicked(evt);
+            }
+        });
 
         lToko2.setText("jLabel1");
 
@@ -159,6 +170,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(197, 197, 197));
         jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel10.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel10MouseClicked(evt);
+            }
+        });
 
         lToko3.setText("jLabel1");
 
@@ -252,6 +268,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel15.setBackground(new java.awt.Color(197, 197, 197));
         jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel15.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel15MouseClicked(evt);
+            }
+        });
 
         lToko6.setText("jLabel1");
 
@@ -277,6 +298,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel16.setBackground(new java.awt.Color(197, 197, 197));
         jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel16.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel16MouseClicked(evt);
+            }
+        });
 
         lToko7.setText("jLabel1");
 
@@ -302,6 +328,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel17.setBackground(new java.awt.Color(197, 197, 197));
         jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel17.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel17MouseClicked(evt);
+            }
+        });
 
         lToko8.setText("jLabel1");
 
@@ -327,6 +358,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel18.setBackground(new java.awt.Color(197, 197, 197));
         jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel18.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel18MouseClicked(evt);
+            }
+        });
 
         lToko5.setText("jLabel1");
 
@@ -352,6 +388,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel19.setBackground(new java.awt.Color(197, 197, 197));
         jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel19.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel19MouseClicked(evt);
+            }
+        });
 
         lToko10.setText("jLabel1");
 
@@ -377,6 +418,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel20.setBackground(new java.awt.Color(197, 197, 197));
         jPanel20.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel20.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel20.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel20MouseClicked(evt);
+            }
+        });
 
         lToko11.setText("jLabel1");
 
@@ -402,6 +448,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel21.setBackground(new java.awt.Color(197, 197, 197));
         jPanel21.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel21.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel21.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel21MouseClicked(evt);
+            }
+        });
 
         lToko12.setText("jLabel1");
 
@@ -427,6 +478,11 @@ public class Toko extends javax.swing.JFrame {
         jPanel22.setBackground(new java.awt.Color(197, 197, 197));
         jPanel22.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel22.setPreferredSize(new java.awt.Dimension(341, 250));
+        jPanel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel22MouseClicked(evt);
+            }
+        });
 
         lToko9.setText("jLabel1");
 
@@ -463,11 +519,77 @@ public class Toko extends javax.swing.JFrame {
     }//GEN-LAST:event_formComponentShown
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
-        // TODO add your handling code here:
+        String namaResto = lToko1.getText();
+        gantiFrame(namaResto);
     }//GEN-LAST:event_jPanel8MouseClicked
 
+    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+        String namaResto = lToko2.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel9MouseClicked
+
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        String namaResto = lToko3.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel10MouseClicked
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        String namaResto = lToko4.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel7MouseClicked
+
+    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
+        String namaResto = lToko5.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel18MouseClicked
+
+    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
+        String namaResto = lToko6.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel15MouseClicked
+
+    private void jPanel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel16MouseClicked
+        String namaResto = lToko7.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel16MouseClicked
+
+    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
+        String namaResto = lToko8.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel17MouseClicked
+
+    private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked
+        String namaResto = lToko9.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel22MouseClicked
+
+    private void jPanel19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel19MouseClicked
+        String namaResto = lToko10.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel19MouseClicked
+
+    private void jPanel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel20MouseClicked
+        String namaResto = lToko11.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel20MouseClicked
+
+    private void jPanel21MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel21MouseClicked
+        String namaResto = lToko12.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_jPanel21MouseClicked
+
+    void gantiFrame(String namaResto) {
+        //Ganti ke Frame Pemesanan
+        try {
+            new Pemesanan(namaResto).setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     void showNamaResto() throws FileNotFoundException, IOException {
-        FileInputStream fis = new FileInputStream(new File("src/data/dataMakanan.xlsx"));
+        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         lToko1.setText(workbook.getSheetAt(0).getSheetName());
         lToko2.setText(workbook.getSheetAt(1).getSheetName());
