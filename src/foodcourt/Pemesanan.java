@@ -34,7 +34,18 @@ public class Pemesanan extends javax.swing.JFrame {
      * Creates new form Pemesanan
      * @throws java.io.IOException
      */
+    public String namaResto;
+    
     public Pemesanan() throws IOException {
+        initComponents();
+        jPanel3.setBackground(new Color(101,101,101,200));
+        ReadExcelFile();
+        jPanel9.setVisible(false);
+    }
+    
+    public Pemesanan(String namaResto) throws IOException{
+        this.namaResto=namaResto;
+        System.out.println(this.namaResto);
         initComponents();
         jPanel3.setBackground(new Color(101,101,101,200));
         ReadExcelFile();
@@ -47,12 +58,12 @@ public class Pemesanan extends javax.swing.JFrame {
      */
     private void ReadExcelFile() throws FileNotFoundException, IOException {
         XSSFRow row;
-        FileInputStream fis = new FileInputStream(new File("src/data/dataMakanan.xlsx"));       
+        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));       
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
-        XSSFSheet spreadsheet = workbook.getSheetAt(0);
+        XSSFSheet spreadsheet = workbook.getSheet(this.namaResto);
         Iterator< Row> rowIterator = spreadsheet.iterator();
         
-        jLabel1.setText("Toko  " + workbook.getSheetName(0));
+        jLabel1.setText("Toko  " + this.namaResto);
   
         
         DefaultTableModel dtm = new DefaultTableModel();
@@ -433,7 +444,8 @@ public class Pemesanan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_exitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMousePressed
-        System.exit(0);
+        new Toko().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_exitMousePressed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
