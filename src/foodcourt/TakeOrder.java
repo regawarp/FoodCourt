@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -32,43 +34,62 @@ public class TakeOrder extends javax.swing.JFrame {
 
     private static final String EXCEL_FILE_DATA_PESANAN_MEJA = ".\\src\\data\\dataPesananDariMeja.xlsx";
     private static final String EXCEL_FILE_DATA_REKAP = ".\\src\\data\\dataRekapPesanan.xlsx";
+    private static FileInputStream fileInDataPesananDariMeja = null, fileInDataRekapPesanan = null;
+    private static OutputStream fileOutDataPesananDariMeja = null, fileOutDataRekap = null;
     private static final int MAX_FOOD_COURT = 26;
     private String selectedListMeja = " ";
-    private String namaToko = "Ootoya";
+    private String namaToko = "Delicio";
     private int jumlahToko = 12;
+    private XSSFSheet sheetInDataPesananDariMeja = null, sheetInDataRekap = null;
     static XSSFRow row;
 
     public TakeOrder() {
         initComponents();
-        XSSFSheet spreadsheet = null;
-        FileInputStream fis;
-        try {
-            fis = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            String sheetName; boolean sheetFound = false;
-            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                spreadsheet = workbook.getSheetAt(indexSheet);
-                sheetName = spreadsheet.getSheetName();
-                if(sheetName.equals(namaToko)){
-                    sheetFound = true;
-                }
-            }
-            fis.close();
-        } catch (IOException e) {
-            System.out.println("IOException : " + e);
-        }
-        SetGUI(spreadsheet);
+        OpenFile();
+        SetGUI(sheetInDataPesananDariMeja);
     }
 
+    private void OpenFile(){
+        try {
+            fileInDataPesananDariMeja = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
+            XSSFWorkbook workbookInDataPesananDariMeja = new XSSFWorkbook(fileInDataPesananDariMeja);
+            sheetInDataPesananDariMeja = GetSheetByNamaToko(workbookInDataPesananDariMeja, namaToko);
+//            fileInDataPesananDariMeja.close();
+
+            fileInDataRekapPesanan = new FileInputStream(new File(EXCEL_FILE_DATA_REKAP));
+            XSSFWorkbook workbookInDataRekap = new XSSFWorkbook(fileInDataRekapPesanan);
+            sheetInDataRekap = GetSheetByNamaToko(workbookInDataRekap, namaToko);
+//            fileInDataRekapPesanan.close();
+
+//            fileOutDataPesananDariMeja = new FileOutputStream(EXCEL_FILE_DATA_PESANAN_MEJA);
+//            fileOutDataRekap = new FileOutputStream(EXCEL_FILE_DATA_REKAP);
+        } catch (IOException ex) {
+           System.out.println("IOException : " + ex);
+        }
+    }
+
+    private XSSFSheet GetSheetByNamaToko(XSSFWorkbook workbookIn, String namaToko){
+        XSSFSheet spreadsheet = null;
+        String sheetName; boolean sheetFound = false;
+        for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
+            spreadsheet = workbookIn.getSheetAt(indexSheet);
+            sheetName = spreadsheet.getSheetName();
+            if(sheetName.equals(namaToko)){
+                sheetFound = true;
+            }
+        }
+        return spreadsheet;
+    }
+    
     private void SetGUI(XSSFSheet spreadsheet) {
-        JLabelNamaToko.setText(namaToko);
         if(spreadsheet != null){
+            JLabelNamaToko.setText(spreadsheet.getSheetName());
             Iterator<Row> rowIterator = spreadsheet.iterator();
 
             String[] ListMeja = new String[MAX_FOOD_COURT];
             int baris = 0;
             String temp = " ";
-            row = (XSSFRow) rowIterator.next(); //pindah dari baris 0 ke baris 1
+            XSSFRow row = (XSSFRow) rowIterator.next(); //pindah dari baris 0 ke baris 1
             while (rowIterator.hasNext()) {
                 row = (XSSFRow) rowIterator.next();
 
@@ -96,7 +117,7 @@ public class TakeOrder extends javax.swing.JFrame {
         JNoteOrder = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         JListTable = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        JButtonDashboard = new javax.swing.JButton();
         jButtonTakeOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -188,12 +209,12 @@ public class TakeOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JListTable);
 
-        jButton2.setBackground(new java.awt.Color(251, 251, 251));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton2.setText("Dashboard");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        JButtonDashboard.setBackground(new java.awt.Color(251, 251, 251));
+        JButtonDashboard.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        JButtonDashboard.setText("Dashboard");
+        JButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                JButtonDashboardActionPerformed(evt);
             }
         });
 
@@ -223,7 +244,7 @@ public class TakeOrder extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -234,7 +255,7 @@ public class TakeOrder extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JButtonDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(JNoteOrder, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,22 +304,8 @@ public class TakeOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JListTableMouseClicked
-        FileInputStream fis;
-        try {
-            fis = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
-
-            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-            XSSFSheet spreadsheet = workbook.getSheetAt(0);
-            String sheetName; boolean sheetFound = false;
-            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                spreadsheet = workbook.getSheetAt(indexSheet);
-                sheetName = spreadsheet.getSheetName();
-                if(sheetName.equals(namaToko)){
-                    sheetFound = true;
-                }
-            }
-            Iterator<Row> rowIterator = spreadsheet.iterator();
-
+        if(sheetInDataPesananDariMeja != null){
+            Iterator<Row> rowIterator = sheetInDataPesananDariMeja.iterator();
             selectedListMeja = JListTable.getSelectedValue(); //tabel 1, tabel 2, dll
 
             DefaultTableModel dtm = new DefaultTableModel();
@@ -311,7 +318,7 @@ public class TakeOrder extends javax.swing.JFrame {
             String tempKeterangan;
             String tempOrderNote = " ";
 
-            row = (XSSFRow) rowIterator.next(); //pindah dari baris 0 ke baris 1
+            XSSFRow row = (XSSFRow) rowIterator.next(); //pindah dari baris 0 ke baris 1
             while (rowIterator.hasNext()) {
                 row = (XSSFRow) rowIterator.next();
                 Cell cellMenu = row.getCell(1);
@@ -333,47 +340,20 @@ public class TakeOrder extends javax.swing.JFrame {
             }
             JTableMenuOrdered.setModel(dtm);
             JNoteOrder.setText("Note :\n" + tempOrderNote);
-            fis.close();
-        } catch (IOException ex) {
-            System.out.println("IOException : " + ex);
-        } finally {
-
         }
     }//GEN-LAST:event_JListTableMouseClicked
 
     private void jButtonTakeOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTakeOrderActionPerformed
-
-        FileInputStream fileInOrderanMeja, fileInDataRekap;
-        OutputStream fileOutOrderanMeja, fileOutDataRekap;
         try {
-            fileInOrderanMeja = new FileInputStream(EXCEL_FILE_DATA_PESANAN_MEJA);
-            XSSFWorkbook workbookOrderanMeja = (XSSFWorkbook) WorkbookFactory.create(fileInOrderanMeja);
-            XSSFSheet sheetInOrderanMeja = workbookOrderanMeja.getSheetAt(0);
+            fileInDataPesananDariMeja = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
+            XSSFWorkbook workbookInOutDataPesananDariMeja = (XSSFWorkbook) WorkbookFactory.create(fileInDataPesananDariMeja);
+            XSSFSheet sheetInDataPesananDariMeja = GetSheetByNamaToko(workbookInOutDataPesananDariMeja, namaToko);
+            Iterator<Row> rowIteratorDataOrder = sheetInDataPesananDariMeja.iterator();
 
-            String sheetName; boolean sheetFound = false;
-            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                sheetInOrderanMeja = workbookOrderanMeja.getSheetAt(indexSheet);
-                sheetName = sheetInOrderanMeja.getSheetName();
-                if(sheetName.equals(namaToko)){
-                    sheetFound = true;
-                }
-            }
-            Iterator<Row> rowIteratorDataOrder = sheetInOrderanMeja.iterator();
-            fileInOrderanMeja.close();
-            
-            fileInDataRekap = new FileInputStream(EXCEL_FILE_DATA_REKAP);
-            XSSFWorkbook workbookDataRekap = (XSSFWorkbook) WorkbookFactory.create(fileInDataRekap);
-            XSSFSheet sheetDataRekap = workbookDataRekap.getSheetAt(0);
-            sheetFound = false;
-            for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                sheetDataRekap = workbookDataRekap.getSheetAt(indexSheet);
-                sheetName = sheetDataRekap.getSheetName();
-                if(sheetName.equals(namaToko)){
-                    sheetFound = true;
-                }
-            }
-            Iterator<Row> rowIteratorDataRekap = sheetDataRekap.iterator();
-            fileInDataRekap.close();
+            fileInDataRekapPesanan = new FileInputStream(new File(EXCEL_FILE_DATA_REKAP));
+            XSSFWorkbook workbookInOutDataRekapPesanan = (XSSFWorkbook) WorkbookFactory.create(fileInDataRekapPesanan);
+            XSSFSheet sheetInDataRekap = GetSheetByNamaToko(workbookInOutDataRekapPesanan, namaToko);
+            Iterator<Row> rowIteratorDataRekap = sheetInDataRekap.iterator();
 
             XSSFRow rowDataOrder, rowDataRekap;
             rowDataOrder = (XSSFRow) rowIteratorDataOrder.next(); //pindah ke baris 0
@@ -381,7 +361,7 @@ public class TakeOrder extends javax.swing.JFrame {
             String selectedNamaMeja = null;
             if(selectedListMeja != null)
                 selectedNamaMeja = selectedListMeja; //table 1, table 2, dll
-            int rowIndexSelectedMeja = getRowIndexOfId(sheetInOrderanMeja, selectedNamaMeja);
+            int rowIndexSelectedMeja = getRowIndexOfId(sheetInDataPesananDariMeja, selectedNamaMeja);
             
             for(int i = 0; i < rowIndexSelectedMeja; i++){
                 rowDataOrder = (XSSFRow) rowIteratorDataOrder.next(); //pindah ke index selectedListMeja
@@ -393,7 +373,7 @@ public class TakeOrder extends javax.swing.JFrame {
 
             if(cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)){
                 boolean found = false;
-                rowIteratorDataRekap = sheetDataRekap.iterator(); //pindah ke baris 0
+                rowIteratorDataRekap = sheetInDataPesananDariMeja.iterator(); //pindah ke baris 0
                 rowDataRekap = (XSSFRow) rowIteratorDataRekap.next(); //pindah ke baris 0
 
                 while(rowIteratorDataRekap.hasNext() && !found){
@@ -416,17 +396,10 @@ public class TakeOrder extends javax.swing.JFrame {
                 if(!found){
                     System.out.println(cellMenuDataOrder.getStringCellValue() + " : NOT FOUND DI FILE REKAP");
                 }
+//                XSSFWorkbook workbookOutDataRekap = sheetInDataRekap.getWorkbook();
                 fileOutDataRekap = new FileOutputStream(EXCEL_FILE_DATA_REKAP);
-                workbookDataRekap.write(fileOutDataRekap); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
-                sheetDataRekap = workbookDataRekap.getSheetAt(0);
-                sheetFound = false;
-                for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                    sheetDataRekap = workbookDataRekap.getSheetAt(indexSheet);
-                    sheetName = sheetDataRekap.getSheetName();
-                    if(sheetName.equals(namaToko)){
-                        sheetFound = true;
-                    }
-                }
+                workbookInOutDataRekapPesanan.write(fileOutDataRekap); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
+                sheetInDataRekap = GetSheetByNamaToko(workbookInOutDataRekapPesanan, namaToko);
                 fileOutDataRekap.close();
             }
             
@@ -437,7 +410,7 @@ public class TakeOrder extends javax.swing.JFrame {
                 cellQuantityDataOrder = rowDataOrder.getCell(2);
 
                 boolean found = false;
-                rowIteratorDataRekap = sheetDataRekap.iterator(); //pindah ke baris 0
+                rowIteratorDataRekap = sheetInDataRekap.iterator(); //pindah ke baris 0
                 rowDataRekap = (XSSFRow) rowIteratorDataRekap.next(); //pindah ke baris 0
 
                 while(rowIteratorDataRekap.hasNext() && !found){
@@ -460,46 +433,41 @@ public class TakeOrder extends javax.swing.JFrame {
                 if(!found){
                     System.out.println(cellMenuDataOrder.getStringCellValue() + " : NOT FOUND DI FILE REKAP");
                 }
+//                XSSFWorkbook workbookOutDataRekap = sheetInDataRekap.getWorkbook();
                 fileOutDataRekap = new FileOutputStream(EXCEL_FILE_DATA_REKAP);
-                workbookDataRekap.write(fileOutDataRekap); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
-                sheetDataRekap = workbookDataRekap.getSheetAt(0);
-                sheetFound = false;
-                for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-                    sheetDataRekap = workbookDataRekap.getSheetAt(indexSheet);
-                    sheetName = sheetDataRekap.getSheetName();
-                    if(sheetName.equals(namaToko)){
-                        sheetFound = true;
-                    }
-                }
+                workbookInOutDataRekapPesanan.write(fileOutDataRekap); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
+                sheetInDataRekap = GetSheetByNamaToko(workbookInOutDataRekapPesanan, namaToko);
                 fileOutDataRekap.close();
             }
             
 
             while(rowIndexSelectedMeja != -1){
-                rowIndexSelectedMeja = getRowIndexOfId(sheetInOrderanMeja, selectedNamaMeja); //ambil index dari meja yang dipilih
-                removeRow(sheetInOrderanMeja, rowIndexSelectedMeja); //delete row dari sheet
+                rowIndexSelectedMeja = getRowIndexOfId(sheetInDataPesananDariMeja, selectedNamaMeja); //ambil index dari meja yang dipilih
+                removeRow(sheetInDataPesananDariMeja, rowIndexSelectedMeja); //delete row dari sheet
             }
 
-            fileOutOrderanMeja = new FileOutputStream(EXCEL_FILE_DATA_PESANAN_MEJA);
-            workbookOrderanMeja.write(fileOutOrderanMeja); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
-//            XSSFSheet sheetOut = workbookOrderanMeja.getSheetAt(0);
-            fileOutOrderanMeja.close();
+//            XSSFWorkbook workbookOutDataPesananDariMeja = sheetInDataPesananDariMeja.getWorkbook();
+            fileOutDataPesananDariMeja = new FileOutputStream(EXCEL_FILE_DATA_PESANAN_MEJA);
+            workbookInOutDataPesananDariMeja.write(fileOutDataPesananDariMeja); //sheet yang telah berubah, mereplace sheet yang ada di file (update file)
 
-            SetGUI(sheetInOrderanMeja); //update GUI
+            fileOutDataPesananDariMeja.close();
+            SetGUI(sheetInDataPesananDariMeja); //update GUI
         } catch (IOException ex) {
-            System.out.println("IOException : " + ex);
-        } catch (InvalidFormatException ex) {
-            System.out.println("InvalidFormatException : " + ex);
+            System.out.println("IOException :  " + ex);
+//        } catch (InvalidFormatException ex) {
+//            System.out.println("InvalidFormatException : " + ex);
         } catch (EncryptedDocumentException ex){
             System.out.println("EncryptedDocumentException : " + ex);
+        } catch (InvalidFormatException ex) {
+            Logger.getLogger(TakeOrder.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
     }//GEN-LAST:event_jButtonTakeOrderActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void JButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonDashboardActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_JButtonDashboardActionPerformed
 
     private static int getRowIndexOfId(XSSFSheet sheet, String selectedid) {
         DataFormatter formatter = new DataFormatter();
@@ -522,9 +490,6 @@ public class TakeOrder extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -559,11 +524,11 @@ public class TakeOrder extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JButtonDashboard;
     private javax.swing.JLabel JLabelNamaToko;
     private javax.swing.JList<String> JListTable;
     private javax.swing.JTextField JNoteOrder;
     private javax.swing.JTable JTableMenuOrdered;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonTakeOrder;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
