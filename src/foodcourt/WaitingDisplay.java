@@ -47,7 +47,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
         FileInputStream fis;
         DefaultTableModel table = new DefaultTableModel();
         
-        fis = new FileInputStream(new File("Book1.xlsx"));
+        fis = new FileInputStream(new File("src//data//Book1.xlsx"));
         try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
             XSSFSheet sheet = wb.getSheetAt(0);
             
@@ -79,7 +79,10 @@ public class WaitingDisplay extends javax.swing.JFrame {
                 
                 table.addRow(data);
             }
-            
+            Object[] rowData = new Object[]{
+                "Total", " ", total
+            };
+            table.addRow(rowData);
             Bill.setModel(table);
         }
     }
@@ -162,7 +165,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet sheet = wb.createSheet("Sheet 1");
         XSSFFont font = wb.createFont();
-        File file = new File("Log Transaksi.xlsx");
+        File file = new File("src//data//Log Transaksi.xlsx");
         XSSFCellStyle cellStyle = wb.createCellStyle();
         TableModel model = Bill.getModel();
         
