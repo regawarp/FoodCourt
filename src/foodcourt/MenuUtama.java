@@ -90,7 +90,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 730, 770));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\FoodCourt\\menuUtama.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\FoodCourt\\src\\menuUtama.jpg")); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-370, 0, 1160, 760));
 
@@ -104,6 +104,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new Toko().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
