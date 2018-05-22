@@ -5,6 +5,7 @@
  */
 package foodcourt;
 
+import java.awt.Color;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.apache.poi.ss.usermodel.Cell;
@@ -86,6 +88,10 @@ public class WaitingDisplay extends javax.swing.JFrame {
             Bill.setModel(table);
         }
     }
+    
+    private void SlideShow(){
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,29 +102,29 @@ public class WaitingDisplay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Bill = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        PrintBill = new javax.swing.JButton();
+        AddMenu = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        Ads = new javax.swing.JLabel();
+        SlideShow = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(26, 26, 26));
         setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(26, 26, 26));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1366, 734));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.setBackground(new java.awt.Color(26, 26, 26));
+        mainPanel.setMinimumSize(new java.awt.Dimension(1366, 734));
+        mainPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 50)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Pesanan Anda Sedang Diproses");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
+        jLabel1.setText("Please Wait for Your Order");
+        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
 
         Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,38 +136,43 @@ public class WaitingDisplay extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Bill);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
+        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
 
-        jButton1.setBackground(new java.awt.Color(67, 1, 2));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Print Bill");
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 50));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        PrintBill.setBackground(new java.awt.Color(67, 1, 2));
+        PrintBill.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        PrintBill.setForeground(new java.awt.Color(255, 255, 255));
+        PrintBill.setText("Print Bill");
+        PrintBill.setPreferredSize(new java.awt.Dimension(150, 50));
+        PrintBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PrintBillActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, -1, -1));
+        mainPanel.add(PrintBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(67, 1, 2));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Add Menu");
-        jButton2.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
+        AddMenu.setBackground(new java.awt.Color(67, 1, 2));
+        AddMenu.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        AddMenu.setForeground(new java.awt.Color(255, 255, 255));
+        AddMenu.setText("Add Menu");
+        AddMenu.setPreferredSize(new java.awt.Dimension(150, 50));
+        AddMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddMenuActionPerformed(evt);
+            }
+        });
+        mainPanel.add(AddMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(Ads, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 520));
+        jPanel2.add(SlideShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 520));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
+        mainPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
+        getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void PrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBillActionPerformed
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet sheet = wb.createSheet("Sheet 1");
         XSSFFont font = wb.createFont();
@@ -190,7 +201,11 @@ public class WaitingDisplay extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_PrintBillActionPerformed
+
+    private void AddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMenuActionPerformed
+        new Toko().setVisible(true);
+    }//GEN-LAST:event_AddMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,25 +235,23 @@ public class WaitingDisplay extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new WaitingDisplay().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new WaitingDisplay().setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Ads;
+    private javax.swing.JButton AddMenu;
     private javax.swing.JTable Bill;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton PrintBill;
+    private javax.swing.JLabel SlideShow;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 }
