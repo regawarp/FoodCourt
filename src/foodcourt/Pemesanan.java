@@ -6,7 +6,6 @@
 package foodcourt;
 
 import java.awt.Color;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
