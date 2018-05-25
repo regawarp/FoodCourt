@@ -29,13 +29,46 @@ public class gawai extends javax.swing.JPanel {
 
         stats_pane = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        showPegawaiStats_pane = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
 
         stats_pane.setBackground(new java.awt.Color(255, 153, 153));
         stats_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel12.setBackground(new java.awt.Color(102, 102, 102));
         jPanel12.setMaximumSize(new java.awt.Dimension(660, 300));
         jPanel12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel12.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 830, 200));
+
+        javax.swing.GroupLayout showPegawaiStats_paneLayout = new javax.swing.GroupLayout(showPegawaiStats_pane);
+        showPegawaiStats_pane.setLayout(showPegawaiStats_paneLayout);
+        showPegawaiStats_paneLayout.setHorizontalGroup(
+            showPegawaiStats_paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
+        showPegawaiStats_paneLayout.setVerticalGroup(
+            showPegawaiStats_paneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+        );
+
+        jPanel12.add(showPegawaiStats_pane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 470, 330));
+
         stats_pane.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 890, 590));
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
@@ -68,6 +101,9 @@ public class gawai extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel19;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel showPegawaiStats_pane;
     private javax.swing.JPanel stats_pane;
     // End of variables declaration//GEN-END:variables
 }

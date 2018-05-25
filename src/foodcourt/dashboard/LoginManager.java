@@ -5,18 +5,31 @@
  */
 package foodcourt.dashboard;
 
+import foodcourt.security.AES;
 import java.awt.Color;
 import java.awt.Insets;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author Admin
  */
 public class LoginManager extends javax.swing.JFrame {
-    
+
     DateFormat dateFormat = new SimpleDateFormat("EEEE,  dd  MMMM  yyyy");
     Date date = new Date();
 
@@ -185,6 +198,11 @@ public class LoginManager extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Swis721 WGL4 BT", 1, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("LOGIN");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel1MousePressed(evt);
+            }
+        });
         jPanel7.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, 40));
 
         jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 100, 40));
@@ -382,16 +400,69 @@ public class LoginManager extends javax.swing.JFrame {
     private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
         char[] input = this.jPasswordField1.getPassword();
         System.out.print(input);
-        if(!input.equals("password"))
+        if (!input.equals("password")) {
             this.jPasswordField1.setText("");
-            this.jPasswordField1.setEchoChar('*');
+        }
+        this.jPasswordField1.setEchoChar('*');
     }//GEN-LAST:event_jPasswordField1FocusGained
 
     private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
-        if(!this.jPasswordField1.getPassword().equals(""))
+        if (!this.jPasswordField1.getPassword().equals("")) {
             this.jPasswordField1.setText("password");
-            this.jPasswordField1.setEchoChar((char)0);    
+        }
+        this.jPasswordField1.setEchoChar((char) 0);
     }//GEN-LAST:event_jPasswordField1FocusLost
+
+    private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
+        try {
+            if (verifikasi(this.jTextField1.getText(), String.valueOf(this.jPasswordField1.getPassword()))) {
+                System.out.println(this.jTextField1.getText());
+//                gantiFrame(this.jTextField1.getText());
+                new Dashboard().setVisible(true);
+                this.setVisible(false);
+            }
+            }catch (IOException ex) {
+            Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel1MousePressed
+
+    
+    void gantiFrame(String username){
+        //Ganti ke Frame Pemesanan
+        try {
+            new Dashboard(username).setVisible(true);
+            this.setVisible(false);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+
+    private boolean verifikasi(String uname, String pass) throws FileNotFoundException, IOException {
+        XSSFRow row;
+        FileInputStream fis = new FileInputStream(new File("src/data/dataLoginManajer.xlsx"));
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet spreadsheet = workbook.getSheetAt(0);
+        Iterator <Row> rowIterator = spreadsheet.iterator();
+
+        row = (XSSFRow) rowIterator.next();
+        while (rowIterator.hasNext()) {
+            row = (XSSFRow) rowIterator.next();
+            Iterator< Cell> cellIterator = row.cellIterator();
+            Cell cell = cellIterator.next();
+            String nama = cell.getStringCellValue();
+            cell = cellIterator.next();
+            String pasw = cell.getStringCellValue();
+            System.out.println(nama+" "+pasw);
+
+            if (nama.equals(uname)) {
+                System.out.println("pass : "+AES.periksa(pass, pasw));
+                return AES.periksa(pass, pasw);
+            }
+            
+        }
+        return false;
+    }
 
     /**
      * @param args the command line arguments

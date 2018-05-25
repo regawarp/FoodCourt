@@ -31,11 +31,33 @@ public class Dashboard extends javax.swing.JFrame {
 
     DateFormat dateFormat = new SimpleDateFormat("EEEE,  dd  MMMM  yyyy");
     Date date = new Date();
+    String namaUser;
 
     /**
      * Creates new form Home
      */
-    public Dashboard() throws IOException {
+//    public Dashboard() throws IOException {
+//        System.out.println(date.getHours());
+//        initComponents();
+//        setColor(btn_1);
+//        ind_1.setOpaque(true);
+//        resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
+//        jProgressBar1.setValue(hitungMeja());
+//        show_pane.add(new penjualan());
+//    }
+    public Dashboard() throws IOException{
+        System.out.println(date.getHours());
+        initComponents();
+        setColor(btn_1);
+        ind_1.setOpaque(true);
+        resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
+        jProgressBar1.setValue(hitungMeja());
+        show_pane.add(new penjualan());
+    }
+    
+    public Dashboard(String user) throws IOException {
+        this.namaUser = user;
+        name.setText(namaUser);
         System.out.println(date.getHours());
         initComponents();
         setColor(btn_1);
@@ -73,7 +95,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -350,10 +372,11 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/admin.png"))); // NOI18N
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 86, -1));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Howdy, Manager!");
-        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, 30));
+        name.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setText("Howdy, Manager!");
+        jPanel4.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, 30));
+        name.getAccessibleContext().setAccessibleName("");
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 310, -1));
 
@@ -449,6 +472,7 @@ public class Dashboard extends javax.swing.JFrame {
         ind_4.setOpaque(true);
         resetColor(new JPanel[]{btn_2, btn_3, btn_1}, new JPanel[]{ind_2, ind_3, ind_1});
         show_pane.removeAll();
+//        show_pane.add(new gawai());
         show_pane.add(new tambah_pegawai());
         show_pane.repaint();
         show_pane.revalidate();
@@ -521,7 +545,7 @@ public class Dashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             try {
-                new Dashboard().setVisible(true);
+                new Dashboard("Manager").setVisible(true);
             } catch (IOException ex) {
                 Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -597,7 +621,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
@@ -614,6 +637,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel name;
     private javax.swing.JPanel show_pane;
     private javax.swing.JPanel side_pane;
     // End of variables declaration//GEN-END:variables

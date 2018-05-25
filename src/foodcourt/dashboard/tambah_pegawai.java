@@ -5,7 +5,7 @@
  */
 package foodcourt.dashboard;
 
-import foodcourt.security.PasswordUtils;
+import foodcourt.security.AES;
 import java.awt.Color;
 import java.awt.Insets;
 import java.io.File;
@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -208,6 +207,7 @@ public class tambah_pegawai extends javax.swing.JPanel {
         try {
             if (isVerified(uname, pass)) {
                 tambahkanUser(uname, pass, jComboBox1.getSelectedItem().toString());
+                System.out.println(pass);
             }
         } catch (IOException ex) {
             Logger.getLogger(tambah_pegawai.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,7 +224,7 @@ public class tambah_pegawai extends javax.swing.JPanel {
             Sheet sheet = workbook.getSheetAt(0);
             row = sheet.getLastRowNum()+1;
             Row currentRow = sheet.createRow(row);
-            password = PasswordUtils.encrypt(password);
+            password = AES.kunci(password);
             
             Cell nama = currentRow.createCell(0);
             nama.setCellValue(username);
@@ -275,7 +275,7 @@ public class tambah_pegawai extends javax.swing.JPanel {
                 XSSFSheet spreadsheet = workbook.getSheetAt(0);
                 Iterator< Row> rowIterator = spreadsheet.iterator();
 
-                row = (XSSFRow) rowIterator.next();
+//                row = (XSSFRow) rowIterator.next();
                 while (rowIterator.hasNext()) {
                     row = (XSSFRow) rowIterator.next();
                     Iterator< Cell> cellIterator = row.cellIterator();
