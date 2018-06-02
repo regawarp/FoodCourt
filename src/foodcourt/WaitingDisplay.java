@@ -142,6 +142,9 @@ public class WaitingDisplay extends javax.swing.JFrame {
         jLabel1.setText("Please Wait for Your Order");
         mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
 
+        Bill.setBackground(new java.awt.Color(255, 255, 255));
+        Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Bill.setForeground(new java.awt.Color(0, 0, 0));
         Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
