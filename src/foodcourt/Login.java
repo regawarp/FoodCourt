@@ -5,6 +5,8 @@
  */
 package foodcourt;
 
+import java.awt.Color;
+
 /**
  *
  * @author Regawa
@@ -18,10 +20,12 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        jPanel1.setBackground(new Color(000,000,000,200));
     }
 
     public Login(String noMeja) {
         initComponents();
+        jPanel1.setBackground(new Color(000,000,000,200));
         this.noMeja = noMeja;
         setNoMeja();
     }
@@ -35,56 +39,58 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnStaffLogin = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         tfNama = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
-        btnStaffLogin = new javax.swing.JButton();
         lNoMeja = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnStaffLogin.setText("Staff Login");
+        getContentPane().add(btnStaffLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Giddyup Std", 0, 100)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("FoodCourt");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, 120));
+
+        tfNama.setFont(new java.awt.Font("Segoe UI Light", 0, 30)); // NOI18N
+        tfNama.setText("Masukan Nama Anda");
+        tfNama.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                tfNamaFocusGained(evt);
+            }
+        });
+        jPanel1.add(tfNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 330, 60));
+
+        btnLogin.setBackground(new java.awt.Color(0, 204, 0));
+        btnLogin.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("LOGIN");
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnLoginMouseClicked(evt);
             }
         });
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 160, 50));
 
-        btnStaffLogin.setText("Staff Login");
+        lNoMeja.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
+        lNoMeja.setForeground(new java.awt.Color(255, 255, 255));
+        lNoMeja.setText("Meja No.X");
+        jPanel1.add(lNoMeja, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, -1, -1));
 
-        lNoMeja.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        lNoMeja.setText("No. X");
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, 510, 770));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnStaffLogin)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(618, 618, 618)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfNama)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(606, 606, 606)
-                        .addComponent(lNoMeja)))
-                .addContainerGap(673, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(btnStaffLogin)
-                .addGap(166, 166, 166)
-                .addComponent(lNoMeja)
-                .addGap(47, 47, 47)
-                .addComponent(tfNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLogin)
-                .addContainerGap(435, Short.MAX_VALUE))
-        );
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lily-lvnatikk-365344-unsplash.jpg"))); // NOI18N
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -94,8 +100,12 @@ public class Login extends javax.swing.JFrame {
         new MenuUtama().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void tfNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNamaFocusGained
+        tfNama.setText("");
+    }//GEN-LAST:event_tfNamaFocusGained
     void setNoMeja() {
-        lNoMeja.setText("No." + this.noMeja);
+        lNoMeja.setText("Meja No." + this.noMeja);
     }
 
     /**
@@ -134,8 +144,11 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnStaffLogin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lNoMeja;
     private javax.swing.JTextField tfNama;
     // End of variables declaration//GEN-END:variables
