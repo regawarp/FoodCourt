@@ -480,7 +480,8 @@ public class TakeOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTakeOrderActionPerformed
 
     private void JButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonDashboardActionPerformed
-        // TODO add your handling code here:
+        new DashboardToko().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_JButtonDashboardActionPerformed
 
     private static int getRowIndexOfId(XSSFSheet sheet, String selectedid) {
