@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package foodcourt;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -28,303 +34,395 @@ public class Toko extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        jPanel14 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        jPanel17 = new javax.swing.JPanel();
-        jPanel18 = new javax.swing.JPanel();
-        jPanel19 = new javax.swing.JPanel();
-        jPanel20 = new javax.swing.JPanel();
-        jPanel21 = new javax.swing.JPanel();
-        jPanel22 = new javax.swing.JPanel();
+        btn1 = new javax.swing.JPanel();
+        lToko1 = new javax.swing.JLabel();
+        Gambar1 = new javax.swing.JLabel();
+        btn2 = new javax.swing.JPanel();
+        lToko2 = new javax.swing.JLabel();
+        Gambar2 = new javax.swing.JLabel();
+        btn3 = new javax.swing.JPanel();
+        lToko3 = new javax.swing.JLabel();
+        Gambar3 = new javax.swing.JLabel();
+        btn4 = new javax.swing.JPanel();
+        lToko4 = new javax.swing.JLabel();
+        Gambar4 = new javax.swing.JLabel();
+        btn5 = new javax.swing.JPanel();
+        lToko5 = new javax.swing.JLabel();
+        Gambar5 = new javax.swing.JLabel();
+        btn6 = new javax.swing.JPanel();
+        lToko6 = new javax.swing.JLabel();
+        Gambar6 = new javax.swing.JLabel();
+        btn7 = new javax.swing.JPanel();
+        lToko7 = new javax.swing.JLabel();
+        Gambar7 = new javax.swing.JLabel();
+        btn8 = new javax.swing.JPanel();
+        lToko8 = new javax.swing.JLabel();
+        Gambar8 = new javax.swing.JLabel();
+        btn9 = new javax.swing.JPanel();
+        lToko9 = new javax.swing.JLabel();
+        Gambar9 = new javax.swing.JLabel();
+        btn10 = new javax.swing.JPanel();
+        lToko10 = new javax.swing.JLabel();
+        Gambar10 = new javax.swing.JLabel();
+        btn11 = new javax.swing.JPanel();
+        lToko11 = new javax.swing.JLabel();
+        Gambar11 = new javax.swing.JLabel();
+        btn12 = new javax.swing.JPanel();
+        lToko12 = new javax.swing.JLabel();
+        Gambar12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
+        setUndecorated(true);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel7.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel7.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn1.setBackground(new java.awt.Color(197, 197, 197));
+        btn1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn1.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn1MouseClicked(evt);
+            }
+        });
+        btn1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko1.setText("jLabel1");
+        btn1.add(lToko1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        btn1.add(Gambar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, -1, -1));
+        getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel8.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel8.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn2.setBackground(new java.awt.Color(197, 197, 197));
+        btn2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn2.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn2MouseClicked(evt);
+            }
+        });
+        btn2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko2.setText("jLabel1");
+        btn2.add(lToko2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        btn2.add(Gambar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
 
-        jPanel9.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel9.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn3.setBackground(new java.awt.Color(197, 197, 197));
+        btn3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn3.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn3MouseClicked(evt);
+            }
+        });
+        btn3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko3.setText("jLabel1");
+        btn3.add(lToko3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        btn3.add(Gambar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
+        getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, -1));
 
-        jPanel10.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel10.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn4.setBackground(new java.awt.Color(197, 197, 197));
+        btn4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn4.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn4MouseClicked(evt);
+            }
+        });
+        btn4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko4.setText("jLabel1");
+        btn4.add(lToko4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+        btn4.add(Gambar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, -1));
+        getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, -1, -1));
 
-        jPanel11.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel11.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn5.setBackground(new java.awt.Color(197, 197, 197));
+        btn5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn5.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn5MouseClicked(evt);
+            }
+        });
+        btn5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
-        jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko5.setText("jLabel1");
+        btn5.add(lToko5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        btn5.add(Gambar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
+        getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
 
-        jPanel12.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel12.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn6.setBackground(new java.awt.Color(197, 197, 197));
+        btn6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn6.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn6MouseClicked(evt);
+            }
+        });
+        btn6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko6.setText("jLabel1");
+        btn6.add(lToko6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        btn6.add(Gambar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, -1));
+        getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
 
-        jPanel13.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel13.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn7.setBackground(new java.awt.Color(197, 197, 197));
+        btn7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn7.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn7MouseClicked(evt);
+            }
+        });
+        btn7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko7.setText("jLabel1");
+        btn7.add(lToko7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        btn7.add(Gambar7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, -1, -1));
+        getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, -1, -1));
 
-        jPanel14.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel14.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn8.setBackground(new java.awt.Color(197, 197, 197));
+        btn8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn8.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn8MouseClicked(evt);
+            }
+        });
+        btn8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko8.setText("jLabel1");
+        btn8.add(lToko8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+        btn8.add(Gambar8, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 260, -1, -1));
 
-        jPanel15.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel15.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn9.setBackground(new java.awt.Color(197, 197, 197));
+        btn9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn9.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn9MouseClicked(evt);
+            }
+        });
+        btn9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
-        jPanel15.setLayout(jPanel15Layout);
-        jPanel15Layout.setHorizontalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel15Layout.setVerticalGroup(
-            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko9.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko9.setText("jLabel1");
+        btn9.add(lToko9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        btn9.add(Gambar9, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
+        getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
 
-        jPanel16.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel16.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn10.setBackground(new java.awt.Color(197, 197, 197));
+        btn10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn10.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn10MouseClicked(evt);
+            }
+        });
+        btn10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko10.setText("jLabel1");
+        btn10.add(lToko10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        btn10.add(Gambar10, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, -1, -1));
+        getContentPane().add(btn10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, -1, -1));
 
-        jPanel17.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel17.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn11.setBackground(new java.awt.Color(197, 197, 197));
+        btn11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn11.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn11MouseClicked(evt);
+            }
+        });
+        btn11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko11.setText("jLabel1");
+        btn11.add(lToko11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, 40));
+        btn11.add(Gambar11, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 260, -1, -1));
+        getContentPane().add(btn11, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 520, -1, -1));
 
-        jPanel18.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel18.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn12.setBackground(new java.awt.Color(197, 197, 197));
+        btn12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn12.setPreferredSize(new java.awt.Dimension(341, 250));
+        btn12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn12MouseClicked(evt);
+            }
+        });
+        btn12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
+        lToko12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko12.setText("jLabel1");
+        btn12.add(lToko12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        btn12.add(Gambar12, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
-        getContentPane().add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
-
-        jPanel19.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel19.setPreferredSize(new java.awt.Dimension(341, 250));
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, -1, -1));
-
-        jPanel20.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel20.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel20.setPreferredSize(new java.awt.Dimension(341, 250));
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 520, -1, -1));
-
-        jPanel21.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel21.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel21.setPreferredSize(new java.awt.Dimension(341, 250));
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 520, -1, -1));
-
-        jPanel22.setBackground(new java.awt.Color(197, 197, 197));
-        jPanel22.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel22.setPreferredSize(new java.awt.Dimension(341, 250));
-
-        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
-        jPanel22.setLayout(jPanel22Layout);
-        jPanel22Layout.setHorizontalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 337, Short.MAX_VALUE)
-        );
-        jPanel22Layout.setVerticalGroup(
-            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 246, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
+        getContentPane().add(btn12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 520, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        try {
+            //method tampil nama resto here
+            showNamaResto();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_formComponentShown
+
+    private void btn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn1MouseClicked
+        String namaResto = lToko1.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn1MouseClicked
+
+    private void btn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn2MouseClicked
+        String namaResto = lToko2.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn2MouseClicked
+
+    private void btn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn3MouseClicked
+        String namaResto = lToko3.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn3MouseClicked
+
+    private void btn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn4MouseClicked
+        String namaResto = lToko4.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn4MouseClicked
+
+    private void btn5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn5MouseClicked
+        String namaResto = lToko5.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn5MouseClicked
+
+    private void btn6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn6MouseClicked
+        String namaResto = lToko6.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn6MouseClicked
+
+    private void btn7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn7MouseClicked
+        String namaResto = lToko7.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn7MouseClicked
+
+    private void btn8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn8MouseClicked
+        String namaResto = lToko8.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn8MouseClicked
+
+    private void btn9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn9MouseClicked
+        String namaResto = lToko9.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn9MouseClicked
+
+    private void btn10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn10MouseClicked
+        String namaResto = lToko10.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn10MouseClicked
+
+    private void btn11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn11MouseClicked
+        String namaResto = lToko11.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn11MouseClicked
+
+    private void btn12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn12MouseClicked
+        String namaResto = lToko12.getText();
+        gantiFrame(namaResto);
+    }//GEN-LAST:event_btn12MouseClicked
+
+    void gantiFrame(String namaResto) {
+        //Ganti ke Frame Pemesanan
+        try {
+            new Pemesanan(namaResto).setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    void showNamaResto() throws FileNotFoundException, IOException {
+        String namaResto;
+        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        namaResto = workbook.getSheetAt(0).getSheetName();
+        lToko1.setText(namaResto);
+        ImageIcon image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar1.setIcon(image);
+        namaResto = workbook.getSheetAt(1).getSheetName();
+        lToko2.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar2.setIcon(image);
+        namaResto = workbook.getSheetAt(2).getSheetName();
+        lToko3.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar3.setIcon(image);
+        namaResto = workbook.getSheetAt(3).getSheetName();
+        lToko4.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar4.setIcon(image);
+        namaResto = workbook.getSheetAt(4).getSheetName();
+        lToko5.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar5.setIcon(image);
+        namaResto = workbook.getSheetAt(5).getSheetName();
+        lToko6.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar6.setIcon(image);
+        namaResto = workbook.getSheetAt(6).getSheetName();
+        lToko7.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar7.setIcon(image);
+        namaResto = workbook.getSheetAt(7).getSheetName();
+        lToko8.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar8.setIcon(image);
+        namaResto = workbook.getSheetAt(8).getSheetName();
+        lToko9.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar9.setIcon(image);
+        namaResto = workbook.getSheetAt(9).getSheetName();
+        lToko10.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar10.setIcon(image);
+        namaResto = workbook.getSheetAt(10).getSheetName();
+        lToko11.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar11.setIcon(image);
+        namaResto = workbook.getSheetAt(11).getSheetName();
+        lToko12.setText(namaResto);
+        image = new ImageIcon("src/img/" + namaResto + ".jpg");
+        Gambar12.setIcon(image);
+        fis.close();
+    }
 
     /**
      * @param args the command line arguments
@@ -362,21 +460,41 @@ public class Toko extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel Gambar1;
+    private javax.swing.JLabel Gambar10;
+    private javax.swing.JLabel Gambar11;
+    private javax.swing.JLabel Gambar12;
+    private javax.swing.JLabel Gambar2;
+    private javax.swing.JLabel Gambar3;
+    private javax.swing.JLabel Gambar4;
+    private javax.swing.JLabel Gambar5;
+    private javax.swing.JLabel Gambar6;
+    private javax.swing.JLabel Gambar7;
+    private javax.swing.JLabel Gambar8;
+    private javax.swing.JLabel Gambar9;
+    private javax.swing.JPanel btn1;
+    private javax.swing.JPanel btn10;
+    private javax.swing.JPanel btn11;
+    private javax.swing.JPanel btn12;
+    private javax.swing.JPanel btn2;
+    private javax.swing.JPanel btn3;
+    private javax.swing.JPanel btn4;
+    private javax.swing.JPanel btn5;
+    private javax.swing.JPanel btn6;
+    private javax.swing.JPanel btn7;
+    private javax.swing.JPanel btn8;
+    private javax.swing.JPanel btn9;
+    private javax.swing.JLabel lToko1;
+    private javax.swing.JLabel lToko10;
+    private javax.swing.JLabel lToko11;
+    private javax.swing.JLabel lToko12;
+    private javax.swing.JLabel lToko2;
+    private javax.swing.JLabel lToko3;
+    private javax.swing.JLabel lToko4;
+    private javax.swing.JLabel lToko5;
+    private javax.swing.JLabel lToko6;
+    private javax.swing.JLabel lToko7;
+    private javax.swing.JLabel lToko8;
+    private javax.swing.JLabel lToko9;
     // End of variables declaration//GEN-END:variables
 }
