@@ -15,8 +15,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -40,10 +41,11 @@ public class WaitingDisplay extends javax.swing.JFrame {
     public WaitingDisplay() throws IOException {
         initComponents();
         DisplayBill();
+        newPanel.setVisible(false);
     }
     
     private void DisplayBill() throws FileNotFoundException, IOException{
-        double total = 0;
+        int total = 0;
         
         XSSFRow row;
         FileInputStream fis;
@@ -53,9 +55,10 @@ public class WaitingDisplay extends javax.swing.JFrame {
         try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
             XSSFSheet sheet = wb.getSheetAt(0);
             
-            table.addColumn("Nama");
-            table.addColumn("Qty");
-            table.addColumn("Harga");
+            table.addColumn(" ");
+            table.addColumn(" ");
+            table.addColumn(" ");
+            Bill.setRowHeight(40);
             
             Iterator < Row > rowIterator = sheet.rowIterator();
             
@@ -64,15 +67,14 @@ public class WaitingDisplay extends javax.swing.JFrame {
                 Iterator < Cell > cellIterator = row.cellIterator();                                        
                 
                 String nama;
-                double qty;
-                double harga;
+                int qty, harga;
                 
                 Cell cell = cellIterator.next();
                 nama = cell.getStringCellValue();
                 cell = cellIterator.next();
-                qty = cell.getNumericCellValue();
+                qty = (int) cell.getNumericCellValue();
                 cell = cellIterator.next();
-                harga = cell.getNumericCellValue();
+                harga = (int) cell.getNumericCellValue();
                 total += harga;
                 
                 Object[] data = new Object[]{
@@ -81,11 +83,25 @@ public class WaitingDisplay extends javax.swing.JFrame {
                 
                 table.addRow(data);
             }
+            Object[] space = new Object[]{
+                " ", " ", " "
+            };
+            table.addRow(space);
             Object[] rowData = new Object[]{
                 "Total", " ", total
             };
             table.addRow(rowData);
+            for(int i = 0; i < 6; i++){
+                table.addRow(space);
+            }
             Bill.setModel(table);
+            Bill.getColumnModel().getColumn(0).setPreferredWidth(150);
+            Bill.getColumnModel().getColumn(1).setPreferredWidth(10);
+            Bill.getColumnModel().getColumn(2).setPreferredWidth(50);
+            Bill.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+            Bill.setBackground(Color.WHITE);
+            JTableHeader header = Bill.getTableHeader();
+            header.setBackground(Color.WHITE);
         }
     }
     
@@ -108,8 +124,8 @@ public class WaitingDisplay extends javax.swing.JFrame {
         Bill = new javax.swing.JTable();
         PrintBill = new javax.swing.JButton();
         AddMenu = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        SlideShow = new javax.swing.JLabel();
+        SlideShow = new javax.swing.JPanel();
+        newPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(26, 26, 26));
@@ -126,6 +142,9 @@ public class WaitingDisplay extends javax.swing.JFrame {
         jLabel1.setText("Please Wait for Your Order");
         mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
 
+        Bill.setBackground(new java.awt.Color(255, 255, 255));
+        Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Bill.setForeground(new java.awt.Color(0, 0, 0));
         Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -134,6 +153,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
             }
         ));
+        Bill.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Bill);
 
         mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
@@ -162,20 +182,22 @@ public class WaitingDisplay extends javax.swing.JFrame {
         });
         mainPanel.add(AddMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(SlideShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 520));
-
-        mainPanel.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
+        SlideShow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.add(SlideShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
 
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
+
+        newPanel.setBackground(new java.awt.Color(26, 26, 26));
+        newPanel.setPreferredSize(new java.awt.Dimension(1366, 800));
+        getContentPane().add(newPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void PrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBillActionPerformed
+        newPanel.setVisible(true);
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet sheet = wb.createSheet("Sheet 1");
-        XSSFFont font = wb.createFont();
         File file = new File("src//data//Log Transaksi.xlsx");
         XSSFCellStyle cellStyle = wb.createCellStyle();
         TableModel model = Bill.getModel();
@@ -248,10 +270,10 @@ public class WaitingDisplay extends javax.swing.JFrame {
     private javax.swing.JButton AddMenu;
     private javax.swing.JTable Bill;
     private javax.swing.JButton PrintBill;
-    private javax.swing.JLabel SlideShow;
+    private javax.swing.JPanel SlideShow;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel newPanel;
     // End of variables declaration//GEN-END:variables
 }
