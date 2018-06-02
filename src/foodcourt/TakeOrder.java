@@ -38,8 +38,7 @@ public class TakeOrder extends javax.swing.JFrame {
     private static OutputStream fileOutDataPesananDariMeja = null, fileOutDataRekap = null;
     private static final int MAX_FOOD_COURT = 26;
     private String selectedListMeja = " ";
-    private String namaToko = "Delicio";
-    private int jumlahToko = 12;
+    private String namaToko = "Aciap";
     private XSSFSheet sheetInDataPesananDariMeja = null, sheetInDataRekap = null;
     static XSSFRow row;
 
@@ -71,11 +70,20 @@ public class TakeOrder extends javax.swing.JFrame {
     private XSSFSheet GetSheetByNamaToko(XSSFWorkbook workbookIn, String namaToko){
         XSSFSheet spreadsheet = null;
         String sheetName; boolean sheetFound = false;
-        for(int  indexSheet = 0; indexSheet < jumlahToko && !sheetFound; indexSheet++){
-            spreadsheet = workbookIn.getSheetAt(indexSheet);
+
+        int indexSheet = 0;
+        spreadsheet = workbookIn.getSheetAt(indexSheet);
+        while(spreadsheet != null && !sheetFound){
             sheetName = spreadsheet.getSheetName();
             if(sheetName.equals(namaToko)){
                 sheetFound = true;
+            } else {
+                indexSheet++;
+                if(indexSheet < workbookIn.getNumberOfSheets()){ //hanya jika ada nama tokonya di file, baru bisa dijalankan
+                    spreadsheet = workbookIn.getSheetAt(indexSheet);
+                } else {
+                    spreadsheet = null;
+                }
             }
         }
         return spreadsheet;
@@ -94,10 +102,12 @@ public class TakeOrder extends javax.swing.JFrame {
                 row = (XSSFRow) rowIterator.next();
 
                 Cell cellTable = row.getCell(0);
-                if (!cellTable.getStringCellValue().equals(temp)) {
-                    ListMeja[baris] = cellTable.getStringCellValue();
-                    temp = ListMeja[baris];
-                    baris++;
+                if(cellTable != null){
+                    if (!cellTable.getStringCellValue().equals(temp)) {
+                        ListMeja[baris] = cellTable.getStringCellValue();
+                        temp = ListMeja[baris];
+                        baris++;
+                    }
                 }
             }
             JListTable.setListData(ListMeja);
@@ -325,17 +335,19 @@ public class TakeOrder extends javax.swing.JFrame {
                 Cell cellQuantity = row.getCell(2);
                 Cell cellKeterangan = row.getCell(3);
                 Cell cellOrderNote = row.getCell(4);
-                if (row.getCell(0).getStringCellValue().equals(selectedListMeja)) {
-                    tempMenuName = cellMenu.getStringCellValue();
-                    tempQuantity = Integer.parseInt(String.valueOf(Math.round(cellQuantity.getNumericCellValue())));
-                    tempKeterangan = cellKeterangan != null ? cellKeterangan.getStringCellValue() : "        -";
-                    tempOrderNote = cellOrderNote != null ? cellOrderNote.getStringCellValue() : " ";
-                    Object[] rowData = new Object[]{
-                        tempMenuName,
-                        tempQuantity,
-                        tempKeterangan
-                    };
-                    dtm.addRow(rowData);
+                if(row.getCell(0) != null){
+                    if (row.getCell(0).getStringCellValue().equals(selectedListMeja)) {
+                        tempMenuName = cellMenu.getStringCellValue();
+                        tempQuantity = Integer.parseInt(String.valueOf(Math.round(cellQuantity.getNumericCellValue())));
+                        tempKeterangan = cellKeterangan != null ? cellKeterangan.getStringCellValue() : "        -";
+                        tempOrderNote = cellOrderNote != null ? cellOrderNote.getStringCellValue() : " ";
+                        Object[] rowData = new Object[]{
+                            tempMenuName,
+                            tempQuantity,
+                            tempKeterangan
+                        };
+                        dtm.addRow(rowData);
+                    }
                 }
             }
             JTableMenuOrdered.setModel(dtm);
@@ -371,26 +383,28 @@ public class TakeOrder extends javax.swing.JFrame {
             Cell cellMenuDataOrder = rowDataOrder.getCell(1);
             Cell cellQuantityDataOrder = rowDataOrder.getCell(2);
 
-            if(cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)){
+            if(cellNamaMejaDataOrder != null && cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)){
                 boolean found = false;
-                rowIteratorDataRekap = sheetInDataPesananDariMeja.iterator(); //pindah ke baris 0
+                rowIteratorDataRekap = sheetInDataRekap.iterator(); //pindah ke baris 0
                 rowDataRekap = (XSSFRow) rowIteratorDataRekap.next(); //pindah ke baris 0
 
                 while(rowIteratorDataRekap.hasNext() && !found){
                     rowDataRekap = (XSSFRow) rowIteratorDataRekap.next();
                     Cell cellMenuDataRekap = rowDataRekap.getCell(0);
                     Cell cellQuantityDataRekap = rowDataRekap.getCell(1);
-                    if(cellMenuDataOrder.getStringCellValue().equals(cellMenuDataRekap.getStringCellValue()) && !found){
-                        int tempQuantityDataRekap = Integer.parseInt(String.valueOf(Math.round(cellQuantityDataRekap.getNumericCellValue())));
-                        int tempQuantityDataOrder = Integer.parseInt(String.valueOf(Math.round(cellQuantityDataOrder.getNumericCellValue())));
-                        int QuantityTotal = tempQuantityDataRekap + tempQuantityDataOrder;
+                    if(cellMenuDataRekap != null){
+                        if(cellMenuDataOrder.getStringCellValue().equals(cellMenuDataRekap.getStringCellValue()) && !found){
+                            int tempQuantityDataRekap = Integer.parseInt(String.valueOf(Math.round(cellQuantityDataRekap.getNumericCellValue())));
+                            int tempQuantityDataOrder = Integer.parseInt(String.valueOf(Math.round(cellQuantityDataOrder.getNumericCellValue())));
+                            int QuantityTotal = tempQuantityDataRekap + tempQuantityDataOrder;
 
-                        System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + tempQuantityDataRekap);
-                        cellQuantityDataRekap.setCellValue(Integer.parseInt(String.valueOf(Math.round(QuantityTotal))));
-                        System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + QuantityTotal);
-                        System.out.println();
-                        found = true;
+                            System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + tempQuantityDataRekap);
+                            cellQuantityDataRekap.setCellValue(Integer.parseInt(String.valueOf(Math.round(QuantityTotal))));
+                            System.out.println("Menu : " + cellMenuDataRekap.getStringCellValue() + " " + QuantityTotal);
+                            System.out.println();
+                            found = true;
 
+                        }
                     }
                 }
                 if(!found){
@@ -403,7 +417,7 @@ public class TakeOrder extends javax.swing.JFrame {
                 fileOutDataRekap.close();
             }
             
-            while (rowIteratorDataOrder.hasNext() && cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)) { //Selama "PUNYA" Next && sama, jadi kalo gak punya next, nilainya false
+            while (rowIteratorDataOrder != null && cellNamaMejaDataOrder != null && rowIteratorDataOrder.hasNext() && cellNamaMejaDataOrder.getStringCellValue().equals(selectedListMeja)) { //Selama "PUNYA" Next && sama, jadi kalo gak punya next, nilainya false
                 rowDataOrder = (XSSFRow) rowIteratorDataOrder.next();
                 cellNamaMejaDataOrder = rowDataOrder.getCell(0);
                 cellMenuDataOrder = rowDataOrder.getCell(1);
