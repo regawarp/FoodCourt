@@ -5,7 +5,28 @@
  */
 package foodcourt;
 
-import javax.swing.Timer;
+import java.awt.Color;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -15,9 +36,77 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
     /**
      * Creates new form WaitingDisplay
+     * @throws java.io.IOException
      */
-    public WaitingDisplay() {
+    public WaitingDisplay() throws IOException {
         initComponents();
+        DisplayBill();
+        newPanel.setVisible(false);
+    }
+    
+    private void DisplayBill() throws FileNotFoundException, IOException{
+        int total = 0;
+        
+        XSSFRow row;
+        FileInputStream fis;
+        DefaultTableModel table = new DefaultTableModel();
+        
+        fis = new FileInputStream(new File("src//data//Book1.xlsx"));
+        try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
+            XSSFSheet sheet = wb.getSheetAt(0);
+            
+            table.addColumn(" ");
+            table.addColumn(" ");
+            table.addColumn(" ");
+            Bill.setRowHeight(40);
+            
+            Iterator < Row > rowIterator = sheet.rowIterator();
+            
+            while(rowIterator.hasNext()){
+                row = (XSSFRow) rowIterator.next();
+                Iterator < Cell > cellIterator = row.cellIterator();                                        
+                
+                String nama;
+                int qty, harga;
+                
+                Cell cell = cellIterator.next();
+                nama = cell.getStringCellValue();
+                cell = cellIterator.next();
+                qty = (int) cell.getNumericCellValue();
+                cell = cellIterator.next();
+                harga = (int) cell.getNumericCellValue();
+                total += harga;
+                
+                Object[] data = new Object[]{
+                    nama, qty, harga
+                };
+                
+                table.addRow(data);
+            }
+            Object[] space = new Object[]{
+                " ", " ", " "
+            };
+            table.addRow(space);
+            Object[] rowData = new Object[]{
+                "Total", " ", total
+            };
+            table.addRow(rowData);
+            for(int i = 0; i < 6; i++){
+                table.addRow(space);
+            }
+            Bill.setModel(table);
+            Bill.getColumnModel().getColumn(0).setPreferredWidth(150);
+            Bill.getColumnModel().getColumn(1).setPreferredWidth(10);
+            Bill.getColumnModel().getColumn(2).setPreferredWidth(50);
+            Bill.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+            Bill.setBackground(Color.WHITE);
+            JTableHeader header = Bill.getTableHeader();
+            header.setBackground(Color.WHITE);
+        }
+    }
+    
+    private void SlideShow(){
+        
     }
 
     /**
@@ -29,31 +118,32 @@ public class WaitingDisplay extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        Bill = new javax.swing.JTable();
+        PrintBill = new javax.swing.JButton();
+        AddMenu = new javax.swing.JButton();
+        SlideShow = new javax.swing.JPanel();
+        newPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(26, 26, 26));
         setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(26, 26, 26));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1366, 734));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.setBackground(new java.awt.Color(26, 26, 26));
+        mainPanel.setMinimumSize(new java.awt.Dimension(1366, 734));
+        mainPanel.setPreferredSize(new java.awt.Dimension(1366, 768));
+        mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 50)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Pesanan Anda Sedang Diproses");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
+        jLabel1.setText("Please Wait for Your Order");
+        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -61,42 +151,81 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        Bill.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(Bill);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
+        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
 
-        jButton1.setBackground(new java.awt.Color(67, 1, 2));
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Print Bill");
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 50));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        PrintBill.setBackground(new java.awt.Color(67, 1, 2));
+        PrintBill.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        PrintBill.setForeground(new java.awt.Color(255, 255, 255));
+        PrintBill.setText("Print Bill");
+        PrintBill.setPreferredSize(new java.awt.Dimension(150, 50));
+        PrintBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PrintBillActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, -1, -1));
+        mainPanel.add(PrintBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(67, 1, 2));
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Add Menu");
-        jButton2.setPreferredSize(new java.awt.Dimension(150, 50));
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
+        AddMenu.setBackground(new java.awt.Color(67, 1, 2));
+        AddMenu.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        AddMenu.setForeground(new java.awt.Color(255, 255, 255));
+        AddMenu.setText("Add Menu");
+        AddMenu.setPreferredSize(new java.awt.Dimension(150, 50));
+        AddMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddMenuActionPerformed(evt);
+            }
+        });
+        mainPanel.add(AddMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 520));
+        SlideShow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mainPanel.add(SlideShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
+        getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
+        newPanel.setBackground(new java.awt.Color(26, 26, 26));
+        newPanel.setPreferredSize(new java.awt.Dimension(1366, 800));
+        getContentPane().add(newPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void PrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBillActionPerformed
+        newPanel.setVisible(true);
+        XSSFWorkbook wb = new XSSFWorkbook();
+        XSSFSheet sheet = wb.createSheet("Sheet 1");
+        File file = new File("src//data//Log Transaksi.xlsx");
+        XSSFCellStyle cellStyle = wb.createCellStyle();
+        TableModel model = Bill.getModel();
+        
+        for(int i = 0; i < model.getRowCount(); i++){
+            XSSFRow row = sheet.createRow((short) i);
+            for(int j = 0; j < model.getColumnCount(); j++){
+                XSSFCell cell = row.createCell((short) j);
+                cell.setCellValue(model.getValueAt(i, j).toString());
+                cell.setCellStyle(cellStyle);
+            }
+        }
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(file);
+            BufferedOutputStream bos;
+            bos = new BufferedOutputStream(fos);
+            wb.write(bos);
+            bos.close();
+            fos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_PrintBillActionPerformed
+
+    private void AddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMenuActionPerformed
+        new Toko().setVisible(true);
+    }//GEN-LAST:event_AddMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,36 +255,23 @@ public class WaitingDisplay extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
                 new WaitingDisplay().setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton AddMenu;
+    private javax.swing.JTable Bill;
+    private javax.swing.JButton PrintBill;
+    private javax.swing.JPanel SlideShow;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JPanel newPanel;
     // End of variables declaration//GEN-END:variables
-
-    public void SlideShow(){
-        Timer tm;
-        int x = 0;
-        String[] pict = {
-            "images/1.JPEG",
-            "images/2.JPEG",                   
-            "images/3.JPEG",                   
-            "images/4.JPEG",                   
-            "images/5.JPEG"                    
-        };
-        
-        
-    }
-
 }

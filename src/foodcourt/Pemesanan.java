@@ -676,9 +676,12 @@ public class Pemesanan extends javax.swing.JFrame {
         Jadi memproses makanan
     */
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-        writeToExcel();
-        new WaitingDisplay().setVisible(true);
-        super.setVisible(false);
+        try {
+            writeToExcel();
+            new WaitingDisplay().setVisible(true);
+            super.setVisible(false);}catch(Exception e){
+                System.out.println(e.getMessage());
+            }
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
