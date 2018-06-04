@@ -201,7 +201,7 @@ public class DashboardToko extends javax.swing.JFrame {
     private void createChart() throws FileNotFoundException, IOException {
         XSSFRow row;
 
-        FileInputStream fis = new FileInputStream(new File("src/Dummy.xlsx"));
+        FileInputStream fis = new FileInputStream(new File("src/data/dataRekapPesananToko.xlsx"));
         XSSFWorkbook wb = new XSSFWorkbook(fis);
         XSSFSheet sht = wb.getSheetAt(0);
         Iterator< Row> rowIterator = sht.iterator();
