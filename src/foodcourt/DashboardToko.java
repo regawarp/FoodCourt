@@ -31,10 +31,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class DashboardToko extends javax.swing.JFrame {
 
+    private String namaToko = "Oto Bento";
     /**
      * Creates new form DashboardToko
      */
     public DashboardToko() {
+        initComponents();
+    }
+    public DashboardToko(String namaToko){
+        this.namaToko = namaToko;
         initComponents();
     }
 
@@ -138,7 +143,8 @@ public class DashboardToko extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new TakeOrder().setVisible(true);
+        new TakeOrder(this.namaToko).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -203,10 +209,10 @@ public class DashboardToko extends javax.swing.JFrame {
 
         FileInputStream fis = new FileInputStream(new File("src/Dummy.xlsx"));
         XSSFWorkbook wb = new XSSFWorkbook(fis);
-        XSSFSheet sht = wb.getSheetAt(0);
+        XSSFSheet sht = GetSheetByNamaToko(wb, namaToko);
         Iterator< Row> rowIterator = sht.iterator();
 
-        jLabel1.setText("DASHBOARD TOKO " + wb.getSheetName(0).toUpperCase());
+        jLabel1.setText("DASHBOARD TOKO " + sht.getSheetName().toUpperCase());
 
         DefaultCategoryDataset data = new DefaultCategoryDataset();
 
@@ -228,4 +234,26 @@ public class DashboardToko extends javax.swing.JFrame {
             wb.close();
         }
     }
+    
+    private XSSFSheet GetSheetByNamaToko(XSSFWorkbook workbookIn, String namaToko){
+        XSSFSheet spreadsheet = null;
+        String sheetName; boolean sheetFound = false;
+
+        int indexSheet = 0;
+        spreadsheet = workbookIn.getSheetAt(indexSheet);
+        while(spreadsheet != null && !sheetFound){
+            sheetName = spreadsheet.getSheetName();
+            if(sheetName.equals(namaToko)){
+                sheetFound = true;
+            } else {
+                indexSheet++;
+                if(indexSheet < workbookIn.getNumberOfSheets()){ //hanya jika ada nama tokonya di file, baru bisa dijalankan
+                    spreadsheet = workbookIn.getSheetAt(indexSheet);
+                } else {
+                    spreadsheet = null;
+                }
+            }
+        }
+        return spreadsheet;
+    }    
 }
