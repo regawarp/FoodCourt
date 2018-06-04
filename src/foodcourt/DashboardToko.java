@@ -30,14 +30,19 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Tik
  */
 public class DashboardToko extends javax.swing.JFrame {
-
+    
+    public String namaToko;
     /**
      * Creates new form DashboardToko
      */
     public DashboardToko() {
         initComponents();
     }
-
+    
+    public DashboardToko(String namaToko){
+        this.namaToko = namaToko;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,7 +147,8 @@ public class DashboardToko extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        jPanel3.removeAll();
+        jPanel3.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -203,10 +209,10 @@ public class DashboardToko extends javax.swing.JFrame {
 
         FileInputStream fis = new FileInputStream(new File("src/data/dataRekapPesananToko.xlsx"));
         XSSFWorkbook wb = new XSSFWorkbook(fis);
-        XSSFSheet sht = wb.getSheetAt(0);
+        XSSFSheet sht = wb.getSheet(this.namaToko);
         Iterator< Row> rowIterator = sht.iterator();
 
-        jLabel1.setText("DASHBOARD TOKO " + wb.getSheetName(0).toUpperCase());
+        jLabel1.setText("DASHBOARD TOKO " + this.namaToko.toUpperCase());
 
         DefaultCategoryDataset data = new DefaultCategoryDataset();
 
@@ -215,7 +221,7 @@ public class DashboardToko extends javax.swing.JFrame {
             int d = (int) row.getCell(3).getNumericCellValue();
             data.addValue(d, "", row.getCell(0).getStringCellValue());
         }
-        JFreeChart chart = ChartFactory.createBarChart("STATISTIK PENJUALAN MAKANAN DAN MINUMAN TOKO " + wb.getSheetName(0).toUpperCase(), "MENU", "JUMLAH", data, PlotOrientation.HORIZONTAL, false, true, false);
+        JFreeChart chart = ChartFactory.createBarChart("STATISTIK PENJUALAN MAKANAN DAN MINUMAN TOKO " + this.namaToko.toUpperCase(), "MENU", "JUMLAH", data, PlotOrientation.HORIZONTAL, false, true, false);
         CategoryPlot catPlot = chart.getCategoryPlot();
         catPlot.setRangeGridlinePaint(Color.BLACK);
 
