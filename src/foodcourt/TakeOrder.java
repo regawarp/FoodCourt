@@ -47,7 +47,14 @@ public class TakeOrder extends javax.swing.JFrame {
         OpenFile();
         SetGUI(sheetInDataPesananDariMeja);
     }
+    public TakeOrder(String namaToko){
+        initComponents();
+        this.namaToko = namaToko;
+        OpenFile();
+        SetGUI(sheetInDataPesananDariMeja);
+    }
 
+    
     private void OpenFile(){
         try {
             fileInDataPesananDariMeja = new FileInputStream(new File(EXCEL_FILE_DATA_PESANAN_MEJA));
@@ -480,7 +487,7 @@ public class TakeOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTakeOrderActionPerformed
 
     private void JButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonDashboardActionPerformed
-        new DashboardToko().setVisible(true);
+        new DashboardToko(this.namaToko).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JButtonDashboardActionPerformed
 
