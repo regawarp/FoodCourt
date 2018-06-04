@@ -6,6 +6,9 @@
 package foodcourt;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +18,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
@@ -23,7 +29,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -33,7 +38,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Tiara Lestari
  */
 public class WaitingDisplay extends javax.swing.JFrame {
-
+    Timer tm;
+    int x = 0;
+    String[] pics = {
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg"
+        };
+    
     /**
      * Creates new form WaitingDisplay
      * @throws java.io.IOException
@@ -41,6 +55,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
     public WaitingDisplay() throws IOException {
         initComponents();
         DisplayBill();
+        SlideShow();
         newPanel.setVisible(false);
     }
     
@@ -105,8 +120,26 @@ public class WaitingDisplay extends javax.swing.JFrame {
         }
     }
     
-    private void SlideShow(){
+    private void SlideShow(){    
+        SetImageSize(4);
         
+        tm = new Timer(500, new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                SetImageSize(x);
+                x += 1;
+                if(x >= pics.length)
+                    x = 0;
+            }
+        });
+        tm.start();
+    }
+    
+    public void SetImageSize(int i){
+        ImageIcon icon = new ImageIcon(pics[i]);
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(Display.getWidth(), Display.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newIcon = new ImageIcon(newImg);
+        Display.setIcon(newIcon);
     }
 
     /**
@@ -124,12 +157,11 @@ public class WaitingDisplay extends javax.swing.JFrame {
         Bill = new javax.swing.JTable();
         PrintBill = new javax.swing.JButton();
         AddMenu = new javax.swing.JButton();
-        SlideShow = new javax.swing.JPanel();
+        Display = new javax.swing.JLabel();
         newPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(26, 26, 26));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainPanel.setBackground(new java.awt.Color(26, 26, 26));
@@ -145,7 +177,6 @@ public class WaitingDisplay extends javax.swing.JFrame {
         Bill.setBackground(new java.awt.Color(255, 255, 255));
         Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Bill.setForeground(new java.awt.Color(0, 0, 0));
-        Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -182,9 +213,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
             }
         });
         mainPanel.add(AddMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
-
-        SlideShow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        mainPanel.add(SlideShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 860, 520));
+        mainPanel.add(Display, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 156, 820, 510));
 
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
 
@@ -270,8 +299,8 @@ public class WaitingDisplay extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddMenu;
     private javax.swing.JTable Bill;
+    private javax.swing.JLabel Display;
     private javax.swing.JButton PrintBill;
-    private javax.swing.JPanel SlideShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
