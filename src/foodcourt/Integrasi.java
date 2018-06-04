@@ -30,20 +30,37 @@ public class Integrasi extends javax.swing.JFrame {
 
         tfTableNo = new javax.swing.JTextField();
         btnSetNo = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setMinimumSize(new java.awt.Dimension(1366, 768));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1366, 728));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(tfTableNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 263, 51, -1));
 
+        tfTableNo.setFont(new java.awt.Font("Segoe UI Light", 0, 48)); // NOI18N
+        tfTableNo.setToolTipText("Nomor Meja");
+        getContentPane().add(tfTableNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 350, 80));
+
+        btnSetNo.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         btnSetNo.setText("SET");
         btnSetNo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnSetNoMouseClicked(evt);
             }
         });
-        getContentPane().add(btnSetNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 289, -1, -1));
+        getContentPane().add(btnSetNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 350, 100));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 36)); // NOI18N
+        jLabel1.setText("Selamat Datang di Halaman Integrasi Sistem Food Court");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
+        jLabel2.setText("Silahkan Isi Kolom di Bawah ini dengan nomor meja lalu tekan set");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -92,6 +109,8 @@ public class Integrasi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSetNo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField tfTableNo;
     // End of variables declaration//GEN-END:variables
 }
