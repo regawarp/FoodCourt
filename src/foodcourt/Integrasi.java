@@ -32,6 +32,7 @@ public class Integrasi extends javax.swing.JFrame {
         btnSetNo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -61,6 +62,11 @@ public class Integrasi extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
         jLabel2.setText("Silahkan Isi Kolom di Bawah ini dengan nomor meja lalu tekan set");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 0));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1366, 768));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -111,6 +117,7 @@ public class Integrasi extends javax.swing.JFrame {
     private javax.swing.JButton btnSetNo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField tfTableNo;
     // End of variables declaration//GEN-END:variables
 }
