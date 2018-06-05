@@ -7,13 +7,17 @@ package foodcourt;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -30,19 +34,24 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author Tik
  */
 public class DashboardToko extends javax.swing.JFrame {
-    
+
     public String namaToko;
+    String namaMakanan, jenis;
+    int harga, promo;
+    DefaultTableModel table = new DefaultTableModel();
+
     /**
      * Creates new form DashboardToko
      */
     public DashboardToko() {
         initComponents();
     }
-    
-    public DashboardToko(String namaToko){
+
+    public DashboardToko(String namaToko) {
         this.namaToko = namaToko;
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,6 +67,19 @@ public class DashboardToko extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        fieldHarga = new javax.swing.JTextField();
+        fieldNama = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        comboPilihan = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        fieldPromo = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -113,7 +135,57 @@ public class DashboardToko extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 660, 180, 70));
 
-        jPanel3.setLayout(new java.awt.BorderLayout());
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel3.add(jScrollPane1, new java.awt.GridBagConstraints());
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Tambah Menu");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 35, 115, 36));
+
+        jLabel3.setText("Nama Menu:");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 111, -1, -1));
+        jPanel4.add(fieldHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 277, 138, 28));
+        jPanel4.add(fieldNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 131, 138, 28));
+
+        jLabel4.setText("Jenis :");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 180, -1, -1));
+
+        comboPilihan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minuman", "Makanan" }));
+        jPanel4.add(comboPilihan, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 200, 123, 30));
+
+        jLabel5.setText("Harga :");
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 257, -1, -1));
+
+        jLabel6.setText("Promo :");
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 333, -1, -1));
+        jPanel4.add(fieldPromo, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 353, 138, 28));
+
+        jButton4.setText("Tambah");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 414, -1, -1));
+
+        jPanel3.add(jPanel4, new java.awt.GridBagConstraints());
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 1240, 510));
 
         jButton3.setText("Kembali");
@@ -149,15 +221,43 @@ public class DashboardToko extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jPanel3.removeAll();
         jPanel3.repaint();
+        jPanel3.setLayout(new GridBagLayout());
+
+        try {
+            readExcel();
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardToko.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jPanel3.add(jPanel4);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jPanel3.removeAll();
+        jPanel3.repaint();
+        jPanel3.setLayout(new BorderLayout());
         try {
             createChart();
         } catch (IOException ex) {
             Logger.getLogger(DashboardToko.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        updateTable();
+        
+        fieldNama.setText("");
+        fieldHarga.setText("");
+        fieldPromo.setText("");
+        
+        try {
+            updateExcel();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DashboardToko.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DashboardToko.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,36 +295,54 @@ public class DashboardToko extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboPilihan;
+    private javax.swing.JTextField fieldHarga;
+    private javax.swing.JTextField fieldNama;
+    private javax.swing.JTextField fieldPromo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     private void createChart() throws FileNotFoundException, IOException {
+        //Method to create BarChart
         XSSFRow row;
 
-        FileInputStream fis = new FileInputStream(new File("src/data/dataRekapPesananToko.xlsx"));
+        FileInputStream fis = new FileInputStream(new File("src/data/dataRekapPesanan.xlsx"));
         XSSFWorkbook wb = new XSSFWorkbook(fis);
-        XSSFSheet sht = wb.getSheet(this.namaToko);
+        XSSFSheet sht = wb.getSheet(namaToko);
         Iterator< Row> rowIterator = sht.iterator();
 
         jLabel1.setText("DASHBOARD TOKO " + this.namaToko.toUpperCase());
-
+        
         DefaultCategoryDataset data = new DefaultCategoryDataset();
-
+        //Get value from Excel and store it
+        row = (XSSFRow) rowIterator.next();
         while (rowIterator.hasNext()) {
             row = (XSSFRow) rowIterator.next();
-            int d = (int) row.getCell(3).getNumericCellValue();
+            int d = (int) row.getCell(1).getNumericCellValue();
             data.addValue(d, "", row.getCell(0).getStringCellValue());
         }
+        
+        //Select chart type and put the data into the chart
         JFreeChart chart = ChartFactory.createBarChart("STATISTIK PENJUALAN MAKANAN DAN MINUMAN TOKO " + this.namaToko.toUpperCase(), "MENU", "JUMLAH", data, PlotOrientation.HORIZONTAL, false, true, false);
         CategoryPlot catPlot = chart.getCategoryPlot();
         catPlot.setRangeGridlinePaint(Color.BLACK);
-
+        
+        //Put the chart to the jPanel and display it
         ChartPanel chartPanel = new ChartPanel(chart);
         jPanel3.removeAll();
         jPanel3.add(chartPanel, BorderLayout.CENTER);
@@ -233,5 +351,94 @@ public class DashboardToko extends javax.swing.JFrame {
         if (wb != null) {
             wb.close();
         }
+    }
+
+    private void readExcel() throws FileNotFoundException, IOException {
+        //Method to read Excel file and then put the values to jTable
+        XSSFRow row;
+
+        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));
+        XSSFWorkbook wb = new XSSFWorkbook(fis);
+        XSSFSheet sht = wb.getSheet(namaToko);
+        Iterator< Row> rowIterator = sht.iterator();
+
+        row = (XSSFRow) rowIterator.next();
+        table.addColumn(row.getCell(0).getStringCellValue());
+        table.addColumn(row.getCell(1).getStringCellValue());
+        table.addColumn(row.getCell(2).getStringCellValue());
+        table.addColumn(row.getCell(3).getStringCellValue());
+
+        while (rowIterator.hasNext()) {
+            row = (XSSFRow) rowIterator.next();
+            Iterator<Cell> cellIterator = row.cellIterator();
+
+            
+
+            Cell cell = cellIterator.next();
+            namaMakanan = cell.getStringCellValue();
+            cell = cellIterator.next();
+            jenis = cell.getStringCellValue();
+            cell = cellIterator.next();
+            harga = (int) cell.getNumericCellValue();
+            cell = cellIterator.next();
+            promo = (int) cell.getNumericCellValue();
+
+            Object[] data = new Object[]{
+                namaMakanan, jenis, harga, promo
+            };
+
+            table.addRow(data);
+        }
+
+        jTable1.setModel(table);
+
+        jScrollPane1.getViewport().add(jTable1);
+        
+        jPanel3.add(jScrollPane1);
+        
+        if (wb != null) {
+            wb.close();
+        }
+    }
+
+    private void updateExcel() throws FileNotFoundException, IOException {
+        //Method to add new data to the Excel file from user's input
+        XSSFRow row = null;
+        
+        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));
+        XSSFWorkbook wb = new XSSFWorkbook(fis);
+        XSSFSheet sheet = wb.getSheet(namaToko);
+        Iterator<Row> rowIter = sheet.iterator();
+        
+        while (rowIter.hasNext()) {
+            row = (XSSFRow) rowIter.next();
+        }
+        
+        row.createCell(0).setCellValue(namaMakanan);
+        row.createCell(1).setCellValue(jenis);
+        row.createCell(2).setCellValue(harga);
+        row.createCell(3).setCellValue(promo);
+        
+        FileOutputStream out = new FileOutputStream(new File ("src/data/DataMakanan12Resto.xlsx"));
+        wb.write(out);
+        out.close();
+        
+    }
+
+    private void updateTable() {
+        //Method to add new data to the jtable from user's input
+        
+        //Get user's input from textField and comboBox
+        namaMakanan = fieldNama.getText();
+        harga = Integer.parseInt(fieldHarga.getText());
+        promo = Integer.parseInt(fieldPromo.getText());
+        jenis = comboPilihan.getSelectedItem().toString();
+        
+        //Store the values, and add it to the jTable
+        Object[] data = new Object[]{
+            namaMakanan, jenis, harga, promo
+        };
+        table.addRow(data);
+        jTable1.setModel(table);
     }
 }
