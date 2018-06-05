@@ -6,6 +6,17 @@
 package foodcourt;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -13,6 +24,7 @@ import java.awt.Color;
  */
 public class Login extends javax.swing.JFrame {
 
+    private static final String EXCEL_FILE_DATA_NO_MEJA = "src/data/dataMeja.xlsx";
     /**
      * Creates new form Login
      */
@@ -20,12 +32,12 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
-        jPanel1.setBackground(new Color(000,000,000,200));
+        jPanel1.setBackground(new Color(000, 000, 000, 200));
     }
 
     public Login(String noMeja) {
         initComponents();
-        jPanel1.setBackground(new Color(000,000,000,200));
+        jPanel1.setBackground(new Color(000, 000, 000, 200));
         this.noMeja = noMeja;
         setNoMeja();
     }
@@ -48,11 +60,15 @@ public class Login extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setAlwaysOnTop(true);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnStaffLogin.setText("Staff Login");
+        btnStaffLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnStaffLoginMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnStaffLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,13 +113,34 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-        new MenuUtama().setVisible(true);
-        this.setVisible(false);
+        FileOutputStream out = null;
+        try {
+            FileInputStream fis = new FileInputStream(new File(EXCEL_FILE_DATA_NO_MEJA));
+            new MenuUtama().setVisible(true);
+            this.setVisible(false);
+            // CODE TO SET EXCEL TABLE NO. OCCUPIED
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            XSSFRow row = sheet.getRow(Integer.parseInt(noMeja)-1);
+            Cell cell = row.getCell(1);
+            cell.setCellValue(1);
+            out = new FileOutputStream(new File(EXCEL_FILE_DATA_NO_MEJA));
+            workbook.write(out);
+            out.close();
+            fis.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnLoginMouseClicked
 
     private void tfNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfNamaFocusGained
         tfNama.setText("");
     }//GEN-LAST:event_tfNamaFocusGained
+
+    private void btnStaffLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStaffLoginMouseClicked
+        // GOTO LOGIN STAFF
+
+    }//GEN-LAST:event_btnStaffLoginMouseClicked
     void setNoMeja() {
         lNoMeja.setText("Meja No." + this.noMeja);
     }
