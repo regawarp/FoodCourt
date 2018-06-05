@@ -226,7 +226,7 @@ public class TakeOrder extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JListTable);
 
-        JButtonDashboard.setBackground(new java.awt.Color(251, 251, 251));
+        JButtonDashboard.setBackground(new java.awt.Color(251, 218, 245));
         JButtonDashboard.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         JButtonDashboard.setText("Dashboard");
         JButtonDashboard.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +235,7 @@ public class TakeOrder extends javax.swing.JFrame {
             }
         });
 
-        jButtonTakeOrder.setBackground(new java.awt.Color(255, 0, 54));
+        jButtonTakeOrder.setBackground(new java.awt.Color(231, 0, 0));
         jButtonTakeOrder.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jButtonTakeOrder.setForeground(new java.awt.Color(255, 255, 255));
         jButtonTakeOrder.setText("Take Order");
