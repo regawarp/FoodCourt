@@ -31,10 +31,11 @@ public class Dashboard extends javax.swing.JFrame {
 
     DateFormat dateFormat = new SimpleDateFormat("EEEE,  dd  MMMM  yyyy");
     Date date = new Date();
-    String namaUser;
+    public String namaUser;
 
     /**
      * Creates new form Home
+     * @throws java.io.IOException
      */
 //    public Dashboard() throws IOException {
 //        System.out.println(date.getHours());
@@ -43,16 +44,17 @@ public class Dashboard extends javax.swing.JFrame {
 //        ind_1.setOpaque(true);
 //        resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
 //        jProgressBar1.setValue(hitungMeja());
-//        show_pane.add(new penjualan());
+//        show_pane.add(new statistik());
 //    }
     public Dashboard() throws IOException{
-        System.out.println(date.getHours());
+        System.out.println(date.getHours() + namaUser);
         initComponents();
         setColor(btn_1);
         ind_1.setOpaque(true);
         resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
         jProgressBar1.setValue(hitungMeja());
-        show_pane.add(new penjualan());
+        show_pane.add(new statistik());
+//        name.setText("Howdy, "+namaUser+"!");
     }
     
     public Dashboard(String user) throws IOException {
@@ -64,7 +66,7 @@ public class Dashboard extends javax.swing.JFrame {
         ind_1.setOpaque(true);
         resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
         jProgressBar1.setValue(hitungMeja());
-        show_pane.add(new penjualan());
+        show_pane.add(new statistik());
     }
 
     /**
@@ -105,6 +107,7 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         show_pane = new javax.swing.JPanel();
 
@@ -407,19 +410,23 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel13.setText(dateFormat.format(date));
         jPanel5.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 240, 27));
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 310, 150));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 310, 150));
 
         jProgressBar1.setBackground(new java.awt.Color(84, 127, 206));
         jProgressBar1.setForeground(new java.awt.Color(0, 204, 204));
         jProgressBar1.setPreferredSize(new java.awt.Dimension(146, 10));
         jProgressBar1.setString("");
         jProgressBar1.setStringPainted(true);
-        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 230, -1));
+        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 230, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("time");
         jLabel5.setToolTipText("");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 610, -1, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Meja Terisi");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 80, 310, 660));
 
@@ -450,7 +457,11 @@ public class Dashboard extends javax.swing.JFrame {
         ind_1.setOpaque(true);
         resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
         show_pane.removeAll();
-        show_pane.add(new penjualan());
+        try {
+            show_pane.add(new statistik());
+        } catch (IOException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         show_pane.repaint();
         show_pane.revalidate();
     }//GEN-LAST:event_btn_1MousePressed
@@ -501,8 +512,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void btn_exitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMousePressed
         // TODO add your handling code here:
-
-        System.exit(0);
+        this.setVisible(false);
+        new LoginManager().setVisible(true);
     }//GEN-LAST:event_btn_exitMousePressed
 
     private void btn_2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_2MouseClicked
@@ -589,25 +600,7 @@ public class Dashboard extends javax.swing.JFrame {
         workbook.close();
         return (terisi*100)/i;
     }
-//    modul latihan jam
-//    
-//    ActionListener updateClockAction = new ActionListener() {
-//  public void actionPerformed(ActionEvent e) {
-//      // Assumes clock is a custom component
-//      jLabel5.setTime(System.currentTimeMillis()); 
-//      // OR
-//      // Assumes clock is a JLabel
-//      jLabel5.setText(new Date().toString()); 
-//    }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//    }
-//    
-//    private Timer t = new Timer(1000, updateClockAction);
-//    t.start();
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_1;
     private javax.swing.JPanel btn_2;
@@ -628,6 +621,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
