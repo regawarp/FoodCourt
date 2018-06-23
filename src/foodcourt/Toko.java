@@ -21,8 +21,15 @@ public class Toko extends javax.swing.JFrame {
     /**
      * Creates new form Toko
      */
+    public String noMeja;
+
     public Toko() {
         initComponents();
+    }
+
+    public Toko(String noMeja) {
+        initComponents();
+        this.noMeja = noMeja;
     }
 
     /**
@@ -362,7 +369,7 @@ public class Toko extends javax.swing.JFrame {
     void gantiFrame(String namaResto) {
         //Ganti ke Frame Pemesanan
         try {
-            new Pemesanan(namaResto).setVisible(true);
+            new Pemesanan(namaResto,this.noMeja).setVisible(true);
             this.setVisible(false);
         } catch (Exception e) {
             System.out.println(e);

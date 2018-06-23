@@ -319,6 +319,7 @@ public class Table extends javax.swing.JFrame {
         pTable1.setBackground(new java.awt.Color(118, 255, 3));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("1");
 
         javax.swing.GroupLayout pTable1Layout = new javax.swing.GroupLayout(pTable1);
@@ -343,6 +344,7 @@ public class Table extends javax.swing.JFrame {
         pTable2.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("2");
 
         javax.swing.GroupLayout pTable2Layout = new javax.swing.GroupLayout(pTable2);
@@ -367,6 +369,7 @@ public class Table extends javax.swing.JFrame {
         pTable3.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("3");
 
         javax.swing.GroupLayout pTable3Layout = new javax.swing.GroupLayout(pTable3);
@@ -391,6 +394,7 @@ public class Table extends javax.swing.JFrame {
         pTable4.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("4");
 
         javax.swing.GroupLayout pTable4Layout = new javax.swing.GroupLayout(pTable4);
@@ -415,6 +419,7 @@ public class Table extends javax.swing.JFrame {
         pTable5.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("5");
 
         javax.swing.GroupLayout pTable5Layout = new javax.swing.GroupLayout(pTable5);
@@ -439,6 +444,7 @@ public class Table extends javax.swing.JFrame {
         pTable6.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("6");
 
         javax.swing.GroupLayout pTable6Layout = new javax.swing.GroupLayout(pTable6);
@@ -463,6 +469,7 @@ public class Table extends javax.swing.JFrame {
         pTable7.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("7");
 
         javax.swing.GroupLayout pTable7Layout = new javax.swing.GroupLayout(pTable7);
@@ -487,6 +494,7 @@ public class Table extends javax.swing.JFrame {
         pTable8.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("8");
 
         javax.swing.GroupLayout pTable8Layout = new javax.swing.GroupLayout(pTable8);
@@ -511,6 +519,7 @@ public class Table extends javax.swing.JFrame {
         pTable9.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("9");
 
         javax.swing.GroupLayout pTable9Layout = new javax.swing.GroupLayout(pTable9);
@@ -535,6 +544,7 @@ public class Table extends javax.swing.JFrame {
         pTable10.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("10");
 
         javax.swing.GroupLayout pTable10Layout = new javax.swing.GroupLayout(pTable10);
@@ -542,9 +552,9 @@ public class Table extends javax.swing.JFrame {
         pTable10Layout.setHorizontalGroup(
             pTable10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTable10Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel8)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pTable10Layout.setVerticalGroup(
             pTable10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -554,11 +564,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 380, -1, -1));
+        getContentPane().add(pTable10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 380, 60, -1));
 
         pTable11.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel21.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("11");
 
         javax.swing.GroupLayout pTable11Layout = new javax.swing.GroupLayout(pTable11);
@@ -583,6 +594,7 @@ public class Table extends javax.swing.JFrame {
         pTable12.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("12");
 
         javax.swing.GroupLayout pTable12Layout = new javax.swing.GroupLayout(pTable12);
@@ -590,7 +602,7 @@ public class Table extends javax.swing.JFrame {
         pTable12Layout.setHorizontalGroup(
             pTable12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTable12Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addGap(23, 23, 23))
         );
@@ -602,11 +614,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 500, -1, -1));
+        getContentPane().add(pTable12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 500, 60, -1));
 
         pTable13.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("13");
 
         javax.swing.GroupLayout pTable13Layout = new javax.swing.GroupLayout(pTable13);
@@ -614,7 +627,7 @@ public class Table extends javax.swing.JFrame {
         pTable13Layout.setHorizontalGroup(
             pTable13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTable13Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jLabel15)
                 .addGap(24, 24, 24))
         );
@@ -626,11 +639,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, -1, -1));
+        getContentPane().add(pTable13, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 500, 60, -1));
 
         pTable14.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("14");
 
         javax.swing.GroupLayout pTable14Layout = new javax.swing.GroupLayout(pTable14);
@@ -640,7 +654,7 @@ public class Table extends javax.swing.JFrame {
             .addGroup(pTable14Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel12)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         pTable14Layout.setVerticalGroup(
             pTable14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -650,11 +664,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable14, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 500, -1, -1));
+        getContentPane().add(pTable14, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 500, 60, -1));
 
         pTable15.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("15");
 
         javax.swing.GroupLayout pTable15Layout = new javax.swing.GroupLayout(pTable15);
@@ -664,7 +679,7 @@ public class Table extends javax.swing.JFrame {
             .addGroup(pTable15Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel9)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         pTable15Layout.setVerticalGroup(
             pTable15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,11 +689,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable15, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, -1, -1));
+        getContentPane().add(pTable15, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 500, 60, -1));
 
         pTable16.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel20.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("16");
 
         javax.swing.GroupLayout pTable16Layout = new javax.swing.GroupLayout(pTable16);
@@ -703,16 +719,17 @@ public class Table extends javax.swing.JFrame {
         pTable17.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("17");
 
         javax.swing.GroupLayout pTable17Layout = new javax.swing.GroupLayout(pTable17);
         pTable17.setLayout(pTable17Layout);
         pTable17Layout.setHorizontalGroup(
             pTable17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pTable17Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTable17Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel19)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
         pTable17Layout.setVerticalGroup(
             pTable17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -722,11 +739,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable17, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 620, -1, -1));
+        getContentPane().add(pTable17, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 620, 60, -1));
 
         pTable18.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("18");
 
         javax.swing.GroupLayout pTable18Layout = new javax.swing.GroupLayout(pTable18);
@@ -734,7 +752,7 @@ public class Table extends javax.swing.JFrame {
         pTable18Layout.setHorizontalGroup(
             pTable18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTable18Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addGap(24, 24, 24))
         );
@@ -746,11 +764,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable18, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, -1, -1));
+        getContentPane().add(pTable18, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 620, 60, -1));
 
         pTable19.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("19");
 
         javax.swing.GroupLayout pTable19Layout = new javax.swing.GroupLayout(pTable19);
@@ -760,7 +779,7 @@ public class Table extends javax.swing.JFrame {
             .addGroup(pTable19Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel11)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         pTable19Layout.setVerticalGroup(
             pTable19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,11 +789,12 @@ public class Table extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(pTable19, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 620, -1, -1));
+        getContentPane().add(pTable19, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 620, 60, -1));
 
         pTable20.setBackground(new java.awt.Color(0, 204, 0));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("20");
 
         javax.swing.GroupLayout pTable20Layout = new javax.swing.GroupLayout(pTable20);
@@ -784,7 +804,7 @@ public class Table extends javax.swing.JFrame {
             .addGroup(pTable20Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel10)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         pTable20Layout.setVerticalGroup(
             pTable20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

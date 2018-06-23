@@ -16,8 +16,18 @@ public class MenuUtama extends javax.swing.JFrame {
     /**
      * Creates new form MenuUtama
      */
+    public String noMeja;
+    
     public MenuUtama() {
         initComponents();
+        jTextArea1.setBorder(null);
+        jTextArea1.setBackground(new Color(26, 26, 26, 100));
+        jTextArea1.setOpaque(true);
+    }
+    
+    public MenuUtama(String noMeja) {
+        initComponents();
+        this.noMeja = noMeja;
         jTextArea1.setBorder(null);
         jTextArea1.setBackground(new Color(26, 26, 26, 100));
         jTextArea1.setOpaque(true);
@@ -90,7 +100,7 @@ public class MenuUtama extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 730, 770));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\ADMIN\\Documents\\GitHub\\FoodCourt\\src\\menuUtama.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/foodcourt/images/bg-makanan.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-370, 0, 1160, 760));
 
@@ -104,7 +114,9 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Toko().setVisible(true);
+        this.setVisible(false);
+        new Toko(this.noMeja).setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

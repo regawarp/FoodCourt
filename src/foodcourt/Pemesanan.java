@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -32,45 +33,46 @@ public class Pemesanan extends javax.swing.JFrame {
 
     /**
      * Creates new form Pemesanan
+     *
      * @throws java.io.IOException
      */
     public String namaResto;
-    
+    public String noMeja;
+
     public Pemesanan() throws IOException {
         initComponents();
-        jPanel3.setBackground(new Color(101,101,101,200));
+        jPanel3.setBackground(new Color(101, 101, 101, 200));
         ReadExcelFile();
         accDelete_pane.setVisible(false);
         accBuy_pane.setVisible(false);
         warnKosong_pane.setVisible(false);
     }
-    
-    public Pemesanan(String namaResto) throws IOException{
-        this.namaResto=namaResto;
-        System.out.println(this.namaResto);
+
+    public Pemesanan(String namaResto, String noMeja) throws IOException {
         initComponents();
-        jPanel3.setBackground(new Color(101,101,101,200));
+        this.namaResto = namaResto;
+        this.noMeja = noMeja;
+        System.out.println(this.namaResto);
+        jPanel3.setBackground(new Color(101, 101, 101, 200));
         ReadExcelFile();
         accDelete_pane.setVisible(false);
         accBuy_pane.setVisible(false);
         warnKosong_pane.setVisible(false);
-        
+
     }
-    
-    
+
     /*
      * Modul untuk membaca data dair excel
      */
     private void ReadExcelFile() throws FileNotFoundException, IOException {
         XSSFRow row;
-        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));       
+        FileInputStream fis = new FileInputStream(new File("src/data/DataMakanan12Resto.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet spreadsheet = workbook.getSheet(this.namaResto);
         Iterator< Row> rowIterator = spreadsheet.iterator();
-        
+
         jLabel1.setText("Toko  " + this.namaResto);
-  
-        
+
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("Nama");
         dtm.addColumn("Jenis");
@@ -95,7 +97,6 @@ public class Pemesanan extends javax.swing.JFrame {
                 nama, kategori, harga
             };
 
-            
             dtm.addRow(data);
         }
         jTable1.setModel(dtm);
@@ -103,8 +104,6 @@ public class Pemesanan extends javax.swing.JFrame {
             workbook.close();
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -191,7 +190,6 @@ public class Pemesanan extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -561,6 +559,7 @@ public class Pemesanan extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_exitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_exitMousePressed
@@ -577,28 +576,27 @@ public class Pemesanan extends javax.swing.JFrame {
      */
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         DefaultTableModel model;
-        model = (DefaultTableModel) jTable2.getModel();      
-        double total=0;
+        model = (DefaultTableModel) jTable2.getModel();
+        double total = 0;
         int selectedRowIndex = jTable1.getSelectedRow();
         String nama = (String) jTable1.getValueAt(selectedRowIndex, 0);
         double harga = (double) jTable1.getValueAt(selectedRowIndex, 2);
         int jumlah = (int) jSpinner1.getValue();
-        harga = harga*jumlah;
+        harga = harga * jumlah;
         String catatan = jTextArea2.getText();
         Object[] data = new Object[]{
-          nama, jumlah, harga, catatan  
+            nama, jumlah, harga, catatan
         };
-        
+
         model.addRow(data);
-        for(int i=0; i<model.getRowCount(); i++){
-            total+=Double.parseDouble(model.getValueAt(i, 2).toString());
+        for (int i = 0; i < model.getRowCount(); i++) {
+            total += Double.parseDouble(model.getValueAt(i, 2).toString());
         }
         jTable2.setModel(model);
-        this.harga.setText("Rp. "+ Format_Number(total) +",-");
-        this.pajak.setText("Rp. "+ Format_Number(total*0.1) +",-");
-        this.bayar_total.setText("Rp. "+ Format_Number(total*1.1) +",-");
-        
-        
+        this.harga.setText("Rp. " + Format_Number(total) + ",-");
+        this.pajak.setText("Rp. " + Format_Number(total * 0.1) + ",-");
+        this.bayar_total.setText("Rp. " + Format_Number(total * 1.1) + ",-");
+
         //kembalikan spinner dan textarea ke default
         jSpinner1.setValue(1);
         jTextArea2.setText("Masukkan catatan disini");
@@ -616,21 +614,21 @@ public class Pemesanan extends javax.swing.JFrame {
     private void jTextArea2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea2MouseClicked
         jTextArea2.setText("");
     }//GEN-LAST:event_jTextArea2MouseClicked
-    
-    
+
+
     private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
     }//GEN-LAST:event_jPanel10MouseClicked
 
-    
+
     private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
     }//GEN-LAST:event_jPanel12MouseClicked
 
     /*
-        Menutup kembali pop up, batal menghapus
-    */
+     Menutup kembali pop up, batal menghapus
+     */
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         accDelete_pane.setVisible(false);
-        jPanel3.setBackground(new Color(101,101,101,200));
+        jPanel3.setBackground(new Color(101, 101, 101, 200));
 
         accDelete_pane.setVisible(false);
         jPanel1.validate();
@@ -639,22 +637,22 @@ public class Pemesanan extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel10MouseClicked
 
     /*
-        Modul ini digunakan untuk menghapus dari daftar makanan yang sudah dipesan (kiri)
-    */
+     Modul ini digunakan untuk menghapus dari daftar makanan yang sudah dipesan (kiri)
+     */
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        double total=0;
-        
+        double total = 0;
+
         DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
         dtm.removeRow(jTable2.getSelectedRow());
         jTable2.setModel(dtm);
-        
-        for(int i=0; i<dtm.getRowCount(); i++){
-            total+=Double.parseDouble(dtm.getValueAt(i, 2).toString());
+
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            total += Double.parseDouble(dtm.getValueAt(i, 2).toString());
         }
-        this.harga.setText("Rp. "+ Format_Number(total) +",-");
-        this.pajak.setText("Rp. "+ Format_Number(total*0.1) +",-");
-        this.bayar_total.setText("Rp. "+ Format_Number(total*1.1) +",-");
-        
+        this.harga.setText("Rp. " + Format_Number(total) + ",-");
+        this.pajak.setText("Rp. " + Format_Number(total * 0.1) + ",-");
+        this.bayar_total.setText("Rp. " + Format_Number(total * 1.1) + ",-");
+
         accDelete_pane.setVisible(false);
         jPanel1.validate();
         jPanel1.repaint();
@@ -662,8 +660,8 @@ public class Pemesanan extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     /*
-       Menampilkan pop up untuk meyakinkan apakaah akan menghapus atau tidak
-    */
+     Menampilkan pop up untuk meyakinkan apakaah akan menghapus atau tidak
+     */
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         accDelete_pane.setVisible(true);
         DefaultTableModel dtm;
@@ -673,15 +671,16 @@ public class Pemesanan extends javax.swing.JFrame {
 
 
     /*
-        Jadi memproses makanan
-    */
+     Jadi memproses makanan
+     */
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         try {
             writeToExcel();
             new WaitingDisplay().setVisible(true);
-            super.setVisible(false);}catch(Exception e){
-                System.out.println(e.getMessage());
-            }
+            super.setVisible(false);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
@@ -689,8 +688,8 @@ public class Pemesanan extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel13MouseClicked
 
     /*
-        Batal memproses tutup kembali popup
-    */
+     Batal memproses tutup kembali popup
+     */
     private void jLabel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel14MouseClicked
         accBuy_pane.setVisible(false);
         jPanel1.validate();
@@ -713,42 +712,91 @@ public class Pemesanan extends javax.swing.JFrame {
     private void jLabel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MouseClicked
         warnKosong_pane.setVisible(false);
     }//GEN-LAST:event_jLabel18MouseClicked
-    
+
     /*
-        Sebelum memesan, pastikan user sudah selesai memilih
-    */
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {                                     
-        if(!tableEmpty(jTable2))
+     Sebelum memesan, pastikan user sudah selesai memilih
+     */
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {
+        if (!tableEmpty(jTable2)) {
             accBuy_pane.setVisible(true);
-        else warnKosong_pane.setVisible(true);
-    }       
+        } else {
+            warnKosong_pane.setVisible(true);
+        }
+    }
     /*
      * Modul untuk menulis ke file excel
      */
-    private void writeToExcel(){
-        
+
+    private void writeToExcel() {
+        FileInputStream fis = null;
+        Row row = null;
+        int countRow = 0;
+        try {
+            // GOTO LAST ROW
+            fis = new FileInputStream("src/data/dataPesananDariMeja.xlsx");
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheet(namaResto);
+//            Iterator<Row> iterator = sheet.iterator();
+//            while (iterator.hasNext()) {
+//                row = iterator.next();
+//                countRow++;
+//            }
+            countRow=sheet.getLastRowNum();
+//            Cell cell = row.getCell(1);
+//            String namaMenu = cell.getStringCellValue();
+//            System.out.println(countRow + " " + namaMenu);
+            //GET DATA FROM JTABLE
+            DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+            int nRow = dtm.getRowCount();
+            Object[][] tableData = new Object[nRow][3];
+            for (int i = 0; i < nRow; i++) {
+                tableData[i][0] = String.valueOf(dtm.getValueAt(i, 0));
+                tableData[i][1] = String.valueOf(dtm.getValueAt(i, 1));
+                tableData[i][2] = String.valueOf(dtm.getValueAt(i, 3));
+            }
+            // INSERT DATA
+            for (int i = 0; i < nRow; i++) {
+                row = sheet.createRow(countRow++);
+                Cell cell = row.createCell(0);
+                cell.setCellValue("Table " + noMeja);
+                for (int j = 0; j < 3; j++) {
+                    cell = row.createCell(j + 1);
+                    if (j == 1) {
+                        cell.setCellValue(Integer.parseInt((String) tableData[i][j]));
+                    } else {
+                        cell.setCellValue((String) tableData[i][j]);
+                    }
+                }
+                cell = row.createCell(4);
+                cell.setCellValue(jTextArea2.getText());
+            }
+            FileOutputStream out = new FileOutputStream("src/data/dataPesananDariMeja.xlsx");
+            workbook.write(out);
+            out.close();
+            fis.close();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
-    
+
     /*
      * Modul untuk mengecek apakah tabel di kanan kosong
      */
-    private boolean tableEmpty(javax.swing.JTable j){
+    private boolean tableEmpty(javax.swing.JTable j) {
         DefaultTableModel dtm = (DefaultTableModel) j.getModel();
-        return dtm.getRowCount()==0;
+        return dtm.getRowCount() == 0;
     }
-    
-    
 
     /*
      * Modul Format_Number untuk memformat bilangan dilengkapi dengan titik
      */
-    String Format_Number(double number){
-        DecimalFormat df = new DecimalFormat("#,##0",new DecimalFormatSymbols(new Locale("pt", "ID")));
+    String Format_Number(double number) {
+        DecimalFormat df = new DecimalFormat("#,##0", new DecimalFormatSymbols(new Locale("pt", "ID")));
         BigDecimal value = new BigDecimal(number);
 
         return String.valueOf(df.format(value.floatValue()));
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -779,7 +827,7 @@ public class Pemesanan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 try {
                     new Pemesanan().setVisible(true);
                 } catch (IOException ex) {
