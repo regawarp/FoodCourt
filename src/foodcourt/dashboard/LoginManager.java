@@ -40,11 +40,6 @@ public class LoginManager extends javax.swing.JFrame {
         System.out.println(date.getHours());
         initComponents();
         jPanel4.setBackground(new Color(102, 0, 0, 200));
-//        setColor(btn_1);
-//        ind_1.setOpaque(true);
-//        resetColor(new JPanel[]{btn_2, btn_3, btn_4}, new JPanel[]{ind_2, ind_3, ind_4});
-//        jProgressBar1.setValue(80);
-//        show_pane.add(new penjualan());
     }
 
     /**
@@ -398,19 +393,17 @@ public class LoginManager extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
-        char[] input = this.jPasswordField1.getPassword();
-        System.out.print(input);
-        if (!input.equals("password")) {
+        if (this.jPasswordField1.getText().equals("password")) {
             this.jPasswordField1.setText("");
+            this.jPasswordField1.setEchoChar('*');
         }
-        this.jPasswordField1.setEchoChar('*');
     }//GEN-LAST:event_jPasswordField1FocusGained
 
     private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
-        if (!this.jPasswordField1.getPassword().equals("")) {
+        if (this.jPasswordField1.getText().equals("")) {
             this.jPasswordField1.setText("password");
+            this.jPasswordField1.setEchoChar((char) 0);
         }
-        this.jPasswordField1.setEchoChar((char) 0);
     }//GEN-LAST:event_jPasswordField1FocusLost
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
@@ -418,16 +411,16 @@ public class LoginManager extends javax.swing.JFrame {
             if (verifikasi(this.jTextField1.getText(), String.valueOf(this.jPasswordField1.getPassword()))) {
                 System.out.println(this.jTextField1.getText());
 //                gantiFrame(this.jTextField1.getText());
+//                new Dashboard(this.jTextField1.getText()).setVisible(true);
                 new Dashboard().setVisible(true);
                 this.setVisible(false);
             }
-            }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(LoginManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jLabel1MousePressed
 
-    
-    void gantiFrame(String username){
+    void gantiFrame(String username) {
         //Ganti ke Frame Pemesanan
         try {
             new Dashboard(username).setVisible(true);
@@ -436,14 +429,13 @@ public class LoginManager extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
 
     private boolean verifikasi(String uname, String pass) throws FileNotFoundException, IOException {
         XSSFRow row;
         FileInputStream fis = new FileInputStream(new File("src/data/dataLoginManajer.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet spreadsheet = workbook.getSheetAt(0);
-        Iterator <Row> rowIterator = spreadsheet.iterator();
+        Iterator<Row> rowIterator = spreadsheet.iterator();
 
         row = (XSSFRow) rowIterator.next();
         while (rowIterator.hasNext()) {
@@ -453,13 +445,12 @@ public class LoginManager extends javax.swing.JFrame {
             String nama = cell.getStringCellValue();
             cell = cellIterator.next();
             String pasw = cell.getStringCellValue();
-            System.out.println(nama+" "+pasw);
+            System.out.println(nama + " " + pasw);
 
             if (nama.equals(uname)) {
-                System.out.println("pass : "+AES.periksa(pass, pasw));
+                System.out.println("pass : " + AES.periksa(pass, pasw));
                 return AES.periksa(pass, pasw);
             }
-            
         }
         return false;
     }
