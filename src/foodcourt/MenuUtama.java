@@ -16,8 +16,18 @@ public class MenuUtama extends javax.swing.JFrame {
     /**
      * Creates new form MenuUtama
      */
+    public String noMeja;
+    
     public MenuUtama() {
         initComponents();
+        jTextArea1.setBorder(null);
+        jTextArea1.setBackground(new Color(26, 26, 26, 100));
+        jTextArea1.setOpaque(true);
+    }
+    
+    public MenuUtama(String noMeja) {
+        initComponents();
+        this.noMeja = noMeja;
         jTextArea1.setBorder(null);
         jTextArea1.setBackground(new Color(26, 26, 26, 100));
         jTextArea1.setOpaque(true);
@@ -104,7 +114,9 @@ public class MenuUtama extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new Toko().setVisible(true);
+        this.setVisible(false);
+        new Toko(this.noMeja).setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

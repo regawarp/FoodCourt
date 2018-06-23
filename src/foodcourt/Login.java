@@ -113,15 +113,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        new MenuUtama(this.noMeja).setVisible(true);
+        this.setVisible(false);
         FileOutputStream out = null;
         try {
             FileInputStream fis = new FileInputStream(new File(EXCEL_FILE_DATA_NO_MEJA));
-            new MenuUtama().setVisible(true);
-            this.setVisible(false);
             // CODE TO SET EXCEL TABLE NO. OCCUPIED
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workbook.getSheetAt(0);
-            XSSFRow row = sheet.getRow(Integer.parseInt(noMeja)-1);
+            XSSFRow row = sheet.getRow(Integer.parseInt(noMeja) - 1);
             Cell cell = row.getCell(1);
             cell.setCellValue(1);
             out = new FileOutputStream(new File(EXCEL_FILE_DATA_NO_MEJA));
