@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -732,6 +733,7 @@ public class Pemesanan extends javax.swing.JFrame {
         Row row = null;
         int countRow = 0;
         try {
+            // WRITE DATA KE Pesanan Meja
             // GOTO LAST ROW
             fis = new FileInputStream("src/data/dataPesananDariMeja.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
@@ -741,7 +743,7 @@ public class Pemesanan extends javax.swing.JFrame {
 //                row = iterator.next();
 //                countRow++;
 //            }
-            countRow=sheet.getLastRowNum();
+            countRow = sheet.getLastRowNum();
 //            Cell cell = row.getCell(1);
 //            String namaMenu = cell.getStringCellValue();
 //            System.out.println(countRow + " " + namaMenu);
@@ -750,9 +752,9 @@ public class Pemesanan extends javax.swing.JFrame {
             int nRow = dtm.getRowCount();
             Object[][] tableData = new Object[nRow][3];
             for (int i = 0; i < nRow; i++) {
-                tableData[i][0] = String.valueOf(dtm.getValueAt(i, 0));
-                tableData[i][1] = String.valueOf(dtm.getValueAt(i, 1));
-                tableData[i][2] = String.valueOf(dtm.getValueAt(i, 3));
+                tableData[i][0] = String.valueOf(dtm.getValueAt(i, 0)); //nama
+                tableData[i][1] = String.valueOf(dtm.getValueAt(i, 1)); //jumlah
+                tableData[i][2] = String.valueOf(dtm.getValueAt(i, 3)); //Catatan
             }
             // INSERT DATA
             for (int i = 0; i < nRow; i++) {
@@ -774,6 +776,43 @@ public class Pemesanan extends javax.swing.JFrame {
             workbook.write(out);
             out.close();
             fis.close();
+
+            // WRITE KE DATA BILL
+            // GOTO LAST ROW
+            System.out.println("databil");
+            fis = new FileInputStream("src/data/dataBill.xlsx");
+            workbook = new XSSFWorkbook(fis);
+            sheet = workbook.getSheetAt(0);
+            countRow = sheet.getLastRowNum();
+            //GET DATA FROM JTABLE
+            dtm = (DefaultTableModel) jTable2.getModel();
+            nRow = dtm.getRowCount();
+            for (int i = 0; i < nRow; i++) {
+                tableData[i][2] = String.valueOf(dtm.getValueAt(i, 2)); // harga
+            }
+            // INSERT DATA
+            for (int i = 0; i < nRow; i++) {
+                row = sheet.createRow(countRow++);
+                Cell cell = row.createCell(0);
+                cell.setCellValue(namaResto);
+                for (int j = 0; j < 3; j++) {
+                    cell = row.createCell(j + 1);
+                    if (j == 0) {
+                        cell.setCellValue((String) tableData[i][j]);
+                    } else if (j == 1) {
+                        cell.setCellValue(Integer.parseInt((String) tableData[i][j]));
+                    } else {
+                        String harga = (String) tableData[i][j];
+                        String[] parts = harga.split(Pattern.quote("."));
+                        cell.setCellValue(Integer.parseInt((String) parts[0]));
+                    }
+                }
+            }
+            out = new FileOutputStream("src/data/dataBill.xlsx");
+            workbook.write(out);
+            out.close();
+            fis.close();
+            System.out.println("Done data bil");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
