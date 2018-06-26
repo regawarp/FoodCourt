@@ -738,16 +738,8 @@ public class Pemesanan extends javax.swing.JFrame {
             fis = new FileInputStream("src/data/dataPesananDariMeja.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet sheet = workbook.getSheet(namaResto);
-//            Iterator<Row> iterator = sheet.iterator();
-//            while (iterator.hasNext()) {
-//                row = iterator.next();
-//                countRow++;
-//            }
-            countRow = sheet.getLastRowNum();
-//            Cell cell = row.getCell(1);
-//            String namaMenu = cell.getStringCellValue();
-//            System.out.println(countRow + " " + namaMenu);
-            //GET DATA FROM JTABLE
+            countRow=sheet.getLastRowNum();
+
             DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
             int nRow = dtm.getRowCount();
             Object[][] tableData = new Object[nRow][3];

@@ -6,7 +6,6 @@
 package foodcourt.dashboard;
 
 import foodcourt.dashboard.data.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
@@ -49,27 +48,46 @@ public class statistik extends javax.swing.JPanel {
      */
     public statistik() throws IOException {
         initComponents();
-//        firstLoad();
+        firstLoad();
     }
 
     private void firstLoad() throws IOException {
         Date today = new Date();
 
         ArrayList<TransaksiHarian> tHr = new ArrayList<>();
-        loadDataExcel("" + (today.getYear() + 1900), today.getMonth(), tHr);
+        ArrayList<TransaksiHarian> tHrBef = new ArrayList<>();
+        loadDataExcel("" + (today.getYear() + 1900), today.getMonth()+1, tHr);
+        loadDataExcel("" + (today.getYear() + 1900), today.getMonth(), tHrBef);
         System.out.println("ukuran thr: " + tHr.size());
 
-        JPanel panel1 = loadPie(today.getMonth(), tHr);
+        JPanel panel1 = loadPie(today.getMonth()+1, tHr);
         panel1.setPreferredSize(new Dimension(10, 10));
         jPanel5.add(panel1);
         jPanel5.repaint();
         jPanel5.revalidate();
 
-        JPanel panel2 = loadLine(today.getMonth(), tHr);
+        JPanel panel2 = loadLine(today.getMonth()+1, tHr);
         panel2.setPreferredSize(new Dimension(10, 10));
         jPanel6.add(panel2);
         jPanel6.repaint();
         jPanel6.revalidate();
+        
+        jComboBox1.setSelectedIndex(today.getMonth());
+        this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + (today.getYear()+1900));
+        this.lbl_pendapatan.setText("" + hitungPemasukanBulanan(tHr));
+        this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
+        this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
+        
+        double presentase = hitungPemasukanBulanan(tHr) - hitungPemasukanBulanan(tHrBef);
+        presentase /= hitungPemasukanBulanan(tHr);
+        presentase *= 100;
+        if (presentase < 0) {
+            this.jLabel5.setText("menurun " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setForeground(new Color(153, 0, 0));
+        } else {
+            this.jLabel5.setText("meningkat " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setForeground(new Color(0, 102, 0));
+        }
     }
 
     public void loadDataExcel(String Tahun, int Bulan, ArrayList<TransaksiHarian> dt) throws FileNotFoundException, IOException {
@@ -79,10 +97,8 @@ public class statistik extends javax.swing.JPanel {
         List<ObjekTransaksi> listTransaksi;
         try (XSSFWorkbook workbook = new XSSFWorkbook(fis)) {
             XSSFSheet spreadsheet = workbook.getSheet(Tahun);
-//            XSSFSheet spreadsheet = workbook.getSheetAt(0);
             Iterator<Row> rowIterator = spreadsheet.iterator();
-            XSSFRow row;
-            row = (XSSFRow) rowIterator.next();
+            XSSFRow row = (XSSFRow) rowIterator.next();
             Iterator<Cell> cellIterator;
             Cell cell;
             listTransaksi = new ArrayList<>();

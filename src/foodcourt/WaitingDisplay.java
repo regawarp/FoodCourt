@@ -5,6 +5,7 @@
  */
 package foodcourt;
 
+import foodcourt.dashboard.data.Penjualan;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -15,6 +16,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -90,15 +93,15 @@ public class WaitingDisplay extends javax.swing.JFrame {
             row = (XSSFRow) rowIterator.next();
             while (rowIterator.hasNext()) {
                 row = (XSSFRow) rowIterator.next();
-                nama = row.getCell(1).getStringCellValue();
-                qty = (int) row.getCell(2).getNumericCellValue();
-                harga = (int) row.getCell(3).getNumericCellValue();
                 total += harga;
 
                 Object[] data = new Object[]{
                     nama, qty, harga
                 };
                 table.addRow(data);
+                nama = row.getCell(1).getStringCellValue();
+                qty = (int) row.getCell(2).getNumericCellValue();
+                harga = (int) row.getCell(3).getNumericCellValue();
             }
             Object[] space = new Object[]{
                 " ", " ", " "
@@ -191,6 +194,11 @@ public class WaitingDisplay extends javax.swing.JFrame {
         PrintBill.setForeground(new java.awt.Color(255, 255, 255));
         PrintBill.setText("Print Bill");
         PrintBill.setPreferredSize(new java.awt.Dimension(150, 50));
+        PrintBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PrintBillMouseClicked(evt);
+            }
+        });
         PrintBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintBillActionPerformed(evt);
@@ -229,9 +237,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        Bill.setBackground(new java.awt.Color(255, 255, 255));
         Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Bill.setForeground(new java.awt.Color(0, 0, 0));
         Bill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -289,6 +295,85 @@ public class WaitingDisplay extends javax.swing.JFrame {
         new Toko().setVisible(true);
     }//GEN-LAST:event_AddMenuActionPerformed
 
+    private void PrintBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrintBillMouseClicked
+        try {
+            FileInputStream fis = null;
+            XSSFRow row = null;
+            FileOutputStream out = null;
+
+            fis = new FileInputStream(new File("src/data/dataBill.xlsx"));
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet spreadsheet = workbook.getSheetAt(0);
+            Iterator<Row> rowIterator = spreadsheet.iterator();
+            row = (XSSFRow) rowIterator.next();
+            row = (XSSFRow) rowIterator.next();
+            Iterator<Cell> cellIterator = row.cellIterator();
+            Cell cell = cellIterator.next();
+
+            ArrayList<Penjualan> pj = new ArrayList<>();
+            Penjualan penjualan = new Penjualan();
+            int i;
+            for(i=1; i<spreadsheet.getLastRowNum(); i++){
+                row = spreadsheet.getRow(i);
+                penjualan.setToko(cell.getStringCellValue());
+                cell = cellIterator.next();
+                cell = cellIterator.next();
+                cell = cellIterator.next();
+                penjualan.setHarga(cell.getNumericCellValue());
+                spreadsheet.removeRow(row);
+                
+                if (pj.contains(penjualan)) {
+                    pj.get(pj.indexOf(penjualan)).setHarga(pj.get(pj.indexOf(penjualan)).getHarga() + penjualan.getHarga());
+                } else {
+                    pj.add(penjualan);
+                }
+            }
+            out = new FileOutputStream(new File("src/data/dataBill.xlsx"));
+            workbook.write(out);
+
+            /*
+            Bagian menulis ke excel transaksi
+             */
+            Date today = new Date();
+            fis = null;
+            out = null;
+            row = null;
+            cell = null;
+            spreadsheet = null;
+            int countRow = 0;
+
+            // GOTO LAST ROW
+            fis = new FileInputStream(new File("src/data/dataTransaksi.xlsx"));
+            workbook = new XSSFWorkbook(fis);
+            spreadsheet = workbook.getSheet("" + (today.getYear() + 1900));
+            row = spreadsheet.getRow(countRow);
+            cell = row.getCell(1);
+            String id = cell.getStringCellValue();
+            int idNum = Integer.parseInt(id.substring(5)) + 1;
+
+            countRow = spreadsheet.getLastRowNum() + 1;
+
+            for (i = 0; i < pj.size(); i++) {
+                row = spreadsheet.createRow(countRow++);
+                cell = row.createCell(0);
+                cell.setCellValue(today);
+                cell = row.createCell(1);
+                cell.setCellValue("#ID" + today.getDate() + idNum);
+                cell = row.createCell(2);
+                cell.setCellValue(pj.get(i).getToko());
+                cell = row.createCell(3);
+                cell.setCellValue(pj.get(i).getHarga());
+            }
+
+            out = new FileOutputStream(new File("src/data/dataTransaksi.xlsx"));
+            workbook.write(out);
+            out.close();
+            fis.close();
+        } catch (IOException ex) {
+            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_PrintBillMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -340,3 +425,4 @@ public class WaitingDisplay extends javax.swing.JFrame {
     private javax.swing.JPanel newPanel;
     // End of variables declaration//GEN-END:variables
 }
+
