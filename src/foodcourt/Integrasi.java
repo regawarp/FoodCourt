@@ -63,7 +63,7 @@ public class Integrasi extends javax.swing.JFrame {
         jLabel2.setText("Silahkan Isi Kolom di Bawah ini dengan nomor meja lalu tekan set");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 0));
+        jPanel1.setBackground(new java.awt.Color(133, 0, 0));
         jPanel1.setMinimumSize(new java.awt.Dimension(1366, 768));
         jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
