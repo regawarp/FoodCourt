@@ -6,17 +6,20 @@
 package foodcourt.dashboard;
 
 import foodcourt.dashboard.data.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -49,15 +52,16 @@ public class statistik extends javax.swing.JPanel {
      */
     public statistik() throws IOException {
         initComponents();
-//        firstLoad();
+        firstLoad();
     }
 
     private void firstLoad() throws IOException {
         Date today = new Date();
 
         ArrayList<TransaksiHarian> tHr = new ArrayList<>();
-        loadDataExcel("" + (today.getYear() + 1900), today.getMonth(), tHr);
-        System.out.println("ukuran thr: " + tHr.size());
+        ArrayList<TransaksiHarian> tHrBef = new ArrayList<>();
+        loadDataExcel("" + (today.getYear() + 1900), today.getMonth()+1, tHr);
+        loadDataExcel("" + (today.getYear() + 1900), today.getMonth(), tHrBef);
 
         JPanel panel1 = loadPie(today.getMonth(), tHr);
         panel1.setPreferredSize(new Dimension(10, 10));
@@ -70,6 +74,26 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.add(panel2);
         jPanel6.repaint();
         jPanel6.revalidate();
+
+        this.jComboBox1.setSelectedIndex(today.getMonth());
+
+        this.lbl_pendapatan.setText("Rp." + Format_Number(hitungPemasukanBulanan(tHr)) + ",-");
+        this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
+        this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
+
+        double presentase = hitungPemasukanBulanan(tHr) - hitungPemasukanBulanan(tHrBef);
+        presentase /= hitungPemasukanBulanan(tHr);
+        presentase *= 100;
+        if (presentase < 0) {
+            this.jLabel5.setText("Penjualan menurun " + presentase + "%");
+            this.jLabel5.setForeground(new Color(153, 0, 0));
+            this.jLabel8.setForeground(new Color(153, 0, 0));
+        } else {
+            this.jLabel5.setText("Penjualan meningkat " + presentase + "%");
+            this.jLabel5.setForeground(new Color(0, 102, 0));
+            this.jLabel8.setForeground(new Color(0, 102, 0));
+        }
+
     }
 
     public void loadDataExcel(String Tahun, int Bulan, ArrayList<TransaksiHarian> dt) throws FileNotFoundException, IOException {
@@ -244,8 +268,10 @@ public class statistik extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -254,6 +280,7 @@ public class statistik extends javax.swing.JPanel {
         lbl_tokoTerlaris = new javax.swing.JLabel();
         lbl_jmlTransaksi = new javax.swing.JLabel();
         lbl_pendapatan = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
 
         stats_pane.setBackground(new java.awt.Color(255, 153, 153));
@@ -293,7 +320,10 @@ public class statistik extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new java.awt.BorderLayout());
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 440, 220));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 210));
+
+        jLabel6.setText("Penjualan Per Toko");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 260));
 
@@ -302,6 +332,9 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new java.awt.CardLayout());
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 840, 230));
+
+        jLabel7.setText("Transaksi Harian");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 890, 280));
 
@@ -317,7 +350,7 @@ public class statistik extends javax.swing.JPanel {
         jLabel4.setText("Pendapatan");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, -1, -1));
 
-        jLabel5.setText("% dari bulan lalu");
+        jLabel5.setText("%");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 19)); // NOI18N
@@ -325,13 +358,16 @@ public class statistik extends javax.swing.JPanel {
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
 
         lbl_tokoTerlaris.setText("jLabel6");
-        jPanel2.add(lbl_tokoTerlaris, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
+        jPanel2.add(lbl_tokoTerlaris, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 80, -1, -1));
 
         lbl_jmlTransaksi.setText("jLabel7");
-        jPanel2.add(lbl_jmlTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, -1, -1));
+        jPanel2.add(lbl_jmlTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 110, -1, -1));
 
         lbl_pendapatan.setText("jLabel8");
-        jPanel2.add(lbl_pendapatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, -1, -1));
+        jPanel2.add(lbl_pendapatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 140, -1, -1));
+
+        jLabel8.setText("dari bulan lalu");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
 
         stats_pane.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 890, 550));
 
@@ -389,7 +425,7 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.revalidate();
 
         this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + tahun);
-        this.lbl_pendapatan.setText("" + hitungPemasukanBulanan(tHr));
+        this.lbl_pendapatan.setText("Rp." + Format_Number(hitungPemasukanBulanan(tHr)) + ",-");
         this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
         this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
 
@@ -397,11 +433,13 @@ public class statistik extends javax.swing.JPanel {
         presentase /= hitungPemasukanBulanan(tHr);
         presentase *= 100;
         if (presentase < 0) {
-            this.jLabel5.setText("menurun " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setText("Penjualan menurun " + presentase + "%");
             this.jLabel5.setForeground(new Color(153, 0, 0));
+            this.jLabel8.setForeground(new Color(153, 0, 0));
         } else {
-            this.jLabel5.setText("meningkat " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setText("Penjualan meningkat " + presentase + "%");
             this.jLabel5.setForeground(new Color(0, 102, 0));
+            this.jLabel8.setForeground(new Color(0, 102, 0));
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -453,6 +491,12 @@ public class statistik extends javax.swing.JPanel {
         return toko;
     }
 
+    String Format_Number(double number) {
+        DecimalFormat df = new DecimalFormat("#,##0", new DecimalFormatSymbols(new Locale("pt", "ID")));
+        BigDecimal value = new BigDecimal(number);
+
+        return String.valueOf(df.format(value.floatValue()));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -464,6 +508,9 @@ public class statistik extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

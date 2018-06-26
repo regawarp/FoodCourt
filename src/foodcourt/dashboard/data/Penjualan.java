@@ -34,7 +34,7 @@ public class Penjualan {
     @Override
     public boolean equals (Object o){
         Penjualan pj = (Penjualan) o;
-        return pj.getToko().equals(pj.getToko());
+        return this.getToko().equals(pj.getToko());
     }
 
     @Override
