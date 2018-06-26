@@ -12,10 +12,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
@@ -74,22 +78,30 @@ public class statistik extends javax.swing.JPanel {
         
         jComboBox1.setSelectedIndex(today.getMonth());
         this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + (today.getYear()+1900));
-        this.lbl_pendapatan.setText("" + hitungPemasukanBulanan(tHr));
+        this.lbl_pendapatan.setText("Rp." + Number_Format(hitungPemasukanBulanan(tHr)) + ",-");
         this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
         this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
         
-        double presentase = hitungPemasukanBulanan(tHr) - hitungPemasukanBulanan(tHrBef);
+        long presentase = (long)hitungPemasukanBulanan(tHr) - (long)hitungPemasukanBulanan(tHrBef);
+        System.out.println("selish : "+presentase);
         presentase /= hitungPemasukanBulanan(tHr);
         presentase *= 100;
         if (presentase < 0) {
-            this.jLabel5.setText("menurun " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setText("menurun " + (int)presentase + "% dari bulan sebelumnya");
             this.jLabel5.setForeground(new Color(153, 0, 0));
         } else {
-            this.jLabel5.setText("meningkat " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setText("meningkat " + (int)presentase + "% dari bulan sebelumnya");
             this.jLabel5.setForeground(new Color(0, 102, 0));
         }
     }
 
+    String Number_Format(double number) {
+        DecimalFormat df = new DecimalFormat("#,##0",new DecimalFormatSymbols(new Locale("pt", "ID")));
+        BigDecimal value = new BigDecimal(number);
+
+        return String.valueOf(df.format(value.floatValue()));
+    }
+    
     public void loadDataExcel(String Tahun, int Bulan, ArrayList<TransaksiHarian> dt) throws FileNotFoundException, IOException {
 
         FileInputStream fis;
@@ -405,18 +417,19 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.revalidate();
 
         this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + tahun);
-        this.lbl_pendapatan.setText("" + hitungPemasukanBulanan(tHr));
+        this.lbl_pendapatan.setText("Rp." + Number_Format(hitungPemasukanBulanan(tHr)) + ",-");
         this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
         this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
 
-        double presentase = hitungPemasukanBulanan(tHr) - hitungPemasukanBulanan(tHrBef);
+        long presentase = (long)hitungPemasukanBulanan(tHr) - (long)hitungPemasukanBulanan(tHrBef);
+        System.out.println("selish : "+presentase);
         presentase /= hitungPemasukanBulanan(tHr);
         presentase *= 100;
         if (presentase < 0) {
-            this.jLabel5.setText("menurun " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setText("menurun " + (int)presentase + "% dari bulan sebelumnya");
             this.jLabel5.setForeground(new Color(153, 0, 0));
         } else {
-            this.jLabel5.setText("meningkat " + presentase + "% dari bulan sebelumnya");
+            this.jLabel5.setText("meningkat " + (int)presentase + "% dari bulan sebelumnya");
             this.jLabel5.setForeground(new Color(0, 102, 0));
         }
     }//GEN-LAST:event_jButton1MouseClicked

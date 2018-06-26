@@ -784,7 +784,7 @@ public class Pemesanan extends javax.swing.JFrame {
             }
             // INSERT DATA
             for (int i = 0; i < nRow; i++) {
-                row = sheet.createRow(countRow++);
+                row = sheet.createRow(sheet.getLastRowNum()+1);
                 Cell cell = row.createCell(0);
                 cell.setCellValue(namaResto);
                 for (int j = 0; j < 3; j++) {
@@ -796,7 +796,7 @@ public class Pemesanan extends javax.swing.JFrame {
                     } else {
                         String harga = (String) tableData[i][j];
                         String[] parts = harga.split(Pattern.quote("."));
-                        cell.setCellValue(Integer.parseInt((String) parts[0]));
+                        cell.setCellValue(Integer.parseInt((String) parts[0]) * 1.1);
                     }
                 }
             }

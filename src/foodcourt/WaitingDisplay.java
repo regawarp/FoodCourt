@@ -93,22 +93,24 @@ public class WaitingDisplay extends javax.swing.JFrame {
             row = (XSSFRow) rowIterator.next();
             while (rowIterator.hasNext()) {
                 row = (XSSFRow) rowIterator.next();
+
+                nama = row.getCell(1).getStringCellValue();
+                qty = (int) row.getCell(2).getNumericCellValue();
+                harga = (int) row.getCell(3).getNumericCellValue();
+
                 total += harga;
 
                 Object[] data = new Object[]{
                     nama, qty, harga
                 };
                 table.addRow(data);
-                nama = row.getCell(1).getStringCellValue();
-                qty = (int) row.getCell(2).getNumericCellValue();
-                harga = (int) row.getCell(3).getNumericCellValue();
             }
             Object[] space = new Object[]{
                 " ", " ", " "
             };
             table.addRow(space);
             Object[] rowData = new Object[]{
-                "Total", " ", total
+                "Total", " ", total * 1
             };
             table.addRow(rowData);
             for (int i = 0; i < 6; i++) {
@@ -261,38 +263,12 @@ public class WaitingDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBillActionPerformed
-        PopUp.setVisible(true);
-        XSSFWorkbook wb = new XSSFWorkbook();
-        XSSFSheet sheet = wb.createSheet("Sheet 1");
-        File file = new File("src//data//Log Transaksi.xlsx");
-        XSSFCellStyle cellStyle = wb.createCellStyle();
-        TableModel model = Bill.getModel();
 
-        for (int i = 0; i < model.getRowCount(); i++) {
-            XSSFRow row = sheet.createRow((short) i);
-            for (int j = 0; j < model.getColumnCount(); j++) {
-                XSSFCell cell = row.createCell((short) j);
-                cell.setCellValue(model.getValueAt(i, j).toString());
-                cell.setCellStyle(cellStyle);
-            }
-        }
-        FileOutputStream fos;
-        try {
-            fos = new FileOutputStream(file);
-            BufferedOutputStream bos;
-            bos = new BufferedOutputStream(fos);
-            wb.write(bos);
-            bos.close();
-            fos.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_PrintBillActionPerformed
 
     private void AddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddMenuActionPerformed
         new Toko().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_AddMenuActionPerformed
 
     private void PrintBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrintBillMouseClicked
@@ -300,40 +276,42 @@ public class WaitingDisplay extends javax.swing.JFrame {
             FileInputStream fis = null;
             XSSFRow row = null;
             FileOutputStream out = null;
+            Cell cell = null;
 
             fis = new FileInputStream(new File("src/data/dataBill.xlsx"));
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet spreadsheet = workbook.getSheetAt(0);
-            Iterator<Row> rowIterator = spreadsheet.iterator();
-            row = (XSSFRow) rowIterator.next();
-            row = (XSSFRow) rowIterator.next();
-            Iterator<Cell> cellIterator = row.cellIterator();
-            Cell cell = cellIterator.next();
 
             ArrayList<Penjualan> pj = new ArrayList<>();
             Penjualan penjualan = new Penjualan();
             int i;
-            for(i=1; i<spreadsheet.getLastRowNum(); i++){
+            for (i = spreadsheet.getLastRowNum(); i > 0; i--) {
                 row = spreadsheet.getRow(i);
-                penjualan.setToko(cell.getStringCellValue());
-                cell = cellIterator.next();
-                cell = cellIterator.next();
-                cell = cellIterator.next();
-                penjualan.setHarga(cell.getNumericCellValue());
+                penjualan.setToko(row.getCell(0).getStringCellValue());
+                penjualan.setHarga(row.getCell(3).getNumericCellValue());
                 spreadsheet.removeRow(row);
-                
+
                 if (pj.contains(penjualan)) {
-                    pj.get(pj.indexOf(penjualan)).setHarga(pj.get(pj.indexOf(penjualan)).getHarga() + penjualan.getHarga());
+                    int j = pj.indexOf(penjualan);
+                    pj.get(j).setHarga(pj.get(j).getHarga() + penjualan.getHarga());
+                    System.out.println("\n"+j);
                 } else {
                     pj.add(penjualan);
                 }
             }
+
             out = new FileOutputStream(new File("src/data/dataBill.xlsx"));
             workbook.write(out);
+            out.close();
+            fis.close();
 
             /*
             Bagian menulis ke excel transaksi
              */
+            for (i = 0; i < pj.size(); i++) {
+                System.out.println("Harga : " + pj.get(i).getHarga() + " - " + pj.get(i).getToko());
+            }
+
             Date today = new Date();
             fis = null;
             out = null;
@@ -346,19 +324,21 @@ public class WaitingDisplay extends javax.swing.JFrame {
             fis = new FileInputStream(new File("src/data/dataTransaksi.xlsx"));
             workbook = new XSSFWorkbook(fis);
             spreadsheet = workbook.getSheet("" + (today.getYear() + 1900));
+            countRow = spreadsheet.getLastRowNum();
             row = spreadsheet.getRow(countRow);
             cell = row.getCell(1);
             String id = cell.getStringCellValue();
             int idNum = Integer.parseInt(id.substring(5)) + 1;
+            System.out.println("nilai idnum : " + idNum);
 
-            countRow = spreadsheet.getLastRowNum() + 1;
+            countRow++;
 
             for (i = 0; i < pj.size(); i++) {
                 row = spreadsheet.createRow(countRow++);
                 cell = row.createCell(0);
                 cell.setCellValue(today);
                 cell = row.createCell(1);
-                cell.setCellValue("#ID" + today.getDate() + idNum);
+                cell.setCellValue("#ID" + String.format("%02d", today.getDate()) + String.format("%03d", idNum));
                 cell = row.createCell(2);
                 cell.setCellValue(pj.get(i).getToko());
                 cell = row.createCell(3);
@@ -369,6 +349,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
             workbook.write(out);
             out.close();
             fis.close();
+            DisplayBill();
         } catch (IOException ex) {
             Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -425,4 +406,3 @@ public class WaitingDisplay extends javax.swing.JFrame {
     private javax.swing.JPanel newPanel;
     // End of variables declaration//GEN-END:variables
 }
-

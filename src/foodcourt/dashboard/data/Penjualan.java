@@ -34,14 +34,15 @@ public class Penjualan {
     @Override
     public boolean equals (Object o){
         Penjualan pj = (Penjualan) o;
-        return pj.getToko().equals(pj.getToko());
+        return this.getToko().equals(pj.getToko());
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.toko);
-        hash = 79 * hash + (int) (Double.doubleToLongBits(this.harga) ^ (Double.doubleToLongBits(this.harga) >>> 32));
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.toko);
+        hash = 83 * hash + (int) (Double.doubleToLongBits(this.harga) ^ (Double.doubleToLongBits(this.harga) >>> 32));
         return hash;
     }
+
 }
