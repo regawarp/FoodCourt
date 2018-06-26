@@ -37,14 +37,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * @author Tiara Lestari
  */
 public class WaitingDisplay extends javax.swing.JFrame {
+
     Timer tm;
     int x = 0;
     String[] pics = {
-            "1.jpg",
-            "2.jpg",
-            "3.jpg",
-            "4.jpg",
-            "5.jpg"
+        "1.jpg",
+        "2.jpg",
+        "3.jpg",
+        "4.jpg",
+        "5.jpg"
     };
     String[] text = {
         "Makanan siang hari",
@@ -53,60 +54,51 @@ public class WaitingDisplay extends javax.swing.JFrame {
         "Tomato soup",
         "Cheese chicken"
     };
-    
+
     /**
      * Creates new form WaitingDisplay
+     *
      * @throws java.io.IOException
      */
     public WaitingDisplay() throws IOException {
         initComponents();
-//        DisplayBill();
+        DisplayBill();
         SlideShow();
         PopUp.setVisible(false);
     }
-    
-    private void DisplayBill() throws FileNotFoundException, IOException{
+
+    private void DisplayBill() throws FileNotFoundException, IOException {
         int total = 0;
-        
+
+        String nama;
+        int qty, harga;
+
         XSSFRow row;
         FileInputStream fis;
         DefaultTableModel table = new DefaultTableModel();
-        
-        fis = new FileInputStream(new File("src//data//Book1.xlsx"));
+
+        fis = new FileInputStream(new File("src//data//dataBill.xlsx"));
         try (XSSFWorkbook wb = new XSSFWorkbook(fis)) {
             XSSFSheet sheet = wb.getSheetAt(0);
-            
+
             table.addColumn(" ");
             table.addColumn(" ");
             table.addColumn(" ");
-            Bill.setRowHeight(35);
-            
-            Iterator < Row > rowIterator = sheet.rowIterator();
-            
-            while(rowIterator.hasNext()){
+            Bill.setRowHeight(20);
+
+            Iterator< Row> rowIterator = sheet.rowIterator();
+            row = (XSSFRow) rowIterator.next();
+            while (rowIterator.hasNext()) {
                 row = (XSSFRow) rowIterator.next();
-                Iterator < Cell > cellIterator = row.cellIterator();                                        
-                
-                String nama;
-                int qty, harga;
-                
-                Cell cell = cellIterator.next();
-                nama = cell.getStringCellValue();
-                cell = cellIterator.next();
-                qty = (int) cell.getNumericCellValue();
-                cell = cellIterator.next();
-                harga = (int) cell.getNumericCellValue();
+                nama = row.getCell(1).getStringCellValue();
+                qty = (int) row.getCell(2).getNumericCellValue();
+                harga = (int) row.getCell(3).getNumericCellValue();
                 total += harga;
-               
+
                 Object[] data = new Object[]{
                     nama, qty, harga
                 };
                 table.addRow(data);
-                
-                Object[] namaToko = new Object[]{
-                    "Aciap"
-                };
-                table.addRow(namaToko);
             }
             Object[] space = new Object[]{
                 " ", " ", " "
@@ -116,7 +108,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
                 "Total", " ", total
             };
             table.addRow(rowData);
-            for(int i = 0; i < 6; i++){
+            for (int i = 0; i < 6; i++) {
                 table.addRow(space);
             }
             Bill.setModel(table);
@@ -128,30 +120,31 @@ public class WaitingDisplay extends javax.swing.JFrame {
             JTableHeader header = Bill.getTableHeader();
             header.setVisible(false);
             header.setBackground(Color.WHITE);
-            
+
         }
     }
-    
-    private void SlideShow(){    
+
+    private void SlideShow() {
         Text.setBackground(new Color(26, 26, 26, 150));
         Text.setOpaque(true);
         SetImageSize(4);
         Text.setText(text[4]);
-        
-        tm = new Timer(750, new ActionListener(){
-            public void actionPerformed(ActionEvent e){
+
+        tm = new Timer(750, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 SetImageSize(x);
                 Text.setText(text[x]);
                 x += 1;
-                if(x >= pics.length)
+                if (x >= pics.length) {
                     x = 0;
+                }
             }
         });
         tm.start();
     }
-    
-    public void SetImageSize(int i){
-        ImageIcon icon = new ImageIcon("src//foodcourt//images//"+pics[i]);
+
+    public void SetImageSize(int i) {
+        ImageIcon icon = new ImageIcon("src//foodcourt//images//" + pics[i]);
         Image img = icon.getImage();
         Image newImg = img.getScaledInstance(Display.getWidth(), Display.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(newImg);
@@ -268,10 +261,10 @@ public class WaitingDisplay extends javax.swing.JFrame {
         File file = new File("src//data//Log Transaksi.xlsx");
         XSSFCellStyle cellStyle = wb.createCellStyle();
         TableModel model = Bill.getModel();
-        
-        for(int i = 0; i < model.getRowCount(); i++){
+
+        for (int i = 0; i < model.getRowCount(); i++) {
             XSSFRow row = sheet.createRow((short) i);
-            for(int j = 0; j < model.getColumnCount(); j++){
+            for (int j = 0; j < model.getColumnCount(); j++) {
                 XSSFCell cell = row.createCell((short) j);
                 cell.setCellValue(model.getValueAt(i, j).toString());
                 cell.setCellStyle(cellStyle);
