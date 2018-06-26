@@ -412,7 +412,7 @@ public class LoginManager extends javax.swing.JFrame {
                 System.out.println(this.jTextField1.getText());
 //                gantiFrame(this.jTextField1.getText());
 //                new Dashboard(this.jTextField1.getText()).setVisible(true);
-                new Dashboard(this.jTextField1.getText()).setVisible(true);
+                new Dashboard().setVisible(true);
                 this.setVisible(false);
             }
         } catch (IOException ex) {

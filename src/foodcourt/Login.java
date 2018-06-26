@@ -5,11 +5,14 @@
  */
 package foodcourt;
 
-import foodcourt.dashboard.LoginManager;
 import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -49,7 +52,6 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         btnStaffLogin = new javax.swing.JButton();
-        btnMgrLogin = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tfNama = new javax.swing.JTextField();
@@ -61,21 +63,13 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnStaffLogin.setText("Staff");
+        btnStaffLogin.setText("Staff Login");
         btnStaffLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnStaffLoginMouseClicked(evt);
             }
         });
-        getContentPane().add(btnStaffLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 100, -1));
-
-        btnMgrLogin.setText("Manager");
-        btnMgrLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMgrLoginMouseClicked(evt);
-            }
-        });
-        getContentPane().add(btnMgrLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 100, -1));
+        getContentPane().add(btnStaffLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -147,10 +141,6 @@ public class Login extends javax.swing.JFrame {
         // GOTO LOGIN STAFF
 
     }//GEN-LAST:event_btnStaffLoginMouseClicked
-
-    private void btnMgrLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMgrLoginMouseClicked
-        new LoginManager().setVisible(true);
-    }//GEN-LAST:event_btnMgrLoginMouseClicked
     void setNoMeja() {
         lNoMeja.setText("Meja No." + this.noMeja);
     }
@@ -193,7 +183,6 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
     private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnMgrLogin;
     private javax.swing.JButton btnStaffLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
