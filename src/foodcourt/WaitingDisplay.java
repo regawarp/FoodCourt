@@ -73,8 +73,8 @@ public class WaitingDisplay extends javax.swing.JFrame {
     private void DisplayBill() throws FileNotFoundException, IOException {
         int total = 0;
 
-        String nama;
-        int qty, harga;
+        String nama = null;
+        int qty = 0, harga = 0;
 
         XSSFRow row;
         FileInputStream fis;
