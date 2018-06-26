@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
@@ -46,7 +45,14 @@ public class WaitingDisplay extends javax.swing.JFrame {
             "3.jpg",
             "4.jpg",
             "5.jpg"
-        };
+    };
+    String[] text = {
+        "Makanan siang hari",
+        "Untuk sarapan enak nih",
+        "Chicken wrapz",
+        "Tomato soup",
+        "Cheese chicken"
+    };
     
     /**
      * Creates new form WaitingDisplay
@@ -56,7 +62,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
         initComponents();
         DisplayBill();
         SlideShow();
-        newPanel.setVisible(false);
+        PopUp.setVisible(false);
     }
     
     private void DisplayBill() throws FileNotFoundException, IOException{
@@ -73,7 +79,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
             table.addColumn(" ");
             table.addColumn(" ");
             table.addColumn(" ");
-            Bill.setRowHeight(40);
+            Bill.setRowHeight(35);
             
             Iterator < Row > rowIterator = sheet.rowIterator();
             
@@ -91,12 +97,16 @@ public class WaitingDisplay extends javax.swing.JFrame {
                 cell = cellIterator.next();
                 harga = (int) cell.getNumericCellValue();
                 total += harga;
-                
+               
                 Object[] data = new Object[]{
                     nama, qty, harga
                 };
-                
                 table.addRow(data);
+                
+                Object[] namaToko = new Object[]{
+                    "Aciap"
+                };
+                table.addRow(namaToko);
             }
             Object[] space = new Object[]{
                 " ", " ", " "
@@ -116,16 +126,22 @@ public class WaitingDisplay extends javax.swing.JFrame {
             Bill.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
             Bill.setBackground(Color.WHITE);
             JTableHeader header = Bill.getTableHeader();
+            header.setVisible(false);
             header.setBackground(Color.WHITE);
+            
         }
     }
     
     private void SlideShow(){    
+        Text.setBackground(new Color(26, 26, 26, 150));
+        Text.setOpaque(true);
         SetImageSize(4);
+        Text.setText(text[4]);
         
-        tm = new Timer(500, new ActionListener(){
+        tm = new Timer(750, new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 SetImageSize(x);
+                Text.setText(text[x]);
                 x += 1;
                 if(x >= pics.length)
                     x = 0;
@@ -153,11 +169,14 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Bill = new javax.swing.JTable();
         PrintBill = new javax.swing.JButton();
         AddMenu = new javax.swing.JButton();
+        Text = new javax.swing.JLabel();
+        PopUp = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         Display = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        Bill = new javax.swing.JTable();
         newPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -172,7 +191,50 @@ public class WaitingDisplay extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 50)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Please Wait for Your Order");
-        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 52, -1, -1));
+        mainPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        PrintBill.setBackground(new java.awt.Color(67, 1, 2));
+        PrintBill.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        PrintBill.setForeground(new java.awt.Color(255, 255, 255));
+        PrintBill.setText("Print Bill");
+        PrintBill.setPreferredSize(new java.awt.Dimension(150, 50));
+        PrintBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintBillActionPerformed(evt);
+            }
+        });
+        mainPanel.add(PrintBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 640, -1, -1));
+
+        AddMenu.setBackground(new java.awt.Color(67, 1, 2));
+        AddMenu.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        AddMenu.setForeground(new java.awt.Color(255, 255, 255));
+        AddMenu.setText("Add Menu");
+        AddMenu.setPreferredSize(new java.awt.Dimension(150, 50));
+        AddMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddMenuActionPerformed(evt);
+            }
+        });
+        mainPanel.add(AddMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 640, -1, -1));
+
+        Text.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        Text.setForeground(new java.awt.Color(255, 255, 255));
+        mainPanel.add(Text, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 570, 790, 70));
+
+        PopUp.setBackground(new java.awt.Color(67, 1, 2));
+        PopUp.setForeground(new java.awt.Color(255, 255, 255));
+        PopUp.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("PLEASE WAIT");
+        PopUp.add(jLabel2, new java.awt.GridBagConstraints());
+
+        mainPanel.add(PopUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 242, 500, 250));
+        mainPanel.add(Display, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 136, 900, 550));
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
         Bill.setBackground(new java.awt.Color(255, 255, 255));
         Bill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -186,34 +248,9 @@ public class WaitingDisplay extends javax.swing.JFrame {
             }
         ));
         Bill.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(Bill);
+        jPanel1.add(Bill, java.awt.BorderLayout.CENTER);
 
-        mainPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 56, 320, 530));
-
-        PrintBill.setBackground(new java.awt.Color(67, 1, 2));
-        PrintBill.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        PrintBill.setForeground(new java.awt.Color(255, 255, 255));
-        PrintBill.setText("Print Bill");
-        PrintBill.setPreferredSize(new java.awt.Dimension(150, 50));
-        PrintBill.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrintBillActionPerformed(evt);
-            }
-        });
-        mainPanel.add(PrintBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 620, -1, -1));
-
-        AddMenu.setBackground(new java.awt.Color(67, 1, 2));
-        AddMenu.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        AddMenu.setForeground(new java.awt.Color(255, 255, 255));
-        AddMenu.setText("Add Menu");
-        AddMenu.setPreferredSize(new java.awt.Dimension(150, 50));
-        AddMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddMenuActionPerformed(evt);
-            }
-        });
-        mainPanel.add(AddMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 620, -1, -1));
-        mainPanel.add(Display, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 156, 820, 510));
+        mainPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 60, 310, 550));
 
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 800));
 
@@ -225,7 +262,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PrintBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBillActionPerformed
-        newPanel.setVisible(true);
+        PopUp.setVisible(true);
         XSSFWorkbook wb = new XSSFWorkbook();
         XSSFSheet sheet = wb.createSheet("Sheet 1");
         File file = new File("src//data//Log Transaksi.xlsx");
@@ -300,9 +337,12 @@ public class WaitingDisplay extends javax.swing.JFrame {
     private javax.swing.JButton AddMenu;
     private javax.swing.JTable Bill;
     private javax.swing.JLabel Display;
+    private javax.swing.JPanel PopUp;
     private javax.swing.JButton PrintBill;
+    private javax.swing.JLabel Text;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel newPanel;
     // End of variables declaration//GEN-END:variables
