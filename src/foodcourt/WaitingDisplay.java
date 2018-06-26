@@ -60,7 +60,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
      */
     public WaitingDisplay() throws IOException {
         initComponents();
-        DisplayBill();
+//        DisplayBill();
         SlideShow();
         PopUp.setVisible(false);
     }
@@ -151,7 +151,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
     }
     
     public void SetImageSize(int i){
-        ImageIcon icon = new ImageIcon(pics[i]);
+        ImageIcon icon = new ImageIcon("src//foodcourt//images//"+pics[i]);
         Image img = icon.getImage();
         Image newImg = img.getScaledInstance(Display.getWidth(), Display.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(newImg);
