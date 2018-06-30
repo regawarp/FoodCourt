@@ -52,7 +52,7 @@ public class statistik extends javax.swing.JPanel {
      */
     public statistik() throws IOException {
         initComponents();
-//        firstLoad();
+        firstLoad();
     }
 
     private void firstLoad() throws IOException {
@@ -294,8 +294,10 @@ public class statistik extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -356,20 +358,17 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.setLayout(new java.awt.CardLayout());
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 840, 230));
 
-        jLabel7.setText("Penjualan Bulanan");
-        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
+        jLabel7.setText("Grafik Transaksi Harian");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 890, 280));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Toko Terlaris");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Jumlah Transaksi");
+        jLabel3.setText("Jumlah Penjualan (/Toko)");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Pendapatan");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 140, -1, -1));
 

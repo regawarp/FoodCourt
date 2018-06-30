@@ -39,6 +39,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
+     *
      * @throws java.io.IOException
      */
     public Dashboard(String user) throws IOException {
@@ -50,7 +51,7 @@ public class Dashboard extends javax.swing.JFrame {
         show_pane.add(new statistik());
         name.setText("Howdy, " + user + "!");
         loadWaktu();
-        this.jLabel12.setText(date.getTimezoneOffset()*-1/60+"");
+        this.jLabel12.setText("GMT " + date.getTimezoneOffset() * -1 / 60);
     }
 
     /**
@@ -105,7 +106,7 @@ public class Dashboard extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        side_pane.setBackground(new java.awt.Color(153, 0, 0));
+        side_pane.setBackground(new java.awt.Color(102, 0, 0));
         side_pane.setForeground(new java.awt.Color(153, 0, 0));
         side_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -536,38 +537,6 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseMoved
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new Dashboard("Manager").setVisible(true);
-            } catch (IOException ex) {
-                Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
-    }
-
     private void setColor(JPanel pane) {
         pane.setBackground(new Color(204, 102, 0));
     }
@@ -596,7 +565,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     private int hitungMeja() throws FileNotFoundException, IOException {
-        int terisi = 0,i=0;
+        int terisi = 0, i = 0;
         XSSFRow row;
         FileInputStream fis = new FileInputStream(new File("src/data/dataMeja.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
@@ -618,7 +587,7 @@ public class Dashboard extends javax.swing.JFrame {
         fis.close();
         return (terisi * 100) / i;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_1;
     private javax.swing.JPanel btn_2;

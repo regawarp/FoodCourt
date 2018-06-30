@@ -414,9 +414,6 @@ public class LoginManager extends javax.swing.JFrame {
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
         try {
             if (verifikasi(this.jTextField1.getText(), String.valueOf(this.jPasswordField1.getPassword()))) {
-                System.out.println(this.jTextField1.getText());
-//                gantiFrame(this.jTextField1.getText());
-//                new Dashboard(this.jTextField1.getText()).setVisible(true);
                 Dashboard db = new Dashboard(this.jTextField1.getName());
                 db.setVisible(true);
                 this.setVisible(false);
@@ -491,25 +488,6 @@ public class LoginManager extends javax.swing.JFrame {
         });
     }
 
-//    modul latihan jam
-//    
-//    ActionListener updateClockAction = new ActionListener() {
-//  public void actionPerformed(ActionEvent e) {
-//      // Assumes clock is a custom component
-//      jLabel5.setTime(System.currentTimeMillis()); 
-//      // OR
-//      // Assumes clock is a JLabel
-//      jLabel5.setText(new Date().toString()); 
-//    }
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//        }
-//    }
-//    
-//    private Timer t = new Timer(1000, updateClockAction);
-//    t.start();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btn_exit;
     private javax.swing.JLabel jLabel1;
