@@ -52,7 +52,7 @@ public class statistik extends javax.swing.JPanel {
      */
     public statistik() throws IOException {
         initComponents();
-        firstLoad();
+//        firstLoad();
     }
 
     private void firstLoad() throws IOException {
@@ -294,10 +294,8 @@ public class statistik extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();

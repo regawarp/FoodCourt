@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import org.apache.poi.ss.usermodel.Cell;
@@ -38,7 +39,6 @@ public class Dashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form Home
-     *
      * @throws java.io.IOException
      */
     public Dashboard(String user) throws IOException {
@@ -93,8 +93,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         show_pane = new javax.swing.JPanel();
 
@@ -419,17 +419,17 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel12.setText("GMT");
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 70, -1));
 
-        jLabel5.setFont(new java.awt.Font("Courier New", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 204, 204));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("00:00:00");
-        jLabel5.setToolTipText("");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 290, -1));
+        jLabel7.setFont(new java.awt.Font("Courier New", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("00:00:00");
+        jLabel7.setToolTipText("");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 290, -1));
 
-        jLabel7.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(204, 255, 204));
-        jLabel7.setText("Waktu Lokal");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jLabel14.setFont(new java.awt.Font("Courier New", 1, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(204, 255, 204));
+        jLabel14.setText("Waktu Lokal");
+        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 310, 80));
 
@@ -536,6 +536,38 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4MouseMoved
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new Dashboard("Manager").setVisible(true);
+            } catch (IOException ex) {
+                Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
     private void setColor(JPanel pane) {
         pane.setBackground(new Color(204, 102, 0));
     }
@@ -555,7 +587,7 @@ public class Dashboard extends javax.swing.JFrame {
         tm = new Timer(990, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 date = new Date();
-                jLabel5.setText(String.format("%02d", date.getHours()) + ":"
+                jLabel7.setText(String.format("%02d", date.getHours()) + ":"
                         + String.format("%02d", date.getMinutes()) + ":"
                         + String.format("%02d", date.getSeconds()));
             }
@@ -564,7 +596,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     private int hitungMeja() throws FileNotFoundException, IOException {
-        int terisi = 0, i = 0;
+        int terisi = 0,i=0;
         XSSFRow row;
         FileInputStream fis = new FileInputStream(new File("src/data/dataMeja.xlsx"));
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
@@ -586,7 +618,7 @@ public class Dashboard extends javax.swing.JFrame {
         fis.close();
         return (terisi * 100) / i;
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_1;
     private javax.swing.JPanel btn_2;
@@ -602,12 +634,12 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
