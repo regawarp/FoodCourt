@@ -101,9 +101,7 @@ public class Pemesanan extends javax.swing.JFrame {
             dtm.addRow(data);
         }
         jTable1.setModel(dtm);
-        if (workbook != null) {
-            workbook.close();
-        }
+        fis.close();
     }
 
     /**

@@ -10,15 +10,15 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -26,11 +26,8 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -282,7 +279,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet spreadsheet = workbook.getSheetAt(0);
 
-            ArrayList<Penjualan> pj = new ArrayList<>();
+            HashMap<String, Double> pj = new HashMap<>();
             Penjualan penjualan = new Penjualan();
             int i;
             for (i = spreadsheet.getLastRowNum(); i > 0; i--) {
@@ -291,12 +288,13 @@ public class WaitingDisplay extends javax.swing.JFrame {
                 penjualan.setHarga(row.getCell(3).getNumericCellValue());
                 spreadsheet.removeRow(row);
 
-                if (pj.contains(penjualan)) {
-                    int j = pj.indexOf(penjualan);
-                    pj.get(j).setHarga(pj.get(j).getHarga() + penjualan.getHarga());
-                    System.out.println("\n"+j);
+                double harga = 0;
+
+                if ((pj.get(penjualan.getToko())) != null) {
+                    harga = (pj.get(penjualan.getToko()));
+                    pj.put(penjualan.getToko(), (penjualan.getHarga()+harga));
                 } else {
-                    pj.add(penjualan);
+                    pj.put(penjualan.getToko(), (penjualan.getHarga()));
                 }
             }
 
@@ -308,10 +306,6 @@ public class WaitingDisplay extends javax.swing.JFrame {
             /*
             Bagian menulis ke excel transaksi
              */
-            for (i = 0; i < pj.size(); i++) {
-                System.out.println("Harga : " + pj.get(i).getHarga() + " - " + pj.get(i).getToko());
-            }
-
             Date today = new Date();
             fis = null;
             out = null;
@@ -333,16 +327,16 @@ public class WaitingDisplay extends javax.swing.JFrame {
 
             countRow++;
 
-            for (i = 0; i < pj.size(); i++) {
+            for (HashMap.Entry<String, Double> penj : pj.entrySet()) {
                 row = spreadsheet.createRow(countRow++);
                 cell = row.createCell(0);
                 cell.setCellValue(today);
                 cell = row.createCell(1);
                 cell.setCellValue("#ID" + String.format("%02d", today.getDate()) + String.format("%03d", idNum));
                 cell = row.createCell(2);
-                cell.setCellValue(pj.get(i).getToko());
+                cell.setCellValue(penj.getKey());
                 cell = row.createCell(3);
-                cell.setCellValue(pj.get(i).getHarga());
+                cell.setCellValue(penj.getValue());
             }
 
             out = new FileOutputStream(new File("src/data/dataTransaksi.xlsx"));

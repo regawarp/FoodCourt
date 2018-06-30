@@ -29,6 +29,7 @@ public class setting extends javax.swing.JPanel {
 
         settings_pane = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         settings_pane.setBackground(new java.awt.Color(204, 204, 204));
         settings_pane.setMinimumSize(new java.awt.Dimension(153, 75));
@@ -38,6 +39,9 @@ public class setting extends javax.swing.JPanel {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel20.setText("Settings");
         settings_pane.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        jLabel1.setText("Coming Soon!");
+        settings_pane.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,6 +61,7 @@ public class setting extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel settings_pane;
     // End of variables declaration//GEN-END:variables

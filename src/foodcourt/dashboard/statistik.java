@@ -60,48 +60,59 @@ public class statistik extends javax.swing.JPanel {
 
         ArrayList<TransaksiHarian> tHr = new ArrayList<>();
         ArrayList<TransaksiHarian> tHrBef = new ArrayList<>();
-        loadDataExcel("" + (today.getYear() + 1900), today.getMonth()+1, tHr);
+        loadDataExcel("" + (today.getYear() + 1900), today.getMonth() + 1, tHr);
         loadDataExcel("" + (today.getYear() + 1900), today.getMonth(), tHrBef);
         System.out.println("ukuran thr: " + tHr.size());
 
-        JPanel panel1 = loadPie(today.getMonth()+1, tHr);
+        JPanel panel1 = loadPie(today.getMonth() + 1, tHr);
         panel1.setPreferredSize(new Dimension(10, 10));
         jPanel5.add(panel1);
         jPanel5.repaint();
         jPanel5.revalidate();
 
-        JPanel panel2 = loadLine(today.getMonth()+1, tHr);
+        JPanel panel2 = loadLine(today.getMonth() + 1, tHr);
         panel2.setPreferredSize(new Dimension(10, 10));
         jPanel6.add(panel2);
         jPanel6.repaint();
         jPanel6.revalidate();
-        
+
+        double a = 0, b = 0;
+        a = hitungPemasukanBulanan(tHr);
+        b = hitungPemasukanBulanan(tHrBef);
         jComboBox1.setSelectedIndex(today.getMonth());
-        this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + (today.getYear()+1900));
-        this.lbl_pendapatan.setText("Rp." + Number_Format(hitungPemasukanBulanan(tHr)) + ",-");
+        this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + (today.getYear() + 1900));
+        this.lbl_pendapatan.setText("Rp." + Number_Format(a) + ",-");
         this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
         this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
-        
-        long presentase = (long)hitungPemasukanBulanan(tHr) - (long)hitungPemasukanBulanan(tHrBef);
-        System.out.println("selish : "+presentase);
-        presentase /= hitungPemasukanBulanan(tHr);
-        presentase *= 100;
-        if (presentase < 0) {
-            this.jLabel5.setText("menurun " + (int)presentase + "% dari bulan sebelumnya");
-            this.jLabel5.setForeground(new Color(153, 0, 0));
+
+        double presentase = 0;
+        if (a > b) {
+            presentase = a - b;
         } else {
-            this.jLabel5.setText("meningkat " + (int)presentase + "% dari bulan sebelumnya");
-            this.jLabel5.setForeground(new Color(0, 102, 0));
+            presentase = b - a;
+        }
+
+        if (b != 0) {
+            presentase = presentase * 100 / b;
+            if (a < b) {
+                this.jLabel5.setText("menurun " + (int) presentase + "% dari bulan sebelumnya");
+                this.jLabel5.setForeground(new Color(153, 0, 0));
+            } else if (a > b) {
+                this.jLabel5.setText("meningkat " + (int) presentase + "% dari bulan sebelumnya");
+                this.jLabel5.setForeground(new Color(0, 102, 0));
+            }
+        } else {
+            this.jLabel5.setText("");
         }
     }
 
     String Number_Format(double number) {
-        DecimalFormat df = new DecimalFormat("#,##0",new DecimalFormatSymbols(new Locale("pt", "ID")));
+        DecimalFormat df = new DecimalFormat("#,##0", new DecimalFormatSymbols(new Locale("pt", "ID")));
         BigDecimal value = new BigDecimal(number);
 
         return String.valueOf(df.format(value.floatValue()));
     }
-    
+
     public void loadDataExcel(String Tahun, int Bulan, ArrayList<TransaksiHarian> dt) throws FileNotFoundException, IOException {
 
         FileInputStream fis;
@@ -114,8 +125,9 @@ public class statistik extends javax.swing.JPanel {
             Iterator<Cell> cellIterator;
             Cell cell;
             listTransaksi = new ArrayList<>();
+            boolean belum = true;
 
-            while (rowIterator.hasNext() && rowIterator != null) {
+            while (rowIterator.hasNext() && rowIterator != null && belum) {
                 //biarkan loop ini,
                 //loop membaca sheet (tahun) untuk membaca bulan
                 row = (XSSFRow) rowIterator.next();
@@ -129,15 +141,15 @@ public class statistik extends javax.swing.JPanel {
                 cell = cellIterator.next();
                 ot.setToko(cell.getStringCellValue());
                 cell = cellIterator.next();
-                ot.setHarga(cell.getNumericCellValue());
+
                 if (ot.getTanggalTransaksi().getMonth() + 1 == Bulan) {
                     listTransaksi.add(ot);
                 }
 
                 while (ot.getTanggalTransaksi().getMonth() + 1 == Bulan && rowIterator.hasNext()) {
                     ObjekTransaksi otr = new ObjekTransaksi();
-                    //ambil datanya disini, ini udh sesuai bulan sama tahunnya
 
+                    //ambil datanya disini, ini udh sesuai bulan sama tahunnya
                     //ganti baris
                     row = (XSSFRow) rowIterator.next();
                     cellIterator = row.cellIterator();
@@ -150,10 +162,15 @@ public class statistik extends javax.swing.JPanel {
                     cell = cellIterator.next();
                     otr.setHarga(cell.getNumericCellValue());
 
-                    listTransaksi.add(otr);
+                    ot = otr;
+                    if (ot.getTanggalTransaksi().getMonth() + 1 == Bulan) {
+                        listTransaksi.add(ot);
+                    }
+                    belum = false;
                 }
             }
         }
+        fis.close();
 
         for (ObjekTransaksi ObjTr : listTransaksi) {
             TransaksiHarian thr = new TransaksiHarian();
@@ -204,7 +221,12 @@ public class statistik extends javax.swing.JPanel {
             Dataset ds = new Dataset();
             ds.setInfo("" + dt.get(i).getTglTransaksi().getDate());
             ds.setValue(dt.get(i).getListTr().size());
-            dataChart.add(ds);
+            if (dataChart.contains(ds)) {
+                int jml = dataChart.get(dataChart.indexOf(ds)).getValue();
+                dataChart.get(dataChart.indexOf(ds)).setValue(jml + ds.getValue());
+            } else {
+                dataChart.add(ds);
+            }
         }
 
         //ini ngisi dari dataset
@@ -272,8 +294,10 @@ public class statistik extends javax.swing.JPanel {
         jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -321,7 +345,10 @@ public class statistik extends javax.swing.JPanel {
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new java.awt.BorderLayout());
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 440, 220));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 440, 210));
+
+        jLabel6.setText("Penjualan Per Toko");
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 260));
 
@@ -330,6 +357,9 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new java.awt.CardLayout());
         jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 840, 230));
+
+        jLabel7.setText("Penjualan Bulanan");
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 890, 280));
 
@@ -352,13 +382,13 @@ public class statistik extends javax.swing.JPanel {
         jLabel1.setText("Summary");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, -1, -1));
 
-        lbl_tokoTerlaris.setText("jLabel6");
+        lbl_tokoTerlaris.setText("--");
         jPanel2.add(lbl_tokoTerlaris, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, -1, -1));
 
-        lbl_jmlTransaksi.setText("jLabel7");
+        lbl_jmlTransaksi.setText("--");
         jPanel2.add(lbl_jmlTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 110, -1, -1));
 
-        lbl_pendapatan.setText("jLabel8");
+        lbl_pendapatan.setText("--");
         jPanel2.add(lbl_pendapatan, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, -1, -1));
 
         stats_pane.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 890, 550));
@@ -416,21 +446,34 @@ public class statistik extends javax.swing.JPanel {
         jPanel6.repaint();
         jPanel6.revalidate();
 
+        double a = 0, b = 0;
+        a = hitungPemasukanBulanan(tHr);
+        b = hitungPemasukanBulanan(tHrBef);
+        System.out.println("bef : " + b);
+
         this.jLabel19.setText(jComboBox1.getSelectedItem().toString() + " - " + tahun);
-        this.lbl_pendapatan.setText("Rp." + Number_Format(hitungPemasukanBulanan(tHr)) + ",-");
+        this.lbl_pendapatan.setText("Rp." + Number_Format(a) + ",-");
         this.lbl_tokoTerlaris.setText(cariTokoTerlaris(tHr));
         this.lbl_jmlTransaksi.setText("" + hitungJumlahTransaksi(tHr));
 
-        long presentase = (long)hitungPemasukanBulanan(tHr) - (long)hitungPemasukanBulanan(tHrBef);
-        System.out.println("selish : "+presentase);
-        presentase /= hitungPemasukanBulanan(tHr);
-        presentase *= 100;
-        if (presentase < 0) {
-            this.jLabel5.setText("menurun " + (int)presentase + "% dari bulan sebelumnya");
-            this.jLabel5.setForeground(new Color(153, 0, 0));
+        double presentase = 0;
+        if (a > b) {
+            presentase = a - b;
         } else {
-            this.jLabel5.setText("meningkat " + (int)presentase + "% dari bulan sebelumnya");
-            this.jLabel5.setForeground(new Color(0, 102, 0));
+            presentase = b - a;
+        }
+
+        if (b != 0) {
+            presentase = presentase * 100 / b;
+            if (a < b) {
+                this.jLabel5.setText("menurun " + (int) presentase + "% dari bulan sebelumnya");
+                this.jLabel5.setForeground(new Color(153, 0, 0));
+            } else if (a > b) {
+                this.jLabel5.setText("meningkat " + (int) presentase + "% dari bulan sebelumnya");
+                this.jLabel5.setForeground(new Color(0, 102, 0));
+            }
+        } else {
+            this.jLabel5.setText("");
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -449,7 +492,9 @@ public class statistik extends javax.swing.JPanel {
 
         for (TransaksiHarian thr : tHr) {
             for (Transaksi tr : thr.getListTr()) {
-                incomen = tr.getPenjualan().stream().map((pj) -> pj.getHarga()).reduce(incomen, (accumulator, _item) -> accumulator + _item);
+                for (Penjualan pj : tr.getPenjualan()) {
+                    incomen += pj.getHarga();
+                }
             }
         }
 
@@ -493,6 +538,8 @@ public class statistik extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

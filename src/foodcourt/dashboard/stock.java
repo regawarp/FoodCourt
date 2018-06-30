@@ -30,6 +30,7 @@ public class stock extends javax.swing.JPanel {
         stock_pane = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         stock_pane.setBackground(new java.awt.Color(255, 153, 153));
         stock_pane.setMinimumSize(new java.awt.Dimension(680, 570));
@@ -40,15 +41,23 @@ public class stock extends javax.swing.JPanel {
         jLabel21.setText("Stok Makanan");
         stock_pane.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
+        jLabel1.setText("Coming Soon!");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 890, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(387, 387, 387)
+                .addComponent(jLabel1)
+                .addContainerGap(403, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 590, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(227, 227, 227)
+                .addComponent(jLabel1)
+                .addContainerGap(343, Short.MAX_VALUE))
         );
 
         stock_pane.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 890, 590));
@@ -77,6 +86,7 @@ public class stock extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel stock_pane;

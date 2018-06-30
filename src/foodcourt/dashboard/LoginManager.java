@@ -8,6 +8,8 @@ package foodcourt.dashboard;
 import foodcourt.security.AES;
 import java.awt.Color;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +20,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -40,6 +43,7 @@ public class LoginManager extends javax.swing.JFrame {
         System.out.println(date.getHours());
         initComponents();
         jPanel4.setBackground(new Color(102, 0, 0, 200));
+        loadWaktu();
     }
 
     /**
@@ -55,6 +59,7 @@ public class LoginManager extends javax.swing.JFrame {
         btn_exit = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         show_pane = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -79,7 +84,6 @@ public class LoginManager extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         side_pane1 = new javax.swing.JPanel();
         side_pane2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 204));
@@ -118,8 +122,15 @@ public class LoginManager extends javax.swing.JFrame {
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("date");
         jLabel13.setText(dateFormat.format(date));
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 240, 30));
-        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 60, 230, 30));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, 240, 30));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, 230, 30));
+
+        jLabel5.setFont(new java.awt.Font("Courier New", 1, 16)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("time");
+        jLabel5.setToolTipText("");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 50, 230, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 80));
 
@@ -341,12 +352,6 @@ public class LoginManager extends javax.swing.JFrame {
         side_pane2.setBackground(new java.awt.Color(88, 0, 0));
         side_pane2.setForeground(new java.awt.Color(153, 0, 0));
         side_pane2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("time");
-        jLabel5.setToolTipText("");
-        side_pane2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 630, -1, -1));
-
         getContentPane().add(side_pane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 80, 60, 660));
 
         pack();
@@ -412,7 +417,8 @@ public class LoginManager extends javax.swing.JFrame {
                 System.out.println(this.jTextField1.getText());
 //                gantiFrame(this.jTextField1.getText());
 //                new Dashboard(this.jTextField1.getText()).setVisible(true);
-                new Dashboard().setVisible(true);
+                Dashboard db = new Dashboard(this.jTextField1.getName());
+                db.setVisible(true);
                 this.setVisible(false);
             }
         } catch (IOException ex) {
@@ -420,14 +426,17 @@ public class LoginManager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel1MousePressed
 
-    void gantiFrame(String username) {
-        //Ganti ke Frame Pemesanan
-        try {
-            new Dashboard(username).setVisible(true);
-            this.setVisible(false);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+    void loadWaktu() {
+        Timer tm;
+        tm = new Timer(990, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                date = new Date();
+                jLabel5.setText(String.format("%02d", date.getHours()) + " : "
+                        + String.format("%02d", date.getMinutes()) + " : "
+                        + String.format("%02d", date.getSeconds()));
+            }
+        });
+        tm.start();
     }
 
     private boolean verifikasi(String uname, String pass) throws FileNotFoundException, IOException {
@@ -452,6 +461,7 @@ public class LoginManager extends javax.swing.JFrame {
                 return AES.periksa(pass, pasw);
             }
         }
+        fis.close();
         return false;
     }
 
