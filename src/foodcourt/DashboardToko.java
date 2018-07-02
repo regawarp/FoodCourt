@@ -48,7 +48,7 @@ public class DashboardToko extends javax.swing.JFrame {
     }
 
     public DashboardToko(String namaToko) {
-        this.namaToko = namaToko;
+        this.namaToko = "Oto Bento";
         initComponents();
     }
 
