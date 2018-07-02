@@ -43,39 +43,51 @@ public class Toko extends javax.swing.JFrame {
 
         btn1 = new javax.swing.JPanel();
         lToko1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         Gambar1 = new javax.swing.JLabel();
         btn2 = new javax.swing.JPanel();
         lToko2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         Gambar2 = new javax.swing.JLabel();
         btn3 = new javax.swing.JPanel();
         lToko3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         Gambar3 = new javax.swing.JLabel();
         btn4 = new javax.swing.JPanel();
         lToko4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         Gambar4 = new javax.swing.JLabel();
         btn5 = new javax.swing.JPanel();
         lToko5 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
         Gambar5 = new javax.swing.JLabel();
         btn6 = new javax.swing.JPanel();
         lToko6 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
         Gambar6 = new javax.swing.JLabel();
         btn7 = new javax.swing.JPanel();
         lToko7 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
         Gambar7 = new javax.swing.JLabel();
         btn8 = new javax.swing.JPanel();
         lToko8 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
         Gambar8 = new javax.swing.JLabel();
         btn9 = new javax.swing.JPanel();
         lToko9 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
         Gambar9 = new javax.swing.JLabel();
         btn10 = new javax.swing.JPanel();
         lToko10 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         Gambar10 = new javax.swing.JLabel();
         btn11 = new javax.swing.JPanel();
         lToko11 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         Gambar11 = new javax.swing.JLabel();
         btn12 = new javax.swing.JPanel();
         lToko12 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         Gambar12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,9 +111,15 @@ public class Toko extends javax.swing.JFrame {
         });
         btn1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lToko1.setBackground(new java.awt.Color(255, 255, 255));
         lToko1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko1.setForeground(new java.awt.Color(0, 0, 0));
         lToko1.setText("jLabel1");
         btn1.add(lToko1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        btn1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 340, 40));
         btn1.add(Gambar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -117,8 +135,13 @@ public class Toko extends javax.swing.JFrame {
         btn2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lToko2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
+        lToko2.setForeground(new java.awt.Color(0, 0, 0));
         lToko2.setText("jLabel1");
         btn2.add(lToko2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        btn2.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 340, 40));
         btn2.add(Gambar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, -1, -1));
@@ -136,6 +159,10 @@ public class Toko extends javax.swing.JFrame {
         lToko3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko3.setText("jLabel1");
         btn3.add(lToko3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
+        btn3.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 340, 40));
         btn3.add(Gambar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, -1, -1));
@@ -153,6 +180,10 @@ public class Toko extends javax.swing.JFrame {
         lToko4.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko4.setText("jLabel1");
         btn4.add(lToko4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
+        btn4.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 340, 40));
         btn4.add(Gambar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 0, -1, -1));
@@ -170,6 +201,10 @@ public class Toko extends javax.swing.JFrame {
         lToko5.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko5.setText("jLabel1");
         btn5.add(lToko5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.setForeground(new java.awt.Color(255, 255, 255));
+        btn5.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 340, 40));
         btn5.add(Gambar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, -1, -1));
@@ -187,6 +222,10 @@ public class Toko extends javax.swing.JFrame {
         lToko6.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko6.setText("jLabel1");
         btn6.add(lToko6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel11.setForeground(new java.awt.Color(255, 255, 255));
+        btn6.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 340, 40));
         btn6.add(Gambar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
@@ -204,6 +243,10 @@ public class Toko extends javax.swing.JFrame {
         lToko7.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko7.setText("jLabel1");
         btn7.add(lToko7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setForeground(new java.awt.Color(255, 255, 255));
+        btn7.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 340, 40));
         btn7.add(Gambar7, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 260, -1, -1));
@@ -221,6 +264,10 @@ public class Toko extends javax.swing.JFrame {
         lToko8.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko8.setText("jLabel1");
         btn8.add(lToko8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setForeground(new java.awt.Color(255, 255, 255));
+        btn8.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 340, 40));
         btn8.add(Gambar8, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 260, -1, -1));
@@ -238,6 +285,10 @@ public class Toko extends javax.swing.JFrame {
         lToko9.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko9.setText("jLabel1");
         btn9.add(lToko9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setForeground(new java.awt.Color(255, 255, 255));
+        btn9.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 340, 40));
         btn9.add(Gambar9, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, -1, -1));
@@ -255,6 +306,10 @@ public class Toko extends javax.swing.JFrame {
         lToko10.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko10.setText("jLabel1");
         btn10.add(lToko10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setForeground(new java.awt.Color(255, 255, 255));
+        btn10.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 340, 40));
         btn10.add(Gambar10, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn10, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 520, -1, -1));
@@ -272,6 +327,10 @@ public class Toko extends javax.swing.JFrame {
         lToko11.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko11.setText("jLabel1");
         btn11.add(lToko11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, 40));
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setForeground(new java.awt.Color(255, 255, 255));
+        btn11.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 340, 40));
         btn11.add(Gambar11, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn11, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 520, -1, -1));
@@ -289,6 +348,10 @@ public class Toko extends javax.swing.JFrame {
         lToko12.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         lToko12.setText("jLabel1");
         btn12.add(lToko12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setForeground(new java.awt.Color(255, 255, 255));
+        btn12.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 340, 40));
         btn12.add(Gambar12, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 330, 240));
 
         getContentPane().add(btn12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 520, -1, -1));
@@ -491,6 +554,18 @@ public class Toko extends javax.swing.JFrame {
     private javax.swing.JPanel btn7;
     private javax.swing.JPanel btn8;
     private javax.swing.JPanel btn9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lToko1;
     private javax.swing.JLabel lToko10;
     private javax.swing.JLabel lToko11;

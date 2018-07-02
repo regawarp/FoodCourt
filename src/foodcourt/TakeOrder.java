@@ -38,7 +38,7 @@ public class TakeOrder extends javax.swing.JFrame {
     private static OutputStream fileOutDataPesananDariMeja = null, fileOutDataRekap = null;
     private static final int MAX_FOOD_COURT = 26;
     private String selectedListMeja = " ";
-    private String namaToko = "Aciap";
+    private String namaToko = "Kacamata";
     private XSSFSheet sheetInDataPesananDariMeja = null, sheetInDataRekap = null;
     static XSSFRow row;
 

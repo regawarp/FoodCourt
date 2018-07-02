@@ -269,6 +269,7 @@ public class WaitingDisplay extends javax.swing.JFrame {
     }//GEN-LAST:event_AddMenuActionPerformed
 
     private void PrintBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrintBillMouseClicked
+       PopUp.setVisible(true);
         try {
             FileInputStream fis = null;
             XSSFRow row = null;
