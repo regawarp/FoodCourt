@@ -56,10 +56,12 @@ public class Integrasi extends javax.swing.JFrame {
         getContentPane().add(btnSetNo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, 350, 100));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Selamat Datang di Halaman Integrasi Sistem Food Court");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Silahkan Isi Kolom di Bawah ini dengan nomor meja lalu tekan set");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
 

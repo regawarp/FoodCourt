@@ -38,6 +38,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class WaitingDisplay extends javax.swing.JFrame {
 
+    private String noMeja;
     Timer tm;
     int x = 0;
     String[] pics = {
@@ -61,6 +62,14 @@ public class WaitingDisplay extends javax.swing.JFrame {
      * @throws java.io.IOException
      */
     public WaitingDisplay() throws IOException {
+        initComponents();
+        DisplayBill();
+        SlideShow();
+        PopUp.setVisible(false);
+    }
+    
+    public WaitingDisplay(String noMeja) throws IOException {
+        this.noMeja= noMeja;
         initComponents();
         DisplayBill();
         SlideShow();
@@ -345,9 +354,15 @@ public class WaitingDisplay extends javax.swing.JFrame {
             out.close();
             fis.close();
             DisplayBill();
+            
+            Thread.sleep(2000);
         } catch (IOException ex) {
             Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(WaitingDisplay.class.getName()).log(Level.SEVERE, null, ex);
         }
+        new Login(noMeja).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_PrintBillMouseClicked
 
     /**

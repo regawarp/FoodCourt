@@ -675,7 +675,7 @@ public class Pemesanan extends javax.swing.JFrame {
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         try {
             writeToExcel();
-            new WaitingDisplay().setVisible(true);
+            new WaitingDisplay(noMeja).setVisible(true);
             super.setVisible(false);
         } catch (Exception e) {
             System.out.println(e.getMessage());
