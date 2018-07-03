@@ -480,7 +480,7 @@ public class TakeOrder extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTakeOrderActionPerformed
 
     private void JButtonDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonDashboardActionPerformed
-        new DashboardToko().setVisible(true);
+        new DashboardToko(namaToko).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JButtonDashboardActionPerformed
 

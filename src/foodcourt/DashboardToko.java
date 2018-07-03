@@ -334,7 +334,9 @@ public class DashboardToko extends javax.swing.JFrame {
         while (rowIterator.hasNext()) {
             row = (XSSFRow) rowIterator.next();
             int d = (int) row.getCell(1).getNumericCellValue();
-            data.addValue(d, "", row.getCell(0).getStringCellValue());
+            if (d != 0){
+                data.addValue(d, "", row.getCell(0).getStringCellValue());
+            }
         }
         
         //Select chart type and put the data into the chart
